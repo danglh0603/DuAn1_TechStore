@@ -1,5 +1,7 @@
 package com.DuAn1.techstore;
 
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -8,10 +10,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.ViewHolder> {
 
+    Context context;
+
+    public AdapterSanPham(Context context) {
+        this.context = context;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_sanpham, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -24,7 +33,7 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.ViewHold
         return 0;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
         }

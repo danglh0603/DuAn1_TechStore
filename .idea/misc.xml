@@ -3,12 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/backgroud_dialof.xml" value="0.25092592592592594" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/backgroud_dn_dk.xml" value="0.26614583333333336" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/background_btn_dangki.xml" value="0.26614583333333336" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/background_button.xml" value="0.26614583333333336" />
+        <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.1648148148148148" />
+        <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/ic_baseline_lock_24_click.xml" value="0.1648148148148148" />
+        <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/ic_baseline_lock_24_default.xml" value="0.25092592592592594" />
+        <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.25092592592592594" />
+        <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/ic_baseline_person_24_default.xml" value="0.25092592592592594" />
+        <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/ic_baseline_person_24_focus.xml" value="0.25092592592592594" />
+        <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/ic_launcher_background.xml" value="0.26205128205128203" />
+        <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/icon_login_focus.xml" value="0.1648148148148148" />
+        <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/icon_login_password_focus.xml" value="0.25092592592592594" />
+        <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/icon_login_person_focus.xml" value="0.25092592592592594" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/layout/activity_login.xml" value="0.264" />
-        <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/layout/activity_splash_screen.xml" value="0.25" />
+        <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/layout/activity_splash_screen.xml" value="0.2" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/layout/adapter_sanpham.xml" value="0.25" />
+        <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/layout/dialog_thoat.xml" value="0.25" />
+        <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.26205128205128203" />
       </map>
     </option>
   </component>
