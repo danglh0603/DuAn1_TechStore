@@ -1,21 +1,16 @@
-package com.DuAn1.techstore;
+package com.DuAn1.techstore.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.EditText;
+
+import com.DuAn1.techstore.R;
 
 public class MainActivity extends AppCompatActivity {
-    Button btn;
-    EditText edt;
-    Button btn2;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
     }
 }

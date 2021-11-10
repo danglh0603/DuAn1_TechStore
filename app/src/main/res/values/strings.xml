@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">TechStore</string>
+    <string name="strChaoMung">Chào mừng bạn đến với</string>
+    <string name="strTechStore">Tech Store</string>
+    <string name="strTenDangNhap">Tên đăng nhập</string>
+    <string name="strMatKhau">Mật khẩu</string>
+    <string name="strNhoMatKhau">Nhớ mật khẩu</string>
+    <string name="strDangNhap">Đăng Nhập</string>
+    <string name="strChuMatKhau">Chưa có tài khoản?</string>
+    <string name="strDangKi">Đăng kí</string>
 </resources>
