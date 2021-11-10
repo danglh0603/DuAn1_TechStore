@@ -1,4 +1,4 @@
-package com.DuAn1.techstore;
+package com.DuAn1.techstore.Activity;
 
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
@@ -11,6 +11,8 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.DuAn1.techstore.R;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText edUsername;

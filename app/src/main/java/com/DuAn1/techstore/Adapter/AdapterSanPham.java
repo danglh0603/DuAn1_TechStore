@@ -1,4 +1,4 @@
-package com.DuAn1.techstore;
+package com.DuAn1.techstore.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.DuAn1.techstore.R;
 
 public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.ViewHolder> {
 
