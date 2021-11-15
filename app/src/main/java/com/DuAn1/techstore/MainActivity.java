@@ -6,6 +6,10 @@ import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
 
+    //toi push dong comment nay len git nhe
+    //dau tien len git kiem tra xem
+    //tren git chua co may dong comment nay
+    //gio push leen nhe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
