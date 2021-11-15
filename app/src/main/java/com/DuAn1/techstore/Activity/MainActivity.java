@@ -1,18 +1,13 @@
-package com.DuAn1.techstore;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.DuAn1.techstore.Activity;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.DuAn1.techstore.R;
+
 public class MainActivity extends AppCompatActivity {
 
-    //toi push dong comment nay len git nhe
-    //dau tien len git kiem tra xem
-    //tren git chua co may dong comment nay
-    //gio push leen nhe
-    //oke
-    //oke//oke
-    //oke
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
