@@ -10,6 +10,9 @@ public class MainActivity extends AppCompatActivity {
     //dau tien len git kiem tra xem
     //tren git chua co may dong comment nay
     //gio push leen nhe
+    //oke
+    //oke//oke
+    //oke
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
