@@ -7,5 +7,5 @@
     <string name="strNhoMatKhau">Nhớ mật khẩu</string>
     <string name="strDangNhap">Đăng Nhập</string>
     <string name="strChuMatKhau">Chưa có tài khoản?</string>
-    <string name="strDangKi">Đăng kí</string>
+    <string name="strDangKi"><u>Đăng kí tại đây!</u></string>
 </resources>
