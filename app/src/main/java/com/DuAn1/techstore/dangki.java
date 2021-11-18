@@ -11,3 +11,6 @@ public class dangki  extends AppCompatActivity {
         setContentView(R.layout.dangki);
     }
 }
+//b code ở nhanh n má hình như tôi code nhầm sang của b thì p h
+ //local branch b code ở nhánh nào cũng được
+//ok giờ t push lên nhé ok
