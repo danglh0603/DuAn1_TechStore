@@ -1,6 +1,7 @@
 package com.DuAn1.techstore.Model;
 
 public class HoaDon {
+
     private int maHoaDon;
     private int maKhachHang;
 
@@ -27,4 +28,5 @@ public class HoaDon {
     public void setMaKhachHang(int maKhachHang) {
         this.maKhachHang = maKhachHang;
     }
+
 }

@@ -1,6 +1,7 @@
 package com.DuAn1.techstore.Model;
 
 public class ChiTietHoaDon {
+
     private int maHoaDon;
     private  int maSanPham;
     private int soLuongMua;
@@ -57,4 +58,5 @@ public class ChiTietHoaDon {
     public void setNgayMua(String ngayMua) {
         this.ngayMua = ngayMua;
     }
+
 }
