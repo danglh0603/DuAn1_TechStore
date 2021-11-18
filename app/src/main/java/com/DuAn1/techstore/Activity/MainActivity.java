@@ -1,10 +1,8 @@
-package com.DuAn1.techstore.Activity;
+package com.DuAn1.techstore;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-
-import com.DuAn1.techstore.R;
 
 public class MainActivity extends AppCompatActivity {
 
