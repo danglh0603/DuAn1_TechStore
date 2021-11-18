@@ -7,6 +7,13 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.DuAn1.techstore.Adapter.AdapterTabLayout;
 import com.DuAn1.techstore.R;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -21,7 +28,6 @@ public class ManChinhActivity extends AppCompatActivity {
         setContentView(R.layout.activity_manchinh);
         viewPager2 = findViewById(R.id.viewPager2);
         tabLayout = findViewById(R.id.tabLayout);
-
         AdapterTabLayout adapterTabLayout = new AdapterTabLayout(ManChinhActivity.this);
         viewPager2.setAdapter(adapterTabLayout);
 
