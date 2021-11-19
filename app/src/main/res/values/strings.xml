@@ -4,8 +4,18 @@
     <string name="strTechStore">Tech Store</string>
     <string name="strTenDangNhap">Tên đăng nhập</string>
     <string name="strMatKhau">Mật khẩu</string>
+    <string name="strReMatKhau">Nhập lại mật khẩu</string>
     <string name="strNhoMatKhau">Nhớ mật khẩu</string>
     <string name="strDangNhap">Đăng Nhập</string>
+    <string name="strDangNhap2"><u>Đăng Nhập</u></string>
     <string name="strChuMatKhau">Chưa có tài khoản?</string>
-    <string name="strDangKi"><u>Đăng kí tại đây!</u></string>
+    <string name="strDangKiTaiDay"><u>Đăng kí tại đây!</u></string>
+    <string name="strDangKi">Đăng kí</string>
+
+
+    //
+    <string name="strHoTen">Họ và tên</string>
+    <string name="strNamSinh">Năm sinh</string>
+    <string name="strSodienThoai">Số điện thoại</string>
+    <string name="strDiaChi">Địa chỉ</string>
 </resources>

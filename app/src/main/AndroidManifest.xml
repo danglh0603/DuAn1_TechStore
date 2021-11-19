@@ -13,7 +13,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TechStore">
         <activity
+            android:name=".Activity.Activity_PhuKien"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.Activity_MayTinhBang"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.Activity_DongHo"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.Activity_Laptop"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.Activity_DienThoai"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.Activity_ChiTietSp"
+            android:exported="true" />
+        <activity
             android:name=".Activity.LoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.ResigterActivity"
             android:exported="true" />
         <activity
             android:name=".Activity.ManChinhActivity"
@@ -26,11 +47,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".Activity.MainActivity"
-            android:exported="true">
-
         </activity>
     </application>
 

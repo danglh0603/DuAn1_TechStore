@@ -41,7 +41,7 @@ public class GirdViewAdapterSp extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        convertView = layoutInflater.inflate(R.layout.custom_grid_sp, null);
+        convertView = layoutInflater.inflate(R.layout.adapter_grid_theloai, null);
         TextView textView = convertView.findViewById(R.id.textView);
         ImageView imageView = convertView.findViewById(R.id.imageView);
         textView.setText(TenLogo[position]);

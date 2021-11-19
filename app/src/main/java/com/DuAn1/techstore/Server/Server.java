@@ -1,4 +1,4 @@
-package com.DuAn1.techstore.Database;
+package com.DuAn1.techstore.Server;
 
 public class Server {
     public static String localhost = "https://duan1techstore.000webhostapp.com";
