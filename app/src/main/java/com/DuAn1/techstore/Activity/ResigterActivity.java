@@ -1,17 +1,34 @@
 package com.DuAn1.techstore.Activity;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.DuAn1.techstore.DAO.Server;
+import com.DuAn1.techstore.Model.Loading;
 import com.DuAn1.techstore.R;
+import com.DuAn1.techstore.Until.CheckConnection;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class ResigterActivity extends AppCompatActivity {
     private TextView tvDangKi;
@@ -32,6 +49,10 @@ public class ResigterActivity extends AppCompatActivity {
     private Button btnResigter;
     private TextView tvDangNhap;
 
+    // loading
+    private Loading loading;
+    private String tenDangNhap, hoTen, namSinh, matKhau, sdt, diaChi;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,13 +60,165 @@ public class ResigterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dangki);
         Anhxa();
         Animation();
-        // chuyen sang man dang nhap
-        tvDangNhap.setOnClickListener(view -> DangNhap());
+        if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
+            // chuyen sang man dang nhap
+            btnResigter.setOnClickListener(view -> {
+                if (validate() > 0) {
+                    loading.LoadingDialog();
+                    Resigter();
+                    //Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_SHORT).show();
+                }
+            });
+            tvDangNhap.setOnClickListener(view -> DangNhap());
+        } else {
+            Dialog("Kiểm tra lại kết nối");
+        }
+
+    }
+
+    private void Resigter() {
+        tenDangNhap = edTenDangNhap.getText().toString().trim();
+        hoTen = edHoTen.getText().toString();
+        namSinh = edNamSinh.getText().toString();
+        matKhau = edMatKhau.getText().toString();
+        sdt = edSoDienThoai.getText().toString();
+        diaChi = edDiaChi.getText().toString();
+        Log.e("zzzzz", Server.dangKy + " getParams: " + tenDangNhap + " " + matKhau + " " + hoTen + " " + namSinh + " " + sdt + " " + diaChi);
+        if (!tenDangNhap.equals("") && !hoTen.equals("") && !namSinh.equals("") && !matKhau.equals("") && !sdt.equals("") && !diaChi.equals("")) {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.dangKy, response -> {
+                switch (response) {
+                    case "success": {
+                        loading.DimissDialog();
+                        String thongBao = "Đăng kí thành công!";
+                        Dialog(thongBao);
+                        Toast.makeText(getApplicationContext(), "Successfully", Toast.LENGTH_SHORT).show();
+                        ClearText();
+                        btnResigter.setClickable(false);
+                        break;
+                    }
+                    case "failure": {
+                        Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                        loading.DimissDialog();
+                        String thongBao = "Thất bại!";
+                        Dialog(thongBao);
+                        break;
+                    }
+                    case "usernamedatontai": {
+                        loading.DimissDialog();
+                        String thongBao = "Tên đăng nhập đã tồn tại!" + "\n" + "Vui lòng chọn tên đăng nhập khác!";
+                        Dialog(thongBao);
+                        break;
+                    }
+                }
+            }, error -> Toast.makeText(getApplicationContext(), error.toString().trim(), Toast.LENGTH_SHORT).show()) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> data = new HashMap<>();
+                    data.put("tenDangNhap", tenDangNhap);
+                    data.put("matKhau", matKhau);
+                    data.put("tenKH", hoTen);
+                    data.put("namSinh", namSinh);
+                    data.put("soDienThoai", sdt);
+                    data.put("diaChi", diaChi);
+                    return data;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+            requestQueue.add(stringRequest);
+
+        } else {
+            Toast.makeText(getApplicationContext(), "Loi", Toast.LENGTH_SHORT).show();
+            loading.DimissDialog();
+        }
+
+    }
+
+    private int validate() {
+        int check = 1;
+        if (Objects.requireNonNull(edTenDangNhap.getText()).toString().length() == 0) {
+            textInputLayout1.setError("Không để trống tên đăng nhập!");
+            edTenDangNhap.requestFocus();
+            check = -1;
+            return check;
+        } else {
+            textInputLayout1.setError(null);
+        }
+        //
+        if (Objects.requireNonNull(edHoTen.getText()).toString().length() == 0) {
+            textInputLayout2.setError("Không để trống họ tên!");
+            edHoTen.requestFocus();
+            check = -1;
+            return check;
+        } else {
+            textInputLayout2.setError(null);
+        }
+        if (Objects.requireNonNull(edNamSinh.getText()).toString().length() == 0) {
+            textInputLayout3.setError("Không để trống năm sinh!");
+            edNamSinh.requestFocus();
+            check = -1;
+            return check;
+        } else {
+            textInputLayout3.setError(null);
+        }
+        if (Objects.requireNonNull(edSoDienThoai.getText()).toString().length() == 0) {
+            textInputLayout4.setError("Không để trống số điện thoại!");
+            edSoDienThoai.requestFocus();
+            check = -1;
+            return check;
+        } else {
+            textInputLayout4.setError(null);
+        }
+        if (Objects.requireNonNull(edDiaChi.getText()).toString().length() == 0) {
+            textInputLayout5.setError("Không để trống địa chỉ!");
+            edDiaChi.requestFocus();
+            check = -1;
+            return check;
+        } else {
+            textInputLayout5.setError(null);
+        }
+
+        if (Objects.requireNonNull(edMatKhau.getText()).toString().length() == 0) {
+            textInputLayout6.setError("Không để trống mật khẩu!");
+            edMatKhau.requestFocus();
+            check = -1;
+            return check;
+        } else {
+            textInputLayout6.setError(null);
+        }
+        if (Objects.requireNonNull(edReMatKhau.getText()).toString().length() == 0) {
+            textInputLayout7.setError("Không để trống nhập lại mật khẩu!");
+            edReMatKhau.requestFocus();
+            check = -1;
+            return check;
+        } else {
+            textInputLayout7.setError(null);
+        }
+        if (!edReMatKhau.getText().toString().equals(edMatKhau.getText().toString())) {
+            textInputLayout7.setError("Mật khẩu nhập lại không trùng khớp!");
+            edReMatKhau.requestFocus();
+            check = -1;
+            return check;
+        } else {
+            textInputLayout7.setError(null);
+        }
+
+        return check;
+    }
+
+    private void ClearText() {
+        edTenDangNhap.setText("");
+        edMatKhau.setText("");
+        edReMatKhau.setText("");
+        edDiaChi.setText("");
+        edHoTen.setText("");
+        edSoDienThoai.setText("");
+        edNamSinh.setText("");
     }
 
     private void DangNhap() {
         Intent intent = new Intent(ResigterActivity.this, LoginActivity.class);
         startActivity(intent);
+        finish();
     }
 
     private void Anhxa() {
@@ -66,6 +239,8 @@ public class ResigterActivity extends AppCompatActivity {
         edReMatKhau = findViewById(R.id.edReMatKhau);
         btnResigter = findViewById(R.id.btnReigter);
         tvDangNhap = findViewById(R.id.tvDangNhap);
+
+        loading = new Loading(this);
     }
 
     private void Animation() {
@@ -91,6 +266,39 @@ public class ResigterActivity extends AppCompatActivity {
         textInputLayout7.animate().translationX(0).setDuration(900).setStartDelay(1400).start();
         btnResigter.animate().translationX(0).setDuration(900).setStartDelay(1600).start();
         tvDangNhap.animate().translationX(0).setDuration(900).setStartDelay(1800).start();
+    }
 
+    private void Dialog(String mess) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_thongbao_resigter, null);
+        builder.setView(view);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        alertDialog.show();
+        TextView tvThongbao = view.findViewById(R.id.tvMess);
+        // dialog
+        Button btnThongBao = view.findViewById(R.id.btnThongBao);
+        tvThongbao.setText(mess);
+
+        btnThongBao.setOnClickListener(view1 -> {
+            loading.DimissDialog();
+            alertDialog.dismiss();
+        });
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }

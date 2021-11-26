@@ -1,6 +1,8 @@
 package com.DuAn1.techstore.Model;
 
-public class SanPham {
+import java.io.Serializable;
+
+public class SanPham implements Serializable {
     private int maLoai;
     private int maSanPham;
     private String tenSanPham;
@@ -10,9 +12,8 @@ public class SanPham {
     private int giaCu;
     private String ngayNhap;
     private String thongTinSanPham;
-    private int yeuThich;
 
-    public SanPham(int maLoai, int maSanPham, String tenSanPham, int soLuongNhap, String hinhAnh, int giaTien, int giaCu, String ngayNhap, String thongTinSanPham, int yeuThich) {
+    public SanPham(int maLoai, int maSanPham, String tenSanPham, int soLuongNhap, String hinhAnh, int giaTien, int giaCu, String ngayNhap, String thongTinSanPham) {
         this.maLoai = maLoai;
         this.maSanPham = maSanPham;
         this.tenSanPham = tenSanPham;
@@ -22,7 +23,6 @@ public class SanPham {
         this.giaCu = giaCu;
         this.ngayNhap = ngayNhap;
         this.thongTinSanPham = thongTinSanPham;
-        this.yeuThich = yeuThich;
     }
 
     public SanPham() {
@@ -98,13 +98,5 @@ public class SanPham {
 
     public void setThongTinSanPham(String thongTinSanPham) {
         this.thongTinSanPham = thongTinSanPham;
-    }
-
-    public int getYeuThich() {
-        return yeuThich;
-    }
-
-    public void setYeuThich(int yeuThich) {
-        this.yeuThich = yeuThich;
     }
 }

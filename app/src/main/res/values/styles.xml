@@ -6,6 +6,7 @@
         <item name="colorAccent">@color/white</item>
         <!--        default-->
         <item name="android:textColorSecondary">#777777</item>
+        <item name="colorSecondary">@color/red</item>
     </style>
 
     <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">

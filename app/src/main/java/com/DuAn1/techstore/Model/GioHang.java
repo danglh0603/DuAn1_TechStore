@@ -1,12 +1,22 @@
 package com.DuAn1.techstore.Model;
 
 public class GioHang {
+    private int maKH;
     private int maSanPham;
     private int soLuongMua;
 
-    public GioHang(int maSanPham, int soLuongMua) {
+    public GioHang(int maKH, int maSanPham, int soLuongMua) {
+        this.maKH = maKH;
         this.maSanPham = maSanPham;
         this.soLuongMua = soLuongMua;
+    }
+
+    public int getMaKH() {
+        return maKH;
+    }
+
+    public void setMaKH(int maKH) {
+        this.maKH = maKH;
     }
 
     public GioHang() {

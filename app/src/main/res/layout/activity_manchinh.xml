@@ -1,66 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E5E5E5"
+    android:background="#FFFFFF"
     android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
-        app:elevation="10dp"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="0dp"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/xanh"
+        app:titleTextColor="@color/white" />
 
-        <Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/xanh"
-            android:elevation="0dp"
-            android:minHeight="?attr/actionBarSize">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:background="@color/xanh">
-
-                <ImageView
-                    android:id="@+id/img"
-                    android:layout_width="69dp"
-                    android:layout_height="51dp"
-                    android:src="@drawable/thietkekhongten" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="3dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_toEndOf="@+id/img"
-                    android:text="Tech Store"
-                    android:textAllCaps="true"
-                    android:textColor="@color/white"
-                    android:textSize="25dp" />
-            </RelativeLayout>
-        </Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager2"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
+    <com.etebarian.meowbottomnavigation.MeowBottomNavigation
+        android:id="@+id/BottomNav"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:backgroundTint="#FF7E7E"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:mbn_shadowColor="@color/xam"
+        app:mbn_backgroundBottomColor="@color/xanh"
+        app:mbn_circleColor="@color/white"
+        app:mbn_countBackgroundColor="@color/orange"
+        app:mbn_countTextColor="@color/white"
+        app:mbn_defaultIconColor="@color/white"
+        app:mbn_selectedIconColor="@color/black" />
 
 </LinearLayout>

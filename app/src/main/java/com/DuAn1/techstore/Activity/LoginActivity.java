@@ -10,18 +10,28 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
 
+import com.DuAn1.techstore.Model.Loading;
 import com.DuAn1.techstore.R;
+import com.DuAn1.techstore.DAO.Server;
+import com.DuAn1.techstore.Until.CheckConnection;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
 public class LoginActivity extends AppCompatActivity {
-    private Button btnHuy;
-    private Button btnThoat;
     private ImageView imageView;
     private TextView tvDangNhap;
     private TextInputLayout textInputLayout1;
@@ -29,28 +39,94 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout textInputLayout2;
     private TextInputEditText edPassword;
     private CheckBox chkRemember;
-    private AppCompatButton btnLogin;
+    private Button btnLogin;
     private TextView textView4;
     private TextView tvResigter;
+
+    private Loading loading;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         //anh xa
         AnhXa();
         // animation
         animationLogo();
         // chuyen sang activity Dang ki
         tvResigter.setOnClickListener(view -> Resigter());
+        if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
+            SharedPreferences sharedPreferences = getSharedPreferences("Accout_file", MODE_PRIVATE);
+            edUsername.setText(sharedPreferences.getString("USER", ""));
+            edPassword.setText(sharedPreferences.getString("PASS", ""));
+            chkRemember.setChecked(sharedPreferences.getBoolean("REMEMBER", false));
+            btnLogin.setOnClickListener(view -> {
+                if (validate() > 0) {
+                    loading.LoadingDialog();
+                    Login(Objects.requireNonNull(edUsername.getText()).toString().trim(), Objects.requireNonNull(edPassword.getText()).toString().trim());
+                }
+            });
+        } else {
+            Dialog("Kiểm tra lại kết nối");
+            btnLogin.setOnClickListener(view -> Dialog("Kiểm tra lại kết nối"));
+        }
+    }
 
 
-        SharedPreferences sharedPreferences = getSharedPreferences("Accout_file", MODE_PRIVATE);
-        edUsername.setText(sharedPreferences.getString("USER", ""));
-        edPassword.setText(sharedPreferences.getString("PASS", ""));
-        chkRemember.setChecked(sharedPreferences.getBoolean("REMEMBER", false));
+    public void Login(String username, String password) {
+        if (!username.equals("") && !password.equals("")) {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.dangNhap, response -> {
+                if (response.equals("success")) {
+                    loading.DimissDialog();
+                    Intent intent = new Intent(LoginActivity.this, ManChinhActivity.class);
+                    startActivity(intent);
+                    rememberAccount(username, password, chkRemember.isChecked());
+                    Toast.makeText(getApplicationContext(), "Xin chào " + username, Toast.LENGTH_SHORT).show();
+                    finish();
+                } else if (response.equals("failure")) {
+                    loading.DimissDialog();
+                    Toast.makeText(LoginActivity.this, "Tên đăng nhập hoặc mật khẩu không chính xác!", Toast.LENGTH_SHORT).show();
+                }
+            }, error -> {
+                //Toast.makeText(LoginActivity.this, error.toString().trim(), Toast.LENGTH_SHORT).show();
+                Dialog("Lỗi kết nối!");
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> data = new HashMap<>();
+                    data.put("tenDangNhap", username);
+                    data.put("matKhau", password);
+                    return data;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+            requestQueue.add(stringRequest);
+        } else {
+            Toast.makeText(this, "null user,pass", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private int validate() {
+        int check = 1;
+        if (Objects.requireNonNull(edUsername.getText()).toString().length() == 0) {
+            textInputLayout1.setError("Không để trống tên đăng nhập!");
+            edUsername.requestFocus();
+            check = -1;
+            return check;
+        } else {
+            textInputLayout1.setError(null);
+        }
+        if (Objects.requireNonNull(edPassword.getText()).toString().length() == 0) {
+            textInputLayout2.setError("Không để trông mật khẩu!");
+            edPassword.requestFocus();
+            check = -1;
+            return check;
+        } else {
+            textInputLayout2.setError(null);
+        }
+
+        return check;
     }
 
     private void AnhXa() {
@@ -64,6 +140,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         textView4 = findViewById(R.id.textView4);
         tvResigter = findViewById(R.id.tvResigter);
+        loading = new Loading(this);
     }
 
     private void Resigter() {
@@ -85,6 +162,24 @@ public class LoginActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    private void Dialog(String mess) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_thongbao_resigter, null);
+        builder.setView(view);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        alertDialog.show();
+        TextView tvThongbao = view.findViewById(R.id.tvMess);
+        // dialog
+        Button btnThongBao = view.findViewById(R.id.btnThongBao);
+        tvThongbao.setText(mess);
+
+        btnThongBao.setOnClickListener(view1 -> {
+            loading.DimissDialog();
+            alertDialog.dismiss();
+        });
+    }
+
     // dialog thoat
     public void Exit() {
         AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
@@ -94,8 +189,8 @@ public class LoginActivity extends AppCompatActivity {
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         alertDialog.show();
 
-        btnHuy = view.findViewById(R.id.btn_dialog_Huy);
-        btnThoat = view.findViewById(R.id.btn_dialog_Thoat);
+        Button btnHuy = view.findViewById(R.id.btn_dialog_Huy);
+        Button btnThoat = view.findViewById(R.id.btn_dialog_Thoat);
 
         btnThoat.setOnClickListener(v -> {
             alertDialog.dismiss();
