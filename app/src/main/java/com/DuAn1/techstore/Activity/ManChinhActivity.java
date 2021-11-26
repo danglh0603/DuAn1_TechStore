@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
-import com.DuAn1.techstore.Model.GioHang;
 import com.DuAn1.techstore.R;
 import com.DuAn1.techstore.fragment.FragmentGioHang;
 import com.DuAn1.techstore.fragment.FragmentManChinh;
