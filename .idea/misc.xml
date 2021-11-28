@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.1638888888888889" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26614583333333336" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/backgroud_dialof.xml" value="0.25092592592592594" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/backgroud_dialog.xml" value="0.175" />
@@ -86,6 +87,8 @@
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/menu/cart.xml" value="0.25" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/menu/search_view.xml" value="0.25" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.26205128205128203" />
+        <entry key="app/src/main/res/layout/activity_manchinh.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_man_chinh.xml" value="0.12314814814814815" />
       </map>
     </option>
   </component>
