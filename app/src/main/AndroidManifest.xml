@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TechStore">
         <activity
+            android:name=".Activity.Activity_DoiMatKhau"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Activity_DoiThongTin"
+            android:exported="false" />
+        <activity
             android:name=".Activity.Activity_Search"
             android:exported="true" />
         <activity

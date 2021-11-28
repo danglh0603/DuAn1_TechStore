@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Activity_DoiMatKhau"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="-110dp"
+        android:backgroundTint="#00ABFD"
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        app:cardCornerRadius="30dp">
+
+        <TextView
+            android:layout_marginTop="150dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:text="Đổi Mật Khẩu"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_marginTop="280dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
+            android:backgroundTint="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:background="@drawable/ic_baseline_person_24_default"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"/>
+                <EditText
+                    android:id="@+id/mkcu"
+                    android:hint="Mật khẩu cũ"
+                    android:layout_marginLeft="10dp"
+                    android:backgroundTint="@color/white"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"/>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_marginTop="350dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
+            android:backgroundTint="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:background="@drawable/ic_baseline_person_24_default"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"/>
+                <EditText
+                    android:id="@+id/mkmoi"
+                    android:hint="Mật khẩu mới"
+                    android:layout_marginLeft="10dp"
+                    android:backgroundTint="@color/white"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"/>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_marginTop="420dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
+            android:backgroundTint="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/emaiml"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"/>
+                <EditText
+                    android:id="@+id/nlmkmoi"
+                    android:hint="Nhập lại mật khẩu"
+                    android:layout_marginLeft="10dp"
+                    android:backgroundTint="@color/white"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"/>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="100dp"
+        android:backgroundTint="#00ABFD"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        app:cardCornerRadius="20dp">
+        <Button
+            android:layout_marginTop="-5dp"
+            android:backgroundTint="#00ABFD"
+            android:id="@+id/btn_editmk"
+            android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Thay Đổi"
+            android:textColor="@color/white"/>
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>

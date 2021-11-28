@@ -86,6 +86,36 @@
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/menu/cart.xml" value="0.25" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/menu/search_view.xml" value="0.25" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.26205128205128203" />
+        <entry key="app/src/main/res/drawable/background_boder_item_grid.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/drawable/background_btn_dangki.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/drawable/background_cir.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/drawable/background_dialog.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/drawable/background_dn_dk.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/drawable/background_loading.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/drawable/background_title.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/drawable/bkdialong.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/drawable/btndangki.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/drawable/btndangnhap.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/drawable/custom_view_thongtinsp.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/drawable/dk2.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_ios_24.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/drawable/ic_baseline_cached_24.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/drawable/ic_baseline_edit_calendar_24_default.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/drawable/ic_baseline_person_24_default.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/drawable/ic_baseline_person_24_focus.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/drawable/ic_baseline_phone_24_default.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/drawable/ic_baseline_phone_24_focus.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/drawable/icon_address.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/drawable/icon_calenra.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/drawable/icon_create.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/drawable/icon_pass.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/drawable/icon_person.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/drawable/icon_phone.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/layout/activity_doi_thong_tin.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_taikhoan.xml" value="0.14550509731232622" />
       </map>
     </option>
   </component>
@@ -94,5 +124,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.165" />
+      </ProjectState>
+    </option>
   </component>
 </project>
