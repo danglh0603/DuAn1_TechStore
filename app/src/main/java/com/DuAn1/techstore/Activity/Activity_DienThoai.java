@@ -23,19 +23,27 @@ import com.DuAn1.techstore.Model.GioHang;
 import com.DuAn1.techstore.Model.Loading;
 import com.DuAn1.techstore.Model.SanPham;
 import com.DuAn1.techstore.R;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Activity_DienThoai extends AppCompatActivity {
 
+    private static final int MATL = 1; // maLoai điện thoại :1
     private Toolbar toolbar;
     private RecyclerView recyclerView;
-    private ArrayList<SanPham> lstDT;
+    private ArrayList<SanPham> lstSP;
     private Adapter_SP adapter_SP;
     private SanPham sanPham;
     private Loading loading;
@@ -54,8 +62,8 @@ public class Activity_DienThoai extends AppCompatActivity {
         loading = new Loading(this);
         toolbar = findViewById(R.id.toolbar);
         recyclerView = findViewById(R.id.rcv);
-        lstDT = new ArrayList<>();
-        adapter_SP = new Adapter_SP(getApplicationContext(), lstDT);
+        lstSP = new ArrayList<>();
+        adapter_SP = new Adapter_SP(getApplicationContext(), lstSP);
         loading.LoadingDialog();
         //
         GridLayoutManager manager = new GridLayoutManager(getApplicationContext(), 2);
@@ -64,38 +72,47 @@ public class Activity_DienThoai extends AppCompatActivity {
     }
 
     private void getDL_DT() {
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());//khai bao context
-        //JsonArrayRequest(duongdan,neuThanhCong,neuThatBai);
-        //tao request
-        //xu ly khi thanh cong
-        //xu ly khi that bai
-        @SuppressLint("NotifyDataSetChanged") JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.dienThoai, response -> {
-            if (response != null) {
-                loading.DimissDialog();
-                for (int i = 0; i < response.length(); i++) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.sanPhamTheoTL,
+                response -> {
                     try {
-                        JSONObject jsonObject = response.getJSONObject(i);//lay doi tuong thu i
-                        sanPham = new SanPham();
-                        sanPham.setMaSanPham(jsonObject.getInt("maSP"));
-                        sanPham.setMaLoai(jsonObject.getInt("maLoai"));
-                        sanPham.setTenSanPham(jsonObject.getString("tenSP"));
-                        sanPham.setSoLuongNhap(jsonObject.getInt("soLuongNhap"));
-                        sanPham.setHinhAnh(jsonObject.getString("hinhAnh"));
-                        sanPham.setGiaTien(jsonObject.getInt("giaTien"));
-                        sanPham.setGiaCu(jsonObject.getInt("giaCu"));
-                        sanPham.setNgayNhap(jsonObject.getString("ngayNhap"));
-                        sanPham.setThongTinSanPham(jsonObject.getString("thongTinSP"));
-                        lstDT.add(sanPham);
-                        adapter_SP.notifyDataSetChanged();
-
-                    } catch (Exception e) {
+                        loading.DimissDialog();
+                        JSONArray jsonArray = new JSONArray(response);
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            try {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);//lay doi tuong thu i
+                                sanPham = new SanPham();
+                                sanPham.setMaSanPham(jsonObject.getInt("maSP"));
+                                sanPham.setMaLoai(jsonObject.getInt("maLoai"));
+                                sanPham.setTenSanPham(jsonObject.getString("tenSP"));
+                                sanPham.setSoLuongNhap(jsonObject.getInt("soLuongNhap"));
+                                sanPham.setHinhAnh(jsonObject.getString("hinhAnh"));
+                                sanPham.setGiaTien(jsonObject.getInt("giaTien"));
+                                sanPham.setGiaCu(jsonObject.getInt("giaCu"));
+                                sanPham.setNgayNhap(jsonObject.getString("ngayNhap"));
+                                sanPham.setThongTinSanPham(jsonObject.getString("thongTinSP"));
+                                lstSP.add(sanPham);
+                                adapter_SP.notifyDataSetChanged();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
-                }
+
+                },
+                error -> Toast.makeText(getApplicationContext(), "Lỗi", Toast.LENGTH_SHORT).show()) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("maLoai", String.valueOf(MATL));
+                return params;
             }
-        }, error -> Toast.makeText(getApplicationContext(), "Lỗi mạng!", Toast.LENGTH_SHORT).show());
-        requestQueue.add(jsonArrayRequest);//add request vao xu ly
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
+
     }
 
     @SuppressLint("RestrictedApi")
