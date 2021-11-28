@@ -87,8 +87,18 @@
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/menu/cart.xml" value="0.25" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/menu/search_view.xml" value="0.25" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.26205128205128203" />
+        <entry key="app/src/main/res/drawable/background_btn_dang_ky.xml" value="0.20092592592592592" />
+        <entry key="app/src/main/res/drawable/background_btn_dangki.xml" value="0.20092592592592592" />
+        <entry key="app/src/main/res/drawable/background_btn_dangnhap.xml" value="0.20092592592592592" />
+        <entry key="app/src/main/res/drawable/background_cir.xml" value="0.20092592592592592" />
+        <entry key="app/src/main/res/layout/activity_dangki.xml" value="0.12537993920972645" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.12537993920972645" />
         <entry key="app/src/main/res/layout/activity_manchinh.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_change_user.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_doi_mat_khau.xml" value="0.2578125" />
+        <entry key="app/src/main/res/layout/fragment_doi_thong_tin.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/fragment_man_chinh.xml" value="0.12314814814814815" />
+        <entry key="app/src/main/res/layout/fragment_taikhoan.xml" value="0.335" />
       </map>
     </option>
   </component>

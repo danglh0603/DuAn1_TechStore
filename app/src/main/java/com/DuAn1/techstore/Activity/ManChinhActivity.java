@@ -15,6 +15,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.DuAn1.techstore.R;
 import com.DuAn1.techstore.fragment.FragmentGioHang;
@@ -29,11 +30,12 @@ public class ManChinhActivity extends AppCompatActivity {
     private MeowBottomNavigation bottomNavigation;
     private Toolbar toolbar;
     private ActionBar actionBar;
-
+    FragmentManager fragmentManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manchinh);
+        fragmentManager = getSupportFragmentManager();
         AnhXa();
         // xu li actionBar
         ActionBar();
@@ -140,6 +142,30 @@ public class ManChinhActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void replaceFragments(Class fragmentClass) {
+        Fragment fragment = null;
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // Insert the fragment by replacing any existing fragment
+        fragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.enter_right_to_left, R.anim.exit_right_to_left,
+                R.anim.enter_left_to_right, R.anim.exit_left_to_right)
+                .replace(R.id.container, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void popBackFragments() {
+        if (fragmentManager.getBackStackEntryCount()> 0) {
+            fragmentManager.popBackStack();
+        }
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
