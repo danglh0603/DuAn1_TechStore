@@ -15,8 +15,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
-import com.DuAn1.techstore.Model.KhachHang;
 import com.DuAn1.techstore.R;
 import com.DuAn1.techstore.fragment.FragmentGioHang;
 import com.DuAn1.techstore.fragment.FragmentManChinh;
@@ -24,21 +24,21 @@ import com.DuAn1.techstore.fragment.FragmentTaiKhoan;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 
 
+
 public class ManChinhActivity extends AppCompatActivity {
 
     private MeowBottomNavigation bottomNavigation;
     private Toolbar toolbar;
     private ActionBar actionBar;
-    private KhachHang khachHang;
-
+    FragmentManager fragmentManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manchinh);
+        fragmentManager = getSupportFragmentManager();
         AnhXa();
         // xu li actionBar
         ActionBar();
-        //getKh();
         // xu li bottom
         BottomNav();
 
@@ -136,19 +136,42 @@ public class ManChinhActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), Activity_GioHang.class);
             startActivity(intent);
         }
-        if (item.getItemId() == R.id.SearchActivity) {
-            Intent intent = new Intent(getApplicationContext(), Activity_Search.class);
-            startActivity(intent);
+        if (item.getItemId() == R.id.Search) {
+//            Intent intent = new Intent(getApplicationContext(), Activity_Search.class);
+//            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_manhinhchinh, menu);
-        return true;
+    public void replaceFragments(Class fragmentClass) {
+        Fragment fragment = null;
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // Insert the fragment by replacing any existing fragment
+        fragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.enter_right_to_left, R.anim.exit_right_to_left,
+                R.anim.enter_left_to_right, R.anim.exit_left_to_right)
+                .replace(R.id.container, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
+    public void popBackFragments() {
+        if (fragmentManager.getBackStackEntryCount()> 0) {
+            fragmentManager.popBackStack();
+        }
+    }
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search_view, menu);
+        return true;
+    }
     @Override
     protected void onPause() {
         super.onPause();

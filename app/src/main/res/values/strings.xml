@@ -12,7 +12,14 @@
     <string name="strDangKiTaiDay"><u>Đăng kí tại đây!</u></string>
     <string name="strDangKi">Đăng kí</string>
 
-
+    //change user
+    <string name="strDangXuat">Đăng xuất</string>
+    <string name="strMKCu">Mật khẩu cũ</string>
+    <string name="strMKMoi">Mật khẩu mới</string>
+    <string name="strNhapLai">Nhập lại mật khẩu</string>
+    <string name="strThayDoi">Thay đổi</string>
+    <string name="strDoiMK">Đổi mật khẩu</string>
+    <string name="strDoiThongTin">Đổi thông tin</string>
     //
     <string name="strHoTen">Họ và tên</string>
     <string name="strNamSinh">Năm sinh</string>
