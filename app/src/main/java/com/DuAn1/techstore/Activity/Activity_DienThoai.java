@@ -26,7 +26,6 @@ import com.DuAn1.techstore.R;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -63,7 +62,7 @@ public class Activity_DienThoai extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         recyclerView = findViewById(R.id.rcv);
         lstSP = new ArrayList<>();
-        adapter_SP = new Adapter_SP(getApplicationContext(), lstSP);
+        adapter_SP = new Adapter_SP(Activity_DienThoai.this, lstSP);
         loading.LoadingDialog();
         //
         GridLayoutManager manager = new GridLayoutManager(getApplicationContext(), 2);

@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import com.DuAn1.techstore.Model.KhachHang;
 import com.DuAn1.techstore.R;
 import com.DuAn1.techstore.fragment.FragmentGioHang;
 import com.DuAn1.techstore.fragment.FragmentManChinh;
@@ -28,6 +29,7 @@ public class ManChinhActivity extends AppCompatActivity {
     private MeowBottomNavigation bottomNavigation;
     private Toolbar toolbar;
     private ActionBar actionBar;
+    private KhachHang khachHang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class ManChinhActivity extends AppCompatActivity {
         AnhXa();
         // xu li actionBar
         ActionBar();
+        //getKh();
         // xu li bottom
         BottomNav();
 
@@ -133,18 +136,19 @@ public class ManChinhActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), Activity_GioHang.class);
             startActivity(intent);
         }
-        if (item.getItemId() == R.id.Search) {
-//            Intent intent = new Intent(getApplicationContext(), Activity_Search.class);
-//            startActivity(intent);
+        if (item.getItemId() == R.id.SearchActivity) {
+            Intent intent = new Intent(getApplicationContext(), Activity_Search.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search_view, menu);
+        getMenuInflater().inflate(R.menu.menu_manhinhchinh, menu);
         return true;
     }
+
     @Override
     protected void onPause() {
         super.onPause();

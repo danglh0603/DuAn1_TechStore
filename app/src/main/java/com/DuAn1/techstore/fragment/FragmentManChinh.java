@@ -24,11 +24,11 @@ import com.DuAn1.techstore.Activity.Activity_PhuKien;
 import com.DuAn1.techstore.Adapter.AdapterSP_BanChay;
 import com.DuAn1.techstore.Adapter.AdapterSlide;
 import com.DuAn1.techstore.Adapter.GirdViewAdapterSp;
+import com.DuAn1.techstore.DAO.Server;
 import com.DuAn1.techstore.Model.DepthPageTransformer;
 import com.DuAn1.techstore.Model.Photo;
 import com.DuAn1.techstore.Model.SanPham;
 import com.DuAn1.techstore.R;
-import com.DuAn1.techstore.DAO.Server;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
@@ -67,7 +67,6 @@ public class FragmentManChinh extends Fragment {
     String url5 = "https://images.fpt.shop/unsafe/fit-in/800x300/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2021/11/19/637729280202093567_F-H1_800x300.png";
     String url6 = "https://images.fpt.shop/unsafe/fit-in/800x300/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2021/11/2/637714572252786896_F-H1_800x300.png";
     String url7 = "https://images.fpt.shop/unsafe/fit-in/800x300/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2021/8/31/637660487336798016_F_H1_800x300.png";
-
 
 
     Handler handler = new Handler();
@@ -155,7 +154,7 @@ public class FragmentManChinh extends Fragment {
         //tao request
         //xu ly khi thanh cong
         //xu ly khi that bai
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.getAllSP, response -> {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.spMoiNhat, response -> {
             if (response != null) {
                 for (int i = 0; i < response.length(); i++) {
                     try {

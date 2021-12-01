@@ -1,6 +1,8 @@
 package com.DuAn1.techstore.Model;
 
-public class KhachHang {
+import java.io.Serializable;
+
+public class KhachHang implements Serializable {
     private int maKhachHang;
     private  String username;
     private  String password;

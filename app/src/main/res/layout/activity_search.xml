@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".Activity.Activity_Search">
 
-    <Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -16,29 +16,24 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="5dp"
-            android:clickable="true"
+            android:layout_margin="5dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="10dp"
             app:cardElevation="3dp">
 
             <androidx.appcompat.widget.SearchView
-                android:id="@+id/search"
-
+                android:id="@+id/searchView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                 />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="5dp" />
         </androidx.cardview.widget.CardView>
-    </Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:overScrollMode="ifContentScrolls">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp" />
-    </androidx.core.widget.NestedScrollView>
+        android:layout_height="match_parent"
+        android:padding="10dp" />
 
 </LinearLayout>

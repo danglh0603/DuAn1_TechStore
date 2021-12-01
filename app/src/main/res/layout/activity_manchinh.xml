@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/xanh"
+        app:menu="@menu/menu_manhinhchinh"
         app:titleTextColor="@color/white" />
 
     <androidx.fragment.app.FragmentContainerView

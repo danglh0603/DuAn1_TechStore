@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TechStore">
         <activity
+            android:name=".Activity.Activity_ThanhToan"
+            android:exported="true" />
+        <activity
             android:name=".Activity.Activity_Search"
             android:exported="true" />
         <activity

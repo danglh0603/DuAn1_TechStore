@@ -19,10 +19,15 @@
     <string name="strSodienThoai">Số điện thoại</string>
     <string name="strDiaChi">Địa chỉ</string>
     <string name="strThongBao">Thông báo</string>
+    //
+    <string name="strHoTenB"><b>Tên người nhận: </b></string>
+    <string name="strDiaChiB"><b>Địa chỉ: </b></string>
+    <string name="strSdtB"><b>Số điện thoại: </b></string>
+    <string name="strSoLuongB"><b>Số lượng mua: </b></string>
 
     //fragment home
     <string name="strDanhMucSp"><u>Danh mục sản phẩm</u></string>
-    <string name="strSanPhamBanChay"><u>Sản phẩm bán chạy</u></string>
+    <string name="strSanPhammoi"><u>Sản phẩm mới</u></string>
     <string name="strThongTin">Thông tin thêm</string>
     <string name="strThemGioHang">Thêm giỏ hàng</string>
     <string name="strMuaNgay">Mua ngay</string>

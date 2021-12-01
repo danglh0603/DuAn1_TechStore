@@ -68,6 +68,7 @@ public class Adapter_SP extends RecyclerView.Adapter<Adapter_SP.ViewHolder> {
             });
             holder.cardView.setOnClickListener(view -> {
                 Intent intent = new Intent(context, Activity_ChiTietSp.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("sanPham", sanPham);
                 intent.putExtras(bundle);

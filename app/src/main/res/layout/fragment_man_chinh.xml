@@ -15,9 +15,9 @@
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager2"
-            android:elevation="2dp"
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="200dp"
+            android:elevation="2dp" />
 
         <me.relex.circleindicator.CircleIndicator3
             android:id="@+id/cir3"
@@ -77,7 +77,7 @@
             android:layout_marginTop="8dp"
             android:elevation="5dp"
             android:padding="8dp"
-            android:text="@string/strSanPhamBanChay"
+            android:text="@string/strSanPhammoi"
             android:textAllCaps="true"
             android:textColor="@color/xanh"
             android:textSize="18sp"

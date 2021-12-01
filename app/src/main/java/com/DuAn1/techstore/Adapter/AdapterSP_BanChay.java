@@ -61,15 +61,12 @@ public class AdapterSP_BanChay extends RecyclerView.Adapter<AdapterSP_BanChay.Vi
                     Toast.makeText(context, "Bỏ thích!", Toast.LENGTH_SHORT).show();
                 }
             });
-            holder.cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(context, Activity_ChiTietSp.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("sanPham", sanPham);
-                    intent.putExtras(bundle);
-                    context.startActivity(intent);
-                }
+            holder.cardView.setOnClickListener(view -> {
+                Intent intent = new Intent(context, Activity_ChiTietSp.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("sanPham", sanPham);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
             });
         }
     }

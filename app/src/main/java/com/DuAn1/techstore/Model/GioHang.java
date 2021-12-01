@@ -1,6 +1,8 @@
 package com.DuAn1.techstore.Model;
 
-public class GioHang {
+import java.io.Serializable;
+
+public class GioHang implements Serializable {
     private int maKH;
     private int maSanPham;
     private int soLuongMua;

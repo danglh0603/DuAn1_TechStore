@@ -15,9 +15,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.DuAn1.techstore.DAO.Server;
 import com.DuAn1.techstore.Model.Loading;
 import com.DuAn1.techstore.R;
-import com.DuAn1.techstore.DAO.Server;
 import com.DuAn1.techstore.Until.CheckConnection;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -80,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.equals("success")) {
                     loading.DimissDialog();
                     Intent intent = new Intent(LoginActivity.this, ManChinhActivity.class);
+                    intent.putExtra("tenDangNhap", username);
                     startActivity(intent);
                     rememberAccount(username, password, chkRemember.isChecked());
                     Toast.makeText(getApplicationContext(), "Xin chào " + username, Toast.LENGTH_SHORT).show();

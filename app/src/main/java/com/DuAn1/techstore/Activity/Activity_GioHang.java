@@ -1,21 +1,61 @@
 package com.DuAn1.techstore.Activity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.DuAn1.techstore.Adapter.Adapter_GioHang;
+import com.DuAn1.techstore.DAO.Server;
+import com.DuAn1.techstore.Model.GioHang;
+import com.DuAn1.techstore.Model.Loading;
+import com.DuAn1.techstore.Model.SanPham;
 import com.DuAn1.techstore.R;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Activity_GioHang extends AppCompatActivity {
 
     private Toolbar toolbar;
+    private Loading loading;
+    private TextView tvSoLuongSPTrongGio;
     private RecyclerView recyclerView;
+    @SuppressLint("StaticFieldLeak")
+    private static TextView tvTongTien;
+    private Button btnThanhToan;
+
+    private SanPham sanPham;
+    private GioHang gioHang;
+    private int maKH;
+    private int tongTien = 0;
+
+    private ArrayList<SanPham> lstSP;
+    private ArrayList<GioHang> lstGH;
+    private Adapter_GioHang adapter_gioHang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +63,45 @@ public class Activity_GioHang extends AppCompatActivity {
         setContentView(R.layout.activity_gio_hang);
         Anhxa();
         ActionBar();
+        getThongTinKH();
+        btnThanhToan.setOnClickListener(view -> ThanhToanGioHang());
+    }
+
+    private void ThanhToanGioHang() {
+        Intent intent = new Intent(Activity_GioHang.this, Activity_ThanhToan.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("lstSP", lstSP);
+        bundle.putSerializable("lstGH", lstGH);
+        bundle.putInt("tongTien", tongTien);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
     }
 
     private void Anhxa() {
         toolbar = findViewById(R.id.toolbar);
+        tvSoLuongSPTrongGio = findViewById(R.id.tvSoLuongSPTrongGio);
         recyclerView = findViewById(R.id.rcv);
+        tvTongTien = findViewById(R.id.tvTongTien);
+        btnThanhToan = findViewById(R.id.btnThanhToan);
+
+
+        loading = new Loading(this);
+        loading.LoadingDialog();
+        lstSP = new ArrayList<>();
+        lstGH = new ArrayList<>();
+
+        adapter_gioHang = new Adapter_GioHang(Activity_GioHang.this, lstGH, lstSP);
+
+        LinearLayoutManager manager = new LinearLayoutManager(Activity_GioHang.this);
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(itemDecoration);
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(adapter_gioHang);
+
+
+        //
+
     }
 
     @SuppressLint("RestrictedApi")
@@ -41,6 +115,89 @@ public class Activity_GioHang extends AppCompatActivity {
         }
 
     }
+
+    private void getDLGioHang(int maKH) {
+        StringRequest request = new StringRequest(Request.Method.POST, Server.getGioHang,
+                response -> {
+                    try {
+                        loading.DimissDialog();
+                        JSONArray jsonArray = new JSONArray(response);
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            try {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);//lay doi tuong thu i
+                                sanPham = new SanPham();
+                                gioHang = new GioHang();
+                                sanPham.setMaSanPham(jsonObject.getInt("maSP"));
+                                sanPham.setMaLoai(jsonObject.getInt("maLoai"));
+                                sanPham.setTenSanPham(jsonObject.getString("tenSP"));
+                                sanPham.setSoLuongNhap(jsonObject.getInt("soLuongNhap"));
+                                sanPham.setHinhAnh(jsonObject.getString("hinhAnh"));
+                                sanPham.setGiaTien(jsonObject.getInt("giaTien"));
+                                sanPham.setGiaCu(jsonObject.getInt("giaCu"));
+                                sanPham.setNgayNhap(jsonObject.getString("ngayNhap"));
+                                sanPham.setThongTinSanPham(jsonObject.getString("thongTinSP"));
+                                gioHang.setMaSanPham(jsonObject.getInt("maSP"));
+                                gioHang.setMaKH(jsonObject.getInt("maKH"));
+                                gioHang.setSoLuongMua(jsonObject.getInt("soLuong"));
+                                lstSP.add(sanPham);
+                                lstGH.add(gioHang);
+                                tongTien += sanPham.getGiaTien() * gioHang.getSoLuongMua();
+                                tvSoLuongSPTrongGio.setText(lstGH.size() + " đơn hàng!");
+                                adapter_gioHang.notifyDataSetChanged();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        DecimalFormat format = new DecimalFormat("###,###,###");
+                        tvTongTien.setText("Tổng tiền: " + format.format(tongTien) + "đ");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }, error ->
+
+        {
+
+        }) {
+            @NonNull
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("maKH", String.valueOf(maKH));
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(request);
+    }
+
+    private void getThongTinKH() {
+        SharedPreferences preferences = getApplicationContext().getSharedPreferences("Accout_file", Context.MODE_PRIVATE);
+        String userName = preferences.getString("USER", "");
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.getKhachHang,
+                response -> {
+                    loading.DimissDialog();
+                    try {
+                        JSONArray jsonArray = new JSONArray(response);
+                        JSONObject jsonObject = jsonArray.getJSONObject(0);
+                        maKH = jsonObject.getInt("maKH");
+                        getDLGioHang(maKH);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                },
+                error -> Toast.makeText(getApplicationContext(), "Lỗi", Toast.LENGTH_SHORT).show()) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("tenDangNhap", userName);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
