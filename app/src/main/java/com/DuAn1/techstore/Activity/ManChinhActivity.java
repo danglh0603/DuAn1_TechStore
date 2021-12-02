@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -89,7 +90,7 @@ public class ManChinhActivity extends AppCompatActivity {
 
         bottomNavigation.setOnClickMenuListener(item -> {
             // xu li su kien click item bottom
-            //Toast.makeText(getApplicationContext(), "" + item.getId(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "" + item.getId(), Toast.LENGTH_SHORT).show();
         });
         bottomNavigation.setOnReselectListener(item -> {
             //
@@ -136,9 +137,9 @@ public class ManChinhActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), Activity_GioHang.class);
             startActivity(intent);
         }
-        if (item.getItemId() == R.id.Search) {
-//            Intent intent = new Intent(getApplicationContext(), Activity_Search.class);
-//            startActivity(intent);
+        if (item.getItemId() == R.id.SearchActivity) {
+            Intent intent = new Intent(getApplicationContext(), Activity_Search.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -169,7 +170,7 @@ public class ManChinhActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search_view, menu);
+        getMenuInflater().inflate(R.menu.menu_manhinhchinh, menu);
         return true;
     }
     @Override
@@ -190,6 +191,5 @@ public class ManChinhActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
     }
 }

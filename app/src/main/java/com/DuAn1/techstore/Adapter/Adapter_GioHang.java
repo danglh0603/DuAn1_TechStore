@@ -1,21 +1,24 @@
 package com.DuAn1.techstore.Adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.DuAn1.techstore.Activity.Activity_GioHang;
 import com.DuAn1.techstore.DAO.Server;
 import com.DuAn1.techstore.Model.GioHang;
+import com.DuAn1.techstore.Model.Loading;
 import com.DuAn1.techstore.Model.SanPham;
 import com.DuAn1.techstore.R;
 import com.android.volley.AuthFailureError;
@@ -23,6 +26,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.chauthai.swipereveallayout.ViewBinderHelper;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -34,16 +38,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Adapter_GioHang extends RecyclerView.Adapter<Adapter_GioHang.ViewHolder> {
+
     private final Context context;
+    private Activity_GioHang activity_gioHang;
     private final ArrayList<GioHang> lstGH;
     private final ArrayList<SanPham> lstSP;
     private final DecimalFormat format = new DecimalFormat("###,###,###");
     private int maKH;
+    private final ViewBinderHelper binderHelper = new ViewBinderHelper();
+    private Loading loading ;
 
-    public Adapter_GioHang(Context context, ArrayList<GioHang> lstGH, ArrayList<SanPham> lstSP) {
+    public Adapter_GioHang(Context context,Activity_GioHang activity_gioHang, ArrayList<GioHang> lstGH, ArrayList<SanPham> lstSP) {
         this.context = context;
+        this.activity_gioHang = activity_gioHang;
         this.lstGH = lstGH;
         this.lstSP = lstSP;
+        loading = new Loading((Activity) context);
     }
 
     @NonNull
@@ -55,7 +65,7 @@ public class Adapter_GioHang extends RecyclerView.Adapter<Adapter_GioHang.ViewHo
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         GioHang gioHang = lstGH.get(position);
         SanPham sanPham = lstSP.get(position);
         if (gioHang != null && sanPham != null) {
@@ -69,20 +79,24 @@ public class Adapter_GioHang extends RecyclerView.Adapter<Adapter_GioHang.ViewHo
             holder.tvGia.setText(format.format(sanPham.getGiaTien()) + "đ");
             holder.tvSoLuong.setText("Số lượng mua: " + gioHang.getSoLuongMua());
             getThongTinKH();
-            holder.btnXoa.setOnClickListener(view -> {
+
+            binderHelper.bind(holder.SwipeRevealLayout, String.valueOf(sanPham.getMaSanPham()));
+            holder.linerDelete.setOnClickListener(view -> {
+                lstSP.remove(holder.getAdapterPosition());
+                lstGH.remove(holder.getAdapterPosition());
                 xoaSanPhamKhoiGioHang(sanPham.getMaSanPham(),maKH);
                 notifyDataSetChanged();
+                activity_gioHang.xuLiSauXoa();
             });
         }
     }
-
-    private void xoaSanPhamKhoiGioHang(int maSanPham,int maKH) {
+    public void xoaSanPhamKhoiGioHang(int maSanPham, int maKH) {
         StringRequest request = new StringRequest(Request.Method.POST, Server.deleteSanPhamGH,
                 response -> {
                     switch (response) {
                         case "success": {
+                            loading.DimissDialog();
                             Toast.makeText(context, "Đã xóa!", Toast.LENGTH_SHORT).show();
-
                             break;
                         }
                         case "failure": {
@@ -102,7 +116,10 @@ public class Adapter_GioHang extends RecyclerView.Adapter<Adapter_GioHang.ViewHo
         };
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(request);
+
     }
+
+
 
     private void getThongTinKH() {
         SharedPreferences preferences = context.getSharedPreferences("Accout_file", Context.MODE_PRIVATE);
@@ -143,7 +160,8 @@ public class Adapter_GioHang extends RecyclerView.Adapter<Adapter_GioHang.ViewHo
         private final TextView tvTenSp;
         private final TextView tvGia;
         private final TextView tvSoLuong;
-        private final AppCompatButton btnXoa;
+        private com.chauthai.swipereveallayout.SwipeRevealLayout SwipeRevealLayout;
+        private LinearLayout linerDelete;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -151,10 +169,10 @@ public class Adapter_GioHang extends RecyclerView.Adapter<Adapter_GioHang.ViewHo
             imgSP = itemView.findViewById(R.id.imgSP);
             tvTenSp = itemView.findViewById(R.id.tvTenSp);
             tvGia = itemView.findViewById(R.id.tvGia);
-
             tvSoLuong = itemView.findViewById(R.id.tvSoLuongMua);
-
-            btnXoa = itemView.findViewById(R.id.btnXoa);
+            //
+            SwipeRevealLayout = itemView.findViewById(R.id.SwipeRevealLayout);
+            linerDelete = itemView.findViewById(R.id.linerDelete);
         }
     }
 }

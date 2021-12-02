@@ -122,6 +122,7 @@ public class Activity_Search extends AppCompatActivity {
         });
         requestQueue.add(jsonArrayRequest);//add request vao xu ly
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {

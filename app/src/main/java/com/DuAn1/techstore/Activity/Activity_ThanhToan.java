@@ -118,10 +118,10 @@ public class Activity_ThanhToan extends AppCompatActivity {
 
         tongTien = bundle.getInt("tongTien");
 
-        adapter_gioHang = new Adapter_GioHang(Activity_ThanhToan.this, lstGH, lstSP);
-        LinearLayoutManager manager = new LinearLayoutManager(Activity_ThanhToan.this);
-        rcv.setLayoutManager(manager);
-        rcv.setAdapter(adapter_gioHang);
+//        adapter_gioHang = new Adapter_GioHang(Activity_ThanhToan.this,this, lstGH, lstSP);
+//        LinearLayoutManager manager = new LinearLayoutManager(Activity_ThanhToan.this);
+//        rcv.setLayoutManager(manager);
+//        rcv.setAdapter(adapter_gioHang);
     }
 
     @SuppressLint("SetTextI18n")

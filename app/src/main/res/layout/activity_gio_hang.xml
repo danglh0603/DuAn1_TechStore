@@ -21,9 +21,15 @@
         android:layout_height="wrap_content"
         android:gravity="end"
         android:padding="5dp"
-        android:text="0 đơn hàng!"
         android:textColor="@color/black"
         android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/imgGHTrong"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/cartnull"
+        android:contentDescription="TODO" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -45,7 +51,6 @@
         android:layout_height="wrap_content"
         android:gravity="end"
         android:padding="8dp"
-        android:text="Tổng tiền: 0đ"
         android:textColor="@color/red"
         android:textSize="20sp"
         android:textStyle="bold" />

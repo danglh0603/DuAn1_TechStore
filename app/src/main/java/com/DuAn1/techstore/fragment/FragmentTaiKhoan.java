@@ -15,13 +15,14 @@ import com.DuAn1.techstore.R;
 
 public class FragmentTaiKhoan extends Fragment {
     ImageView img_chang_user;
+
     public FragmentTaiKhoan() {
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_taikhoan,null,false);
+        View view = inflater.inflate(R.layout.fragment_taikhoan, null, false);
         return view;
     }
 
@@ -29,12 +30,7 @@ public class FragmentTaiKhoan extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         AnhXa(view);
-        img_chang_user.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((ManChinhActivity) getActivity()).replaceFragments(FragmentChangeUser.class);
-            }
-        });
+        img_chang_user.setOnClickListener(v -> ((ManChinhActivity) getActivity()).replaceFragments(FragmentChangeUser.class));
     }
 
     private void AnhXa(View view) {

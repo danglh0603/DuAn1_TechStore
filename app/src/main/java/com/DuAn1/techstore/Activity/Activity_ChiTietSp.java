@@ -48,7 +48,6 @@ public class Activity_ChiTietSp extends AppCompatActivity {
     private TextView tvTen;
     private TextView tvGia;
     private TextView tvGiaCu;
-    private TextView tvSoLuong;
     private TextView tvThongTin;
     private AppCompatButton btnMuaNgay;
     private AppCompatButton btnThemGioHang;
@@ -74,7 +73,6 @@ public class Activity_ChiTietSp extends AppCompatActivity {
         tvTen = findViewById(R.id.tvTen);
         tvGia = findViewById(R.id.tvGia);
         tvGiaCu = findViewById(R.id.tvGiaCu);
-        tvSoLuong = findViewById(R.id.tvSoLuong);
         tvThongTin = findViewById(R.id.tvThongTin);
         btnMuaNgay = findViewById(R.id.btnMuaNgay);
         btnThemGioHang = findViewById(R.id.btnThemGioHang);

@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +46,8 @@ public class Activity_GioHang extends AppCompatActivity {
     private Loading loading;
     private TextView tvSoLuongSPTrongGio;
     private RecyclerView recyclerView;
+    private ImageView imgGHTrong;
+
     @SuppressLint("StaticFieldLeak")
     private static TextView tvTongTien;
     private Button btnThanhToan;
@@ -80,28 +84,26 @@ public class Activity_GioHang extends AppCompatActivity {
 
     private void Anhxa() {
         toolbar = findViewById(R.id.toolbar);
+        imgGHTrong = findViewById(R.id.imgGHTrong);
         tvSoLuongSPTrongGio = findViewById(R.id.tvSoLuongSPTrongGio);
         recyclerView = findViewById(R.id.rcv);
         tvTongTien = findViewById(R.id.tvTongTien);
         btnThanhToan = findViewById(R.id.btnThanhToan);
-
+        imgGHTrong.setVisibility(View.INVISIBLE);
 
         loading = new Loading(this);
         loading.LoadingDialog();
         lstSP = new ArrayList<>();
         lstGH = new ArrayList<>();
-
-        adapter_gioHang = new Adapter_GioHang(Activity_GioHang.this, lstGH, lstSP);
-
+        //
+        adapter_gioHang = new Adapter_GioHang(Activity_GioHang.this, this, lstGH, lstSP);
         LinearLayoutManager manager = new LinearLayoutManager(Activity_GioHang.this);
+        // ----
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(itemDecoration);
+        //----
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter_gioHang);
-
-
-        //
-
     }
 
     @SuppressLint("RestrictedApi")
@@ -116,43 +118,59 @@ public class Activity_GioHang extends AppCompatActivity {
 
     }
 
+    public void xuLiSauXoa(){
+        imgGHTrong.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.INVISIBLE);
+        tvSoLuongSPTrongGio.setText("0 đơn hàng trong giỏ");
+        tvTongTien.setText("0đ");
+    }
     private void getDLGioHang(int maKH) {
         StringRequest request = new StringRequest(Request.Method.POST, Server.getGioHang,
                 response -> {
-                    try {
+                    if (response.equals("failure")) {
                         loading.DimissDialog();
-                        JSONArray jsonArray = new JSONArray(response);
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            try {
-                                JSONObject jsonObject = jsonArray.getJSONObject(i);//lay doi tuong thu i
-                                sanPham = new SanPham();
-                                gioHang = new GioHang();
-                                sanPham.setMaSanPham(jsonObject.getInt("maSP"));
-                                sanPham.setMaLoai(jsonObject.getInt("maLoai"));
-                                sanPham.setTenSanPham(jsonObject.getString("tenSP"));
-                                sanPham.setSoLuongNhap(jsonObject.getInt("soLuongNhap"));
-                                sanPham.setHinhAnh(jsonObject.getString("hinhAnh"));
-                                sanPham.setGiaTien(jsonObject.getInt("giaTien"));
-                                sanPham.setGiaCu(jsonObject.getInt("giaCu"));
-                                sanPham.setNgayNhap(jsonObject.getString("ngayNhap"));
-                                sanPham.setThongTinSanPham(jsonObject.getString("thongTinSP"));
-                                gioHang.setMaSanPham(jsonObject.getInt("maSP"));
-                                gioHang.setMaKH(jsonObject.getInt("maKH"));
-                                gioHang.setSoLuongMua(jsonObject.getInt("soLuong"));
-                                lstSP.add(sanPham);
-                                lstGH.add(gioHang);
-                                tongTien += sanPham.getGiaTien() * gioHang.getSoLuongMua();
-                                tvSoLuongSPTrongGio.setText(lstGH.size() + " đơn hàng!");
-                                adapter_gioHang.notifyDataSetChanged();
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                        xuLiSauXoa();
+                        //Toast.makeText(getApplicationContext(), "Gio hang trong!", Toast.LENGTH_SHORT).show();
+                        return;
+                    } else {
+                        try {
+                            loading.DimissDialog();
+                            imgGHTrong.setVisibility(View.GONE);
+                            recyclerView.setVisibility(View.VISIBLE);
+                            JSONArray jsonArray = new JSONArray(response);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                try {
+                                    JSONObject jsonObject = jsonArray.getJSONObject(i);//lay doi tuong thu i
+                                    sanPham = new SanPham();
+                                    gioHang = new GioHang();
+                                    sanPham.setMaSanPham(jsonObject.getInt("maSP"));
+                                    sanPham.setMaLoai(jsonObject.getInt("maLoai"));
+                                    sanPham.setTenSanPham(jsonObject.getString("tenSP"));
+                                    sanPham.setSoLuongNhap(jsonObject.getInt("soLuongNhap"));
+                                    sanPham.setHinhAnh(jsonObject.getString("hinhAnh"));
+                                    sanPham.setGiaTien(jsonObject.getInt("giaTien"));
+                                    sanPham.setGiaCu(jsonObject.getInt("giaCu"));
+                                    sanPham.setNgayNhap(jsonObject.getString("ngayNhap"));
+                                    sanPham.setThongTinSanPham(jsonObject.getString("thongTinSP"));
+                                    //
+                                    gioHang.setMaSanPham(sanPham.getMaSanPham());
+                                    gioHang.setMaKH(jsonObject.getInt("maKH"));
+                                    gioHang.setSoLuongMua(jsonObject.getInt("soLuong"));
+                                    lstSP.add(sanPham);
+                                    lstGH.add(gioHang);
+                                    tongTien += sanPham.getGiaTien() * gioHang.getSoLuongMua();
+                                    tvSoLuongSPTrongGio.setText(lstGH.size() + " đơn hàng!");
+                                    adapter_gioHang.notifyDataSetChanged();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
                             }
-                        }
-                        DecimalFormat format = new DecimalFormat("###,###,###");
-                        tvTongTien.setText("Tổng tiền: " + format.format(tongTien) + "đ");
+                            DecimalFormat format = new DecimalFormat("###,###,###");
+                            tvTongTien.setText("Tổng tiền: " + format.format(tongTien) + "đ");
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }, error ->
 
