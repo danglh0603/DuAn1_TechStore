@@ -46,9 +46,9 @@ public class Adapter_GioHang extends RecyclerView.Adapter<Adapter_GioHang.ViewHo
     private final DecimalFormat format = new DecimalFormat("###,###,###");
     private int maKH;
     private final ViewBinderHelper binderHelper = new ViewBinderHelper();
-    private Loading loading ;
+    private Loading loading;
 
-    public Adapter_GioHang(Context context,Activity_GioHang activity_gioHang, ArrayList<GioHang> lstGH, ArrayList<SanPham> lstSP) {
+    public Adapter_GioHang(Context context, Activity_GioHang activity_gioHang, ArrayList<GioHang> lstGH, ArrayList<SanPham> lstSP) {
         this.context = context;
         this.activity_gioHang = activity_gioHang;
         this.lstGH = lstGH;
@@ -84,12 +84,15 @@ public class Adapter_GioHang extends RecyclerView.Adapter<Adapter_GioHang.ViewHo
             holder.linerDelete.setOnClickListener(view -> {
                 lstSP.remove(holder.getAdapterPosition());
                 lstGH.remove(holder.getAdapterPosition());
-                xoaSanPhamKhoiGioHang(sanPham.getMaSanPham(),maKH);
+                xoaSanPhamKhoiGioHang(sanPham.getMaSanPham(), maKH);
                 notifyDataSetChanged();
-                activity_gioHang.xuLiSauXoa();
+                if (lstGH.size()==0 && lstSP.size()==0) {
+                    activity_gioHang.xuLiKhiGHRong();
+                }
             });
         }
     }
+
     public void xoaSanPhamKhoiGioHang(int maSanPham, int maKH) {
         StringRequest request = new StringRequest(Request.Method.POST, Server.deleteSanPhamGH,
                 response -> {
@@ -118,7 +121,6 @@ public class Adapter_GioHang extends RecyclerView.Adapter<Adapter_GioHang.ViewHo
         requestQueue.add(request);
 
     }
-
 
 
     private void getThongTinKH() {

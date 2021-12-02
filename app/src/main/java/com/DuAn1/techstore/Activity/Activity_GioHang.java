@@ -118,18 +118,19 @@ public class Activity_GioHang extends AppCompatActivity {
 
     }
 
-    public void xuLiSauXoa(){
+    public void xuLiKhiGHRong(){
         imgGHTrong.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.INVISIBLE);
         tvSoLuongSPTrongGio.setText("0 đơn hàng trong giỏ");
         tvTongTien.setText("0đ");
+        btnThanhToan.setEnabled(false);
     }
     private void getDLGioHang(int maKH) {
         StringRequest request = new StringRequest(Request.Method.POST, Server.getGioHang,
                 response -> {
                     if (response.equals("failure")) {
                         loading.DimissDialog();
-                        xuLiSauXoa();
+                        xuLiKhiGHRong();
                         //Toast.makeText(getApplicationContext(), "Gio hang trong!", Toast.LENGTH_SHORT).show();
                         return;
                     } else {
