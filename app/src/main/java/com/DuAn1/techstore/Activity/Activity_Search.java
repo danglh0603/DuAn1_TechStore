@@ -55,16 +55,19 @@ public class Activity_Search extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 adapter_SP.getFilter().filter(query);
+
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
                 adapter_SP.getFilter().filter(newText);
+
                 return false;
             }
         });
     }
+
 
     private void ActionBar() {
         setSupportActionBar(toolbar);
@@ -130,6 +133,12 @@ public class Activity_Search extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        adapter_SP.fixMemoryLeak();
     }
 
 }

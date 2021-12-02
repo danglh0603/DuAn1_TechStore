@@ -43,7 +43,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
                 android:paddingHorizontal="18dp"
-                android:text="Địa chỉ nhận hàng: "
+                android:text="@string/strDiaChiNhanHang"
                 android:textAllCaps="true"
                 android:textColor="@color/xanh"
                 android:textSize="20sp"
@@ -75,7 +75,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:padding="10dp" />
 
             <LinearLayout
@@ -86,7 +86,8 @@
                 <ImageView
                     android:id="@+id/img"
                     android:layout_width="150dp"
-                    android:layout_height="200dp" />
+                    android:layout_height="200dp"
+                    tools:ignore="ContentDescription" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -100,9 +101,9 @@
                         android:layout_height="wrap_content"
                         android:maxLines="2"
                         android:padding="8dp"
-                        android:text="ten san pham"
+                        android:text=""
                         android:textColor="@color/black"
-                        android:textSize="16sp"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -110,9 +111,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="8dp"
-                        android:text="1000d"
+                        android:text=""
                         android:textColor="@color/red"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -125,7 +126,7 @@
         android:layout_height="wrap_content"
         android:gravity="end"
         android:padding="8dp"
-        android:text="tong tien: "
+        android:text=""
         android:textColor="@color/red"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/btnThanhToan"
@@ -140,7 +141,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvTongTien"
         android:background="@color/xanh"
-        android:text="Thanh toán"
+        android:text=""
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

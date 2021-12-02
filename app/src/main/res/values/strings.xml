@@ -39,4 +39,5 @@
     <string name="strThemGioHang">Thêm giỏ hàng</string>
     <string name="strMuaNgay">Mua ngay</string>
     <string name="strSearch">search</string>
+    <string name="strDiaChiNhanHang">Địa chỉ nhận hàng:</string>
 </resources>

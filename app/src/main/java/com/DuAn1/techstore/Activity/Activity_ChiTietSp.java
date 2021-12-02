@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -53,6 +54,7 @@ public class Activity_ChiTietSp extends AppCompatActivity {
     private AppCompatButton btnThemGioHang;
     private SanPham sanPham;
     private int maKH;
+    private int sl;
     private int tongTien;
     //
 
@@ -199,8 +201,8 @@ public class Activity_ChiTietSp extends AppCompatActivity {
                 .into(imgDialogSp);
 
         tvDialogSoLuong.setText("Kho: " + sanPham.getSoLuongNhap());
-        int sl = 1;
-        tvDialogSoLuongMua.setText(String.valueOf(sl));
+
+        tvDialogSoLuongMua.setText(String.valueOf(1));
         btnDialogGiam.setOnClickListener(view1 -> {
             if (Integer.parseInt(tvDialogSoLuongMua.getText().toString()) > 1) {
                 tvDialogSoLuongMua.setText(String.valueOf(Integer.parseInt(tvDialogSoLuongMua.getText().toString()) - 1));
@@ -229,7 +231,9 @@ public class Activity_ChiTietSp extends AppCompatActivity {
             Intent intent = new Intent(Activity_ChiTietSp.this, Activity_ThanhToan.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("sanPham", sanPham);
-            bundle.putInt("slMua", Integer.parseInt(tvDialogSoLuongMua.getText().toString()));
+            sl = Integer.parseInt(tvDialogSoLuongMua.getText().toString());
+            bundle.putInt("slMua", sl);
+            //Log.e("sllllll", "MuaNgay: "+sl );
             tongTien = sanPham.getGiaTien() * sl;
             bundle.putInt("sl", sl);
             bundle.putInt("tongTien", tongTien);
@@ -351,5 +355,20 @@ public class Activity_ChiTietSp extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }
