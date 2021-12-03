@@ -21,7 +21,7 @@ import com.DuAn1.techstore.Activity.Activity_DongHo;
 import com.DuAn1.techstore.Activity.Activity_Laptop;
 import com.DuAn1.techstore.Activity.Activity_MayTinhBang;
 import com.DuAn1.techstore.Activity.Activity_PhuKien;
-import com.DuAn1.techstore.Adapter.AdapterSP_BanChay;
+import com.DuAn1.techstore.Adapter.AdapterSP_Moi;
 import com.DuAn1.techstore.Adapter.AdapterSlide;
 import com.DuAn1.techstore.Adapter.GirdViewAdapterSp;
 import com.DuAn1.techstore.DAO.Server;
@@ -45,7 +45,7 @@ public class FragmentManChinh extends Fragment {
     private GridView gridView;
     private SanPham sanPham;
     private ArrayList<SanPham> lstSp;
-    private AdapterSP_BanChay adapterSP_banChay;
+    private AdapterSP_Moi adapterSP_moi;
     private RecyclerView recyclerView;
     private ViewPager2 viewPager;
     private CircleIndicator3 viewCir;
@@ -108,11 +108,11 @@ public class FragmentManChinh extends Fragment {
         //
         lstSp = new ArrayList<>();
         //
-        adapterSP_banChay = new AdapterSP_BanChay(getContext(), lstSp);
+        adapterSP_moi = new AdapterSP_Moi(getContext(), lstSp);
         GridLayoutManager manager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(manager);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapterSP_banChay);
+        recyclerView.setAdapter(adapterSP_moi);
     }
 
 
@@ -170,7 +170,7 @@ public class FragmentManChinh extends Fragment {
                         sanPham.setNgayNhap(jsonObject.getString("ngayNhap"));
                         sanPham.setThongTinSanPham(jsonObject.getString("thongTinSP"));
                         lstSp.add(sanPham);
-                        adapterSP_banChay.notifyDataSetChanged();
+                        adapterSP_moi.notifyDataSetChanged();
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -239,8 +239,8 @@ public class FragmentManChinh extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (adapterSP_banChay == null) {
-            adapterSP_banChay.fixMemoryLeak();
+        if (adapterSP_moi == null) {
+            adapterSP_moi.fixMemoryLeak();
         }
     }
 }

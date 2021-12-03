@@ -136,6 +136,9 @@ public class Adapter_SP extends RecyclerView.Adapter<Adapter_SP.ViewHolder> {
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                 lstSP = (ArrayList<SanPham>) filterResults.values;
+                if (lstSP.size()==0){
+                    Toast.makeText(context, "Không tìm thấy sản phẩm!", Toast.LENGTH_SHORT).show();
+                }
                 notifyDataSetChanged();
             }
         };

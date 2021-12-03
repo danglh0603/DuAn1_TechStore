@@ -22,7 +22,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.DuAn1.techstore.Adapter.Adapter_GioHang;
+import com.DuAn1.techstore.Adapter.Adapter_ThanhToan;
 import com.DuAn1.techstore.DAO.Server;
 import com.DuAn1.techstore.Model.GioHang;
 import com.DuAn1.techstore.Model.KhachHang;
@@ -69,7 +69,7 @@ public class Activity_ThanhToan extends AppCompatActivity {
     //
     private ArrayList<GioHang> lstGH;
     private ArrayList<SanPham> lstSP;
-    private Adapter_GioHang adapter_gioHang;
+    private Adapter_ThanhToan adapter_thanhToan;
     private final DecimalFormat format = new DecimalFormat("###,###,###");
 
     @Override
@@ -102,6 +102,8 @@ public class Activity_ThanhToan extends AppCompatActivity {
         khachHang = new KhachHang();
         //
         rcv = findViewById(R.id.rcv);
+        lstSP = new ArrayList<>();
+        lstGH = new ArrayList<>();
 
     }
 
@@ -112,16 +114,17 @@ public class Activity_ThanhToan extends AppCompatActivity {
         }
         sanPham = (SanPham) bundle.get("sanPham");
         sl = bundle.getInt("sl");
-        //
+        tongTien = bundle.getInt("tongTien");
+        //tvTongTien.setText(String.valueOf(tongTien));
+
         lstSP = (ArrayList<SanPham>) bundle.get("lstSP");
         lstGH = (ArrayList<GioHang>) bundle.get("lstGH");
+        adapter_thanhToan = new Adapter_ThanhToan(Activity_ThanhToan.this, lstSP, lstGH);
+        LinearLayoutManager manager = new LinearLayoutManager(Activity_ThanhToan.this);
+        rcv.setLayoutManager(manager);
+        rcv.setAdapter(adapter_thanhToan);
 
-        tongTien = bundle.getInt("tongTien");
 
-//        adapter_gioHang = new Adapter_GioHang(Activity_ThanhToan.this,this, lstGH, lstSP);
-//        LinearLayoutManager manager = new LinearLayoutManager(Activity_ThanhToan.this);
-//        rcv.setLayoutManager(manager);
-//        rcv.setAdapter(adapter_gioHang);
     }
 
     @SuppressLint("SetTextI18n")
@@ -204,7 +207,7 @@ public class Activity_ThanhToan extends AppCompatActivity {
                         error -> Toast.makeText(getApplicationContext(), "Looix ket noi", Toast.LENGTH_SHORT).show()) {
                     @NonNull
                     @Override
-                    protected Map<String, String> getParams(){
+                    protected Map<String, String> getParams() {
                         Map<String, String> params = new HashMap<>();
                         params.put("maHD", String.valueOf(maHD));
                         params.put("maSP", String.valueOf(lstSP.get(indexSp).getMaSanPham()));

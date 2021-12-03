@@ -24,12 +24,12 @@ import com.squareup.picasso.Picasso;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class AdapterSP_BanChay extends RecyclerView.Adapter<AdapterSP_BanChay.ViewHolder> {
+public class AdapterSP_Moi extends RecyclerView.Adapter<AdapterSP_Moi.ViewHolder> {
 
     private Context context;
     private ArrayList<SanPham> list;
 
-    public AdapterSP_BanChay(Context context, ArrayList<SanPham> list) {
+    public AdapterSP_Moi(Context context, ArrayList<SanPham> list) {
         this.context = context;
         this.list = list;
     }

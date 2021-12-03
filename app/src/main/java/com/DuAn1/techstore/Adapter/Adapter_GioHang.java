@@ -40,13 +40,13 @@ import java.util.Map;
 public class Adapter_GioHang extends RecyclerView.Adapter<Adapter_GioHang.ViewHolder> {
 
     private final Context context;
-    private Activity_GioHang activity_gioHang;
+    private final Activity_GioHang activity_gioHang;
     private final ArrayList<GioHang> lstGH;
     private final ArrayList<SanPham> lstSP;
     private final DecimalFormat format = new DecimalFormat("###,###,###");
     private int maKH;
     private final ViewBinderHelper binderHelper = new ViewBinderHelper();
-    private Loading loading;
+    private final Loading loading;
 
     public Adapter_GioHang(Context context, Activity_GioHang activity_gioHang, ArrayList<GioHang> lstGH, ArrayList<SanPham> lstSP) {
         this.context = context;
@@ -162,8 +162,8 @@ public class Adapter_GioHang extends RecyclerView.Adapter<Adapter_GioHang.ViewHo
         private final TextView tvTenSp;
         private final TextView tvGia;
         private final TextView tvSoLuong;
-        private com.chauthai.swipereveallayout.SwipeRevealLayout SwipeRevealLayout;
-        private LinearLayout linerDelete;
+        private final com.chauthai.swipereveallayout.SwipeRevealLayout SwipeRevealLayout;
+        private final LinearLayout linerDelete;
 
 
         public ViewHolder(@NonNull View itemView) {
