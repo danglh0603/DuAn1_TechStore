@@ -1,5 +1,6 @@
 package com.DuAn1.techstore.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +11,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.DuAn1.techstore.Activity.Activity_Change_User;
 import com.DuAn1.techstore.Activity.ManChinhActivity;
 import com.DuAn1.techstore.R;
 
 public class FragmentTaiKhoan extends Fragment {
     ImageView img_chang_user;
-
+    Intent intent;
     public FragmentTaiKhoan() {
     }
 
@@ -30,7 +32,13 @@ public class FragmentTaiKhoan extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         AnhXa(view);
-        img_chang_user.setOnClickListener(v -> ((ManChinhActivity) getActivity()).replaceFragments(FragmentChangeUser.class));
+        img_chang_user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent((ManChinhActivity)getActivity(), Activity_Change_User.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void AnhXa(View view) {
