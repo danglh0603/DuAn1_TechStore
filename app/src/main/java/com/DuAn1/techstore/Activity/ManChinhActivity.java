@@ -3,6 +3,8 @@ package com.DuAn1.techstore.Activity;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,6 +40,7 @@ public class ManChinhActivity extends AppCompatActivity {
         setContentView(R.layout.activity_manchinh);
         fragmentManager = getSupportFragmentManager();
         AnhXa();
+
         // xu li actionBar
         ActionBar();
         // xu li bottom
@@ -61,7 +64,7 @@ public class ManChinhActivity extends AppCompatActivity {
         bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.ic_baseline_home_24));
         bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.ic_baseline_shopping_cart_24));
         bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.ic_baseline_person_24));
-
+        Log.e("ff", "ff");
         bottomNavigation.setOnShowListener(item -> {
             Fragment fragment = null;
             switch (item.getId()) {
@@ -96,6 +99,21 @@ public class ManChinhActivity extends AppCompatActivity {
             //
             //Toast.makeText(getApplicationContext(), "Reselect", Toast.LENGTH_SHORT).show();
         });
+
+        Bundle bundle = getIntent().getExtras();
+        String title = bundle.getString("tai_khoan");
+        try {
+            if(title.equals("3")) {
+                new android.os.Handler(Looper.getMainLooper()).postDelayed(
+                        new Runnable() {
+                            public void run() {
+                                bottomNavigation.show(3, true);
+                            }
+                        },
+                        100);
+            }
+        } catch (Exception e) {
+        }
     }
 
     private int getCountNotification() {

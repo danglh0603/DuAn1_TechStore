@@ -13,6 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TechStore">
         <activity
+            android:name=".Activity.Activity_Doi_Thong_Tin"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.Activity_Doi_Mat_Khau"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.Activity_Change_User"
+            android:exported="true" />
+        <activity
             android:name=".Activity.Activity_ThanhToan"
             android:exported="true" />
         <activity
