@@ -15,7 +15,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class AdapterSlide extends RecyclerView.Adapter<AdapterSlide.PhotoViewHolder> {
-    private ArrayList<Photo> list;
+    private final ArrayList<Photo> list;
 
     public AdapterSlide(ArrayList<Photo> list) {
         this.list = list;
@@ -48,7 +48,7 @@ public class AdapterSlide extends RecyclerView.Adapter<AdapterSlide.PhotoViewHol
         return 0;
     }
 
-    class PhotoViewHolder extends RecyclerView.ViewHolder {
+    static class PhotoViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
 
         public PhotoViewHolder(@NonNull View itemView) {

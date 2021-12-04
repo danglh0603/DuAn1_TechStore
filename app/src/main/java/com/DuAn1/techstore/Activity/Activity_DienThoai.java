@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.DuAn1.techstore.Adapter.Adapter_SP;
 import com.DuAn1.techstore.DAO.Server;
-import com.DuAn1.techstore.Model.GioHang;
 import com.DuAn1.techstore.Model.Loading;
 import com.DuAn1.techstore.Model.SanPham;
 import com.DuAn1.techstore.R;

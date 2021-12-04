@@ -64,12 +64,12 @@ public class ResigterActivity extends AppCompatActivity {
             btnResigter.setOnClickListener(view -> {
                 if (validate() > 0) {
                     loading.LoadingDialog();
-                    tenDangNhap = edTenDangNhap.getText().toString().trim();
-                    hoTen = edHoTen.getText().toString().trim();
-                    namSinh = edNamSinh.getText().toString().trim();
-                    matKhau = edMatKhau.getText().toString().trim();
-                    sdt = edSoDienThoai.getText().toString().trim();
-                    diaChi = edDiaChi.getText().toString().trim();
+                    tenDangNhap = Objects.requireNonNull(edTenDangNhap.getText()).toString().trim();
+                    hoTen = Objects.requireNonNull(edHoTen.getText()).toString().trim();
+                    namSinh = Objects.requireNonNull(edNamSinh.getText()).toString().trim();
+                    matKhau = Objects.requireNonNull(edMatKhau.getText()).toString().trim();
+                    sdt = Objects.requireNonNull(edSoDienThoai.getText()).toString().trim();
+                    diaChi = Objects.requireNonNull(edDiaChi.getText()).toString().trim();
                     Resigter();
                 }
             });
@@ -129,7 +129,7 @@ public class ResigterActivity extends AppCompatActivity {
 
     private int validate() {
         int check = 1;
-        if (edTenDangNhap.getText().toString().length() == 0) {
+        if (Objects.requireNonNull(edTenDangNhap.getText()).toString().length() == 0) {
             textInputLayout1.setError("Không để trống tên đăng nhập!");
             edTenDangNhap.requestFocus();
             check = -1;
@@ -138,7 +138,7 @@ public class ResigterActivity extends AppCompatActivity {
             textInputLayout1.setError(null);
         }
         //
-        if (edHoTen.getText().toString().length() == 0) {
+        if (Objects.requireNonNull(edHoTen.getText()).toString().length() == 0) {
             textInputLayout2.setError("Không để trống họ tên!");
             edHoTen.requestFocus();
             check = -1;
@@ -146,7 +146,7 @@ public class ResigterActivity extends AppCompatActivity {
         } else {
             textInputLayout2.setError(null);
         }
-        if (edNamSinh.getText().toString().length() == 0) {
+        if (Objects.requireNonNull(edNamSinh.getText()).toString().length() == 0) {
             textInputLayout3.setError("Không để trống năm sinh!");
             edNamSinh.requestFocus();
             check = -1;
@@ -154,7 +154,7 @@ public class ResigterActivity extends AppCompatActivity {
         } else {
             textInputLayout3.setError(null);
         }
-        if (edSoDienThoai.getText().toString().length() == 0) {
+        if (Objects.requireNonNull(edSoDienThoai.getText()).toString().length() == 0) {
             textInputLayout4.setError("Không để trống số điện thoại!");
             edSoDienThoai.requestFocus();
             check = -1;
@@ -162,7 +162,7 @@ public class ResigterActivity extends AppCompatActivity {
         } else {
             textInputLayout4.setError(null);
         }
-        if (edDiaChi.getText().toString().length() == 0) {
+        if (Objects.requireNonNull(edDiaChi.getText()).toString().length() == 0) {
             textInputLayout5.setError("Không để trống địa chỉ!");
             edDiaChi.requestFocus();
             check = -1;
@@ -171,7 +171,7 @@ public class ResigterActivity extends AppCompatActivity {
             textInputLayout5.setError(null);
         }
 
-        if (edMatKhau.getText().toString().length() == 0) {
+        if (Objects.requireNonNull(edMatKhau.getText()).toString().length() == 0) {
             textInputLayout6.setError("Không để trống mật khẩu!");
             edMatKhau.requestFocus();
             check = -1;
@@ -179,7 +179,7 @@ public class ResigterActivity extends AppCompatActivity {
         } else {
             textInputLayout6.setError(null);
         }
-        if (edReMatKhau.getText().toString().length() == 0) {
+        if (Objects.requireNonNull(edReMatKhau.getText()).toString().length() == 0) {
             textInputLayout7.setError("Không để trống nhập lại mật khẩu!");
             edReMatKhau.requestFocus();
             check = -1;

@@ -12,9 +12,9 @@ import com.DuAn1.techstore.R;
 
 public class GirdViewAdapterSp extends BaseAdapter {
 
-    private Context context;
-    private String[] TenLogo;
-    private int[] HinhLogo;
+    private final Context context;
+    private final String[] TenLogo;
+    private final int[] HinhLogo;
 
     public GirdViewAdapterSp(Context context, String[] tenLogo, int[] hinhLogo) {
         this.context = context;

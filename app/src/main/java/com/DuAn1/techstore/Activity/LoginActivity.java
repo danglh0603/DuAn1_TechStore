@@ -51,12 +51,14 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         //anh xa
         AnhXa();
-        // animation
-        animationLogo();
-        // chuyen sang activity Dang ki
-        tvResigter.setOnClickListener(view -> Resigter());
+
         if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
+            // animation
+            animationLogo();
+            // chuyen sang activity Dang ki
+            tvResigter.setOnClickListener(view -> Resigter());
             SharedPreferences sharedPreferences = getSharedPreferences("Accout_file", MODE_PRIVATE);
+
             edUsername.setText(sharedPreferences.getString("USER", ""));
             edPassword.setText(sharedPreferences.getString("PASS", ""));
             chkRemember.setChecked(sharedPreferences.getBoolean("REMEMBER", false));
@@ -72,6 +74,8 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    //}
+
 
     public void Login(String username, String password) {
         if (!username.equals("") && !password.equals("")) {
@@ -82,7 +86,8 @@ public class LoginActivity extends AppCompatActivity {
                     intent.putExtra("tenDangNhap", username);
                     startActivity(intent);
                     rememberAccount(username, password, chkRemember.isChecked());
-                    Toast.makeText(getApplicationContext(), "Xin chào " + username, Toast.LENGTH_SHORT).show();
+                    LuuDangNhap(username);
+                    //Toast.makeText(getApplicationContext(), "Xin chào " + username, Toast.LENGTH_SHORT).show();
                     finish();
                 } else if (response.equals("failure")) {
                     loading.DimissDialog();
@@ -93,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                 Dialog("Lỗi kết nối!");
             }) {
                 @Override
-                protected Map<String, String> getParams()  {
+                protected Map<String, String> getParams() {
                     Map<String, String> data = new HashMap<>();
                     data.put("tenDangNhap", username);
                     data.put("matKhau", password);
@@ -105,6 +110,14 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "null user,pass", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void LuuDangNhap(String username) {
+        SharedPreferences sharedPreferences2 = getSharedPreferences("Luu_dangNhap", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences2.edit();
+        editor.putBoolean("luuDangNhap", true);
+        editor.putString("USER", username);
+        editor.apply();
     }
 
     private int validate() {
@@ -141,6 +154,7 @@ public class LoginActivity extends AppCompatActivity {
         textView4 = findViewById(R.id.textView4);
         tvResigter = findViewById(R.id.tvResigter);
         loading = new Loading(this);
+
     }
 
     private void Resigter() {

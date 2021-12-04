@@ -3,7 +3,7 @@ package com.DuAn1.techstore.Until;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.widget.Toast;
+
 
 public class CheckConnection {
     public static boolean haveNetworkConnection(Context context) {
@@ -16,13 +16,10 @@ public class CheckConnection {
                     wifi = true;
             if (info.getTypeName().equals("MOBILE"))
                 if (info.isConnected())
-                    wifi = true;
+                    mobile = true;
 
         }
         return wifi || mobile;
     }
 
-    public static void ShowToastLong(Context context, String tb) {
-        Toast.makeText(context, tb, Toast.LENGTH_LONG).show();
-    }
 }

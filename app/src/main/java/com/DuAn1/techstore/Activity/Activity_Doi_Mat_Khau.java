@@ -34,6 +34,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Activity_Doi_Mat_Khau extends AppCompatActivity {
     private KhachHang khachHang;
@@ -58,22 +59,16 @@ public class Activity_Doi_Mat_Khau extends AppCompatActivity {
         setContentView(R.layout.activity_doi_mat_khau);
         AnhXa();
 
-        img_change_pass_back_chang_user.setOnClickListener(new View.OnClickListener() {
-            // back ve activity trc
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Activity_Doi_Mat_Khau.this, Activity_Change_User.class);
-                startActivity(intent);
-                finish();
-            }
+        // back ve activity trc
+        img_change_pass_back_chang_user.setOnClickListener(v -> {
+            Intent intent = new Intent(Activity_Doi_Mat_Khau.this, Activity_Change_User.class);
+            startActivity(intent);
+            finish();
         });
-        btnLogChangePass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (validate() > 0) {
-                    loading.LoadingDialog();
-                    updateMatKhau();
-                }
+        btnLogChangePass.setOnClickListener(view -> {
+            if (validate() > 0) {
+                loading.LoadingDialog();
+                updateMatKhau();
             }
         });
     }
@@ -127,7 +122,7 @@ public class Activity_Doi_Mat_Khau extends AppCompatActivity {
 
 
     private void getThongTinKH() {
-        SharedPreferences preferences = getApplicationContext().getSharedPreferences("Accout_file", Context.MODE_PRIVATE);
+        SharedPreferences preferences = getApplicationContext().getSharedPreferences("Luu_dangNhap", Context.MODE_PRIVATE);
         String userName = preferences.getString("USER", "");
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.getKhachHang,
                 response -> {
@@ -185,9 +180,9 @@ public class Activity_Doi_Mat_Khau extends AppCompatActivity {
 
     private int validate() {
         int check = 1;
-        oldPass = edOldPass.getText().toString().trim();
-        newPass = edNewPass.getText().toString().trim();
-        reNewPass = edReNewPass.getText().toString().trim();
+        oldPass = Objects.requireNonNull(edOldPass.getText()).toString().trim();
+        newPass = Objects.requireNonNull(edNewPass.getText()).toString().trim();
+        reNewPass = Objects.requireNonNull(edReNewPass.getText()).toString().trim();
         //
         if (oldPass.length() == 0) {
             textInputLayout1.setError("Không để trống mật khẩu cũ!");

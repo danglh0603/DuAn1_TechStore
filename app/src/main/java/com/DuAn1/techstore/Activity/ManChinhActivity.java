@@ -9,9 +9,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -22,9 +19,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.DuAn1.techstore.R;
-import com.DuAn1.techstore.fragment.FragmentGioHang;
 import com.DuAn1.techstore.fragment.FragmentManChinh;
 import com.DuAn1.techstore.fragment.FragmentTaiKhoan;
+import com.DuAn1.techstore.fragment.FragmentThongBao;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 
 
@@ -34,10 +31,6 @@ public class ManChinhActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private ActionBar actionBar;
     private FragmentManager fragmentManager;
-
-    FrameLayout redCircle;
-    TextView countTextView;
-    int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +74,7 @@ public class ManChinhActivity extends AppCompatActivity {
                     break;
                 }
                 case 2: {
-                    fragment = new FragmentGioHang();
+                    fragment = new FragmentThongBao();
                     actionBar.setTitle("Giỏ Hàng");
                     break;
                 }
@@ -113,18 +106,16 @@ public class ManChinhActivity extends AppCompatActivity {
         });
 
         Bundle bundle = getIntent().getExtras();
-        String title = bundle.getString("tai_khoan");
-        try {
-            if (title.equals("3")) {
-                new android.os.Handler(Looper.getMainLooper()).postDelayed(
-                        new Runnable() {
-                            public void run() {
-                                bottomNavigation.show(3, true);
-                            }
-                        },
-                        100);
+        if (bundle != null) {
+            String title = bundle.getString("tai_khoan");
+            try {
+                if (title.equals("3")) {
+                    new android.os.Handler(Looper.getMainLooper()).postDelayed(
+                            () -> bottomNavigation.show(3, true),
+                            100);
+                }
+            } catch (Exception ignored) {
             }
-        } catch (Exception e) {
         }
     }
 

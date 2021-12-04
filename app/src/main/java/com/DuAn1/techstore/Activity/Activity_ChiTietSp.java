@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -131,7 +130,7 @@ public class Activity_ChiTietSp extends AppCompatActivity {
     }
 
     private void getThongTinKH() {
-        SharedPreferences preferences = getApplicationContext().getSharedPreferences("Accout_file", Context.MODE_PRIVATE);
+        SharedPreferences preferences = getApplicationContext().getSharedPreferences("Luu_dangNhap", Context.MODE_PRIVATE);
         String userName = preferences.getString("USER", "");
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.getKhachHang,
                 response -> {
@@ -317,9 +316,7 @@ public class Activity_ChiTietSp extends AppCompatActivity {
                             Toast.makeText(Activity_ChiTietSp.this, "Không thể thêm vào giỏ hàng!", Toast.LENGTH_SHORT).show();
                         }
                     }
-                }, error -> {
-            Toast.makeText(Activity_ChiTietSp.this, "Lỗi", Toast.LENGTH_SHORT).show();
-        }) {
+                }, error -> Toast.makeText(Activity_ChiTietSp.this, "Lỗi", Toast.LENGTH_SHORT).show()) {
             @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {

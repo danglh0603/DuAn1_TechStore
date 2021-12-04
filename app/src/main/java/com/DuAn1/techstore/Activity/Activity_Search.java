@@ -119,10 +119,7 @@ public class Activity_Search extends AppCompatActivity {
 
                 }
             }
-        }, error -> {
-            Toast.makeText(getApplicationContext(), "Lỗi mạng!", Toast.LENGTH_SHORT).show();
-
-        });
+        }, error -> Toast.makeText(getApplicationContext(), "Lỗi mạng!", Toast.LENGTH_SHORT).show());
         requestQueue.add(jsonArrayRequest);//add request vao xu ly
     }
 

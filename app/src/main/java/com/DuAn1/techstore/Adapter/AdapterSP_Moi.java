@@ -27,7 +27,7 @@ import java.util.ArrayList;
 public class AdapterSP_Moi extends RecyclerView.Adapter<AdapterSP_Moi.ViewHolder> {
 
     private Context context;
-    private ArrayList<SanPham> list;
+    private final ArrayList<SanPham> list;
 
     public AdapterSP_Moi(Context context, ArrayList<SanPham> list) {
         this.context = context;
@@ -84,12 +84,12 @@ public class AdapterSP_Moi extends RecyclerView.Adapter<AdapterSP_Moi.ViewHolder
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private ImageView imgSp;
-        private TextView tvTenSp;
-        private TextView tvGiaSp;
-        private TextView tvGiaCuSp;
-        private CheckBox checkBox;
-        private CardView cardView;
+        private final ImageView imgSp;
+        private final TextView tvTenSp;
+        private final TextView tvGiaSp;
+        private final TextView tvGiaCuSp;
+        private final CheckBox checkBox;
+        private final CardView cardView;
 
 
         public ViewHolder(@NonNull View itemView) {

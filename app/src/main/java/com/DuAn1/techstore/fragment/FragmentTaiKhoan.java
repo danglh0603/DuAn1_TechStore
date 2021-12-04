@@ -80,12 +80,7 @@ public class FragmentTaiKhoan extends Fragment {
             intent = new Intent((ManChinhActivity) getActivity(), Activity_Change_User.class);
             startActivity(intent);
         });
-        btnLogOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DialogDX();
-            }
-        });
+        btnLogOut.setOnClickListener(view1 -> DialogDX());
 
     }
 
@@ -113,7 +108,7 @@ public class FragmentTaiKhoan extends Fragment {
     }
 
     private void getThongTinKH() {
-        SharedPreferences preferences = context.getSharedPreferences("Accout_file", Context.MODE_PRIVATE);
+        SharedPreferences preferences = context.getSharedPreferences("Luu_dangNhap", Context.MODE_PRIVATE);
         String userName = preferences.getString("USER", "");
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.getKhachHang,
                 response -> {
@@ -168,9 +163,7 @@ public class FragmentTaiKhoan extends Fragment {
 
                     }
 
-                }, error -> {
-            Toast.makeText(context, "Loi dem GH", Toast.LENGTH_SHORT).show();
-        }) {
+                }, error -> Toast.makeText(context, "Loi dem GH", Toast.LENGTH_SHORT).show()) {
             @NonNull
             @Override
             protected Map<String, String> getParams() {
@@ -212,7 +205,7 @@ public class FragmentTaiKhoan extends Fragment {
                 }, error -> {
 
         }) {
-            @Nullable
+            @NonNull
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
@@ -232,22 +225,23 @@ public class FragmentTaiKhoan extends Fragment {
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         Button btnDx = view.findViewById(R.id.btnDangXuat);
         Button btnHuy = view.findViewById(R.id.btnHuy);
-        btnDx.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                alertDialog.dismiss();
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent);
-                getActivity().finish();
-            }
+        btnDx.setOnClickListener(view1 -> {
+            alertDialog.dismiss();
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            clearLuuDangNhap();
+            startActivity(intent);
+            getActivity().finish();
         });
-        btnHuy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                alertDialog.dismiss();
-            }
-        });
+        btnHuy.setOnClickListener(view12 -> alertDialog.dismiss());
         alertDialog.show();
+    }
+
+    private void clearLuuDangNhap() {
+        SharedPreferences sharedPreferences2 = getActivity().getSharedPreferences("Luu_dangNhap", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences2.edit();
+        editor.putBoolean("luuDangNhap",false);
+        editor.putString("USER","");
+        editor.apply();
     }
 
     @Override

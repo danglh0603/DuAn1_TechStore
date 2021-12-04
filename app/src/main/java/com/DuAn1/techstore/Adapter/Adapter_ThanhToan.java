@@ -19,10 +19,10 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Adapter_ThanhToan extends RecyclerView.Adapter<Adapter_ThanhToan.ViewHolder> {
-    private Context context;
-    private ArrayList<SanPham> lstSP;
-    private ArrayList<GioHang> lstGH;
-    private DecimalFormat format = new DecimalFormat("###,###,###");
+    private final Context context;
+    private final ArrayList<SanPham> lstSP;
+    private final ArrayList<GioHang> lstGH;
+    private final DecimalFormat format = new DecimalFormat("###,###,###");
 
     public Adapter_ThanhToan(Context context, ArrayList<SanPham> lstSP, ArrayList<GioHang> lstGH) {
         this.context = context;
@@ -61,11 +61,11 @@ public class Adapter_ThanhToan extends RecyclerView.Adapter<Adapter_ThanhToan.Vi
         return 0;
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
-        private ImageView imgSP;
-        private TextView tvTenSp;
-        private TextView tvGia;
-        private TextView tvSoLuongMua;
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        private final ImageView imgSP;
+        private final TextView tvTenSp;
+        private final TextView tvGia;
+        private final TextView tvSoLuongMua;
 
 
         public ViewHolder(@NonNull View itemView) {

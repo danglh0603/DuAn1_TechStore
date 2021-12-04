@@ -124,7 +124,7 @@ public class Adapter_GioHang extends RecyclerView.Adapter<Adapter_GioHang.ViewHo
 
 
     private void getThongTinKH() {
-        SharedPreferences preferences = context.getSharedPreferences("Accout_file", Context.MODE_PRIVATE);
+        SharedPreferences preferences = context.getSharedPreferences("Luu_dangNhap", Context.MODE_PRIVATE);
         String userName = preferences.getString("USER", "");
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.getKhachHang,
                 response -> {

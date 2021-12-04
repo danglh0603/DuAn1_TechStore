@@ -26,6 +26,7 @@ import com.DuAn1.techstore.Adapter.AdapterSlide;
 import com.DuAn1.techstore.Adapter.GirdViewAdapterSp;
 import com.DuAn1.techstore.DAO.Server;
 import com.DuAn1.techstore.Model.DepthPageTransformer;
+import com.DuAn1.techstore.Model.Loading;
 import com.DuAn1.techstore.Model.Photo;
 import com.DuAn1.techstore.Model.SanPham;
 import com.DuAn1.techstore.R;
@@ -49,6 +50,8 @@ public class FragmentManChinh extends Fragment {
     private ViewPager2 viewPager;
     private CircleIndicator3 viewCir;
     private ArrayList<Photo> mList;
+    //
+    private Loading loading;
     private final String[] ten = {
             "Điện thoại", "LapTop", "Đồng hồ", "Ipad", "Phụ kiện"
     };
@@ -68,11 +71,11 @@ public class FragmentManChinh extends Fragment {
     String url7 = "https://images.fpt.shop/unsafe/fit-in/800x300/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2021/8/31/637660487336798016_F_H1_800x300.png";
 
     //
-    public static final int DIENTHOAI=0;
-    public static final int LAPTOP=1;
-    public static final int DONG_HO=2;
-    public static final int IPAD=3;
-    public static final int PHU_KIEN=4;
+    public static final int DIENTHOAI = 0;
+    public static final int LAPTOP = 1;
+    public static final int DONG_HO = 2;
+    public static final int IPAD = 3;
+    public static final int PHU_KIEN = 4;
     //
     Handler handler = new Handler();
     Runnable runnable = new Runnable() {
@@ -111,6 +114,8 @@ public class FragmentManChinh extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.rcvSPBanChay);
 
         //
+        loading = new Loading(getActivity());
+        loading.LoadingDialog();
         lstSp = new ArrayList<>();
         //
         adapterSP_moi = new AdapterSP_Moi(getContext(), lstSp);
@@ -176,6 +181,7 @@ public class FragmentManChinh extends Fragment {
                         sanPham.setThongTinSanPham(jsonObject.getString("thongTinSP"));
                         lstSp.add(sanPham);
                         adapterSP_moi.notifyDataSetChanged();
+                        loading.DimissDialog();
 
                     } catch (Exception e) {
                         e.printStackTrace();

@@ -20,20 +20,14 @@ public class FragmentDoiMatKhau extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_doi_mat_khau,null,false);
-        return view;
+        return inflater.inflate(R.layout.fragment_doi_mat_khau,null,false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         AnhXa(view);
-        img_change_pass_back_chang_user.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((ManChinhActivity) getActivity()).popBackFragments();
-            }
-        });
+        img_change_pass_back_chang_user.setOnClickListener(v -> ((ManChinhActivity) getActivity()).popBackFragments());
     }
 
     public void AnhXa(View view) {
