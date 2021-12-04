@@ -12,7 +12,9 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/xanh"
         app:menu="@menu/menu_manhinhchinh"
-        app:titleTextColor="@color/white" />
+        app:titleTextColor="@color/white"/>
+
+
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/container"
@@ -25,12 +27,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:mbn_shadowColor="@color/xam"
         app:mbn_backgroundBottomColor="@color/xanh"
         app:mbn_circleColor="@color/white"
         app:mbn_countBackgroundColor="@color/orange"
         app:mbn_countTextColor="@color/white"
         app:mbn_defaultIconColor="@color/white"
-        app:mbn_selectedIconColor="@color/black" />
+        app:mbn_selectedIconColor="@color/black"
+        app:mbn_shadowColor="@color/xam" />
 
 </LinearLayout>

@@ -186,47 +186,23 @@ public class ManChinhActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.cart: {
-                updateCount();
-                Intent intent = new Intent(getApplicationContext(), Activity_GioHang.class);
-                startActivity(intent);
-                break;
-            }
-            case R.id.SearchActivity: {
-                Intent intent = new Intent(getApplicationContext(), Activity_Search.class);
-                startActivity(intent);
-                break;
-            }
+        if (item.getItemId() == R.id.cart) {
+            Intent intent = new Intent(getApplicationContext(), Activity_GioHang.class);
+            startActivity(intent);
+        }
+        if (item.getItemId() == R.id.SearchActivity) {
+            Intent intent = new Intent(getApplicationContext(), Activity_Search.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void updateCount() {
-        if (count > 0 && count < 99) {
-            countTextView.setText(String.valueOf(count));
-        } else {
-            countTextView.setText("99+");
-        }
-        redCircle.setVisibility((count > 0) ? View.VISIBLE : View.GONE);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_manhinhchinh, menu);
+
         return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        final MenuItem menuItem = menu.findItem(R.id.cart);
-        FrameLayout rootView = (FrameLayout) menuItem.getActionView();
-
-        redCircle = (FrameLayout) rootView.findViewById(R.id.view_alert_red_circle);
-        countTextView = (TextView) rootView.findViewById(R.id.tvCount);
-
-        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
