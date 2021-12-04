@@ -99,13 +99,13 @@ public class ManChinhActivity extends AppCompatActivity {
         bottomNavigation.show(1, true);
 
         bottomNavigation.setOnClickMenuListener(item -> {
-            // xu li su kien click item bottom
-            switch (item.getId()) {
-                case 1: {
-                    Toast.makeText(this, "asdas", Toast.LENGTH_SHORT).show();
-                    break;
-                }
-            }
+//            // xu li su kien click item bottom
+//            switch (item.getId()) {
+//                case 1: {
+//                    Toast.makeText(this, "asdas", Toast.LENGTH_SHORT).show();
+//                    break;
+//                }
+//            }
         });
         bottomNavigation.setOnReselectListener(item -> {
             //
