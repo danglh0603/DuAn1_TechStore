@@ -4,12 +4,13 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,13 +28,17 @@ import com.DuAn1.techstore.fragment.FragmentTaiKhoan;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 
 
-
 public class ManChinhActivity extends AppCompatActivity {
 
     private MeowBottomNavigation bottomNavigation;
     private Toolbar toolbar;
     private ActionBar actionBar;
-    FragmentManager fragmentManager;
+    private FragmentManager fragmentManager;
+
+    FrameLayout redCircle;
+    TextView countTextView;
+    int count = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,11 +66,13 @@ public class ManChinhActivity extends AppCompatActivity {
 
 
     private void BottomNav() {
+        // add icon fragment
         bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.ic_baseline_home_24));
         bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.ic_baseline_shopping_cart_24));
         bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.ic_baseline_person_24));
-        Log.e("ff", "ff");
+
         bottomNavigation.setOnShowListener(item -> {
+            // replace fragment khi click item
             Fragment fragment = null;
             switch (item.getId()) {
                 case 1: {
@@ -79,7 +86,7 @@ public class ManChinhActivity extends AppCompatActivity {
                     break;
                 }
                 case 3: {
-                    fragment = new FragmentTaiKhoan();
+                    fragment = new FragmentTaiKhoan(getApplicationContext());
                     actionBar.setTitle("Tài khoản");
                     break;
                 }
@@ -93,7 +100,12 @@ public class ManChinhActivity extends AppCompatActivity {
 
         bottomNavigation.setOnClickMenuListener(item -> {
             // xu li su kien click item bottom
-            Toast.makeText(getApplicationContext(), "" + item.getId(), Toast.LENGTH_SHORT).show();
+            switch (item.getId()) {
+                case 1: {
+                    Toast.makeText(this, "asdas", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+            }
         });
         bottomNavigation.setOnReselectListener(item -> {
             //
@@ -103,7 +115,7 @@ public class ManChinhActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         String title = bundle.getString("tai_khoan");
         try {
-            if(title.equals("3")) {
+            if (title.equals("3")) {
                 new android.os.Handler(Looper.getMainLooper()).postDelayed(
                         new Runnable() {
                             public void run() {
@@ -149,18 +161,6 @@ public class ManChinhActivity extends AppCompatActivity {
         btnHuy.setOnClickListener(v -> alertDialog.dismiss());
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.cart) {
-            Intent intent = new Intent(getApplicationContext(), Activity_GioHang.class);
-            startActivity(intent);
-        }
-        if (item.getItemId() == R.id.SearchActivity) {
-            Intent intent = new Intent(getApplicationContext(), Activity_Search.class);
-            startActivity(intent);
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     public void replaceFragments(Class fragmentClass) {
         Fragment fragment = null;
@@ -172,25 +172,63 @@ public class ManChinhActivity extends AppCompatActivity {
         // Insert the fragment by replacing any existing fragment
         fragmentManager.beginTransaction()
                 .setCustomAnimations(R.anim.enter_right_to_left, R.anim.exit_right_to_left,
-                R.anim.enter_left_to_right, R.anim.exit_left_to_right)
+                        R.anim.enter_left_to_right, R.anim.exit_left_to_right)
                 .replace(R.id.container, fragment)
                 .addToBackStack(null)
                 .commit();
     }
 
     public void popBackFragments() {
-        if (fragmentManager.getBackStackEntryCount()> 0) {
+        if (fragmentManager.getBackStackEntryCount() > 0) {
             fragmentManager.popBackStack();
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.cart: {
+                updateCount();
+                Intent intent = new Intent(getApplicationContext(), Activity_GioHang.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.SearchActivity: {
+                Intent intent = new Intent(getApplicationContext(), Activity_Search.class);
+                startActivity(intent);
+                break;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void updateCount() {
+        if (count > 0 && count < 99) {
+            countTextView.setText(String.valueOf(count));
+        } else {
+            countTextView.setText("99+");
+        }
+        redCircle.setVisibility((count > 0) ? View.VISIBLE : View.GONE);
+    }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_manhinhchinh, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        final MenuItem menuItem = menu.findItem(R.id.cart);
+        FrameLayout rootView = (FrameLayout) menuItem.getActionView();
+
+        redCircle = (FrameLayout) rootView.findViewById(R.id.view_alert_red_circle);
+        countTextView = (TextView) rootView.findViewById(R.id.tvCount);
+
+        return super.onPrepareOptionsMenu(menu);
+    }
+
     @Override
     protected void onPause() {
         super.onPause();

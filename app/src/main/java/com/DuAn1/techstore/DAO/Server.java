@@ -15,5 +15,9 @@ public class Server {
     public static String getGioHang = localhost + "/api/getGioHang.php";
     public static String deleteGioHang = localhost + "/api/deleteGioHang.php";
     public static String deleteSanPhamGH = localhost + "/api/deleteSanPhamGH.php";
+    //
+    public static String updateMatKhau = localhost + "/api/updateMatKhau.php";
+    public static String updateKhachHang = localhost + "/api/updateKhachHang.php";
+    public static String getSPDaMua = localhost + "/api/getSanPhamDaMua.php";
 
 }

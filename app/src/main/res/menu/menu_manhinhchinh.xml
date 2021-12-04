@@ -5,10 +5,10 @@
         android:id="@+id/SearchActivity"
         android:icon="@drawable/ic_baseline_search_24"
         android:title="@string/strSearch"
-        app:showAsAction="ifRoom|collapseActionView" />
+        app:showAsAction="always" />
     <item
         android:id="@+id/cart"
-        android:icon="@drawable/ic_baseline_shopping_cart_24"
+        android:actionLayout="@layout/menu_badge"
         android:title="Gio Hang"
-        app:showAsAction="always|collapseActionView" />
+        app:showAsAction="always" />
 </menu>

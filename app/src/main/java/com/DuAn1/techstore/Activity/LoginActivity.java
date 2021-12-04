@@ -19,7 +19,6 @@ import com.DuAn1.techstore.DAO.Server;
 import com.DuAn1.techstore.Model.Loading;
 import com.DuAn1.techstore.R;
 import com.DuAn1.techstore.Until.CheckConnection;
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
@@ -94,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                 Dialog("Lỗi kết nối!");
             }) {
                 @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
+                protected Map<String, String> getParams()  {
                     Map<String, String> data = new HashMap<>();
                     data.put("tenDangNhap", username);
                     data.put("matKhau", password);

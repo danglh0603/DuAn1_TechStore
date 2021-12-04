@@ -46,7 +46,6 @@ public class FragmentManChinh extends Fragment {
     private SanPham sanPham;
     private ArrayList<SanPham> lstSp;
     private AdapterSP_Moi adapterSP_moi;
-    private RecyclerView recyclerView;
     private ViewPager2 viewPager;
     private CircleIndicator3 viewCir;
     private ArrayList<Photo> mList;
@@ -68,7 +67,13 @@ public class FragmentManChinh extends Fragment {
     String url6 = "https://images.fpt.shop/unsafe/fit-in/800x300/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2021/11/2/637714572252786896_F-H1_800x300.png";
     String url7 = "https://images.fpt.shop/unsafe/fit-in/800x300/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2021/8/31/637660487336798016_F_H1_800x300.png";
 
-
+    //
+    public static final int DIENTHOAI=0;
+    public static final int LAPTOP=1;
+    public static final int DONG_HO=2;
+    public static final int IPAD=3;
+    public static final int PHU_KIEN=4;
+    //
     Handler handler = new Handler();
     Runnable runnable = new Runnable() {
         @Override
@@ -103,7 +108,7 @@ public class FragmentManChinh extends Fragment {
         gridView = view.findViewById(R.id.gridView);
         viewPager = view.findViewById(R.id.viewPager2);
         viewCir = view.findViewById(R.id.cir3);
-        recyclerView = view.findViewById(R.id.rcvSPBanChay);
+        RecyclerView recyclerView = view.findViewById(R.id.rcvSPBanChay);
 
         //
         lstSp = new ArrayList<>();
@@ -154,7 +159,7 @@ public class FragmentManChinh extends Fragment {
         //tao request
         //xu ly khi thanh cong
         //xu ly khi that bai
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.spMoiNhat, response -> {
+        @SuppressLint("NotifyDataSetChanged") JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.spMoiNhat, response -> {
             if (response != null) {
                 for (int i = 0; i < response.length(); i++) {
                     try {
@@ -178,10 +183,7 @@ public class FragmentManChinh extends Fragment {
 
                 }
             }
-        }, error -> {
-            Toast.makeText(context, "Lỗi mạng!", Toast.LENGTH_SHORT).show();
-
-        });
+        }, error -> Toast.makeText(context, "Lỗi mạng!", Toast.LENGTH_SHORT).show());
         requestQueue.add(jsonArrayRequest);//add request vao xu ly
     }
 
@@ -193,27 +195,27 @@ public class FragmentManChinh extends Fragment {
     private void ActivityTL() {
         gridView.setOnItemClickListener((adapterView, view, i, l) -> {
             switch (i) {
-                case 0: {
+                case DIENTHOAI: {
                     Intent in = new Intent(getActivity(), Activity_DienThoai.class);
                     startActivity(in);
                     break;
                 }
-                case 1: {
+                case LAPTOP: {
                     Intent in = new Intent(getActivity(), Activity_Laptop.class);
                     startActivity(in);
                     break;
                 }
-                case 2: {
+                case DONG_HO: {
                     Intent in = new Intent(getActivity(), Activity_DongHo.class);
                     startActivity(in);
                     break;
                 }
-                case 3: {
+                case IPAD: {
                     Intent in = new Intent(getActivity(), Activity_MayTinhBang.class);
                     startActivity(in);
                     break;
                 }
-                case 4: {
+                case PHU_KIEN: {
                     Intent in = new Intent(getActivity(), Activity_PhuKien.class);
                     startActivity(in);
                     break;

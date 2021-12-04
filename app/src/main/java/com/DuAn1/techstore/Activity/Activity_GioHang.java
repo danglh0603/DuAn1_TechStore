@@ -129,8 +129,8 @@ public class Activity_GioHang extends AppCompatActivity {
         StringRequest request = new StringRequest(Request.Method.POST, Server.getGioHang,
                 response -> {
                     if (response.equals("failure")) {
-                        loading.DimissDialog();
                         xuLiKhiGHRong();
+                        loading.DimissDialog();
                         //Toast.makeText(getApplicationContext(), "Gio hang trong!", Toast.LENGTH_SHORT).show();
                         return;
                     } else {

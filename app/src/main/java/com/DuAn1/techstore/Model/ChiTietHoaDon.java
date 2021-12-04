@@ -3,20 +3,11 @@ package com.DuAn1.techstore.Model;
 public class ChiTietHoaDon {
 
     private int maHoaDon;
-    private  int maSanPham;
+    private int maSanPham;
+    private int donGia;
     private int soLuongMua;
-    private int tongTien;
-    private String ngayMua;
 
     public ChiTietHoaDon() {
-    }
-
-    public ChiTietHoaDon(int maHoaDon, int maSanPham, int soLuongMua, int tongTien, String ngayMua) {
-        this.maHoaDon = maHoaDon;
-        this.maSanPham = maSanPham;
-        this.soLuongMua = soLuongMua;
-        this.tongTien = tongTien;
-        this.ngayMua = ngayMua;
     }
 
     public int getMaHoaDon() {
@@ -35,6 +26,14 @@ public class ChiTietHoaDon {
         this.maSanPham = maSanPham;
     }
 
+    public int getDonGia() {
+        return donGia;
+    }
+
+    public void setDonGia(int donGia) {
+        this.donGia = donGia;
+    }
+
     public int getSoLuongMua() {
         return soLuongMua;
     }
@@ -43,20 +42,10 @@ public class ChiTietHoaDon {
         this.soLuongMua = soLuongMua;
     }
 
-    public int getTongTien() {
-        return tongTien;
+    public ChiTietHoaDon(int maHoaDon, int maSanPham, int donGia, int soLuongMua) {
+        this.maHoaDon = maHoaDon;
+        this.maSanPham = maSanPham;
+        this.donGia = donGia;
+        this.soLuongMua = soLuongMua;
     }
-
-    public void setTongTien(int tongTien) {
-        this.tongTien = tongTien;
-    }
-
-    public String getNgayMua() {
-        return ngayMua;
-    }
-
-    public void setNgayMua(String ngayMua) {
-        this.ngayMua = ngayMua;
-    }
-
 }

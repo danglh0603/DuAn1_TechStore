@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.Activity_Doi_Mat_Khau">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
@@ -21,14 +22,15 @@
             android:id="@+id/img_change_pass_back_change_user"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/img_back_2"
             android:layout_marginLeft="15dp"
+            android:src="@drawable/img_back_2"
             app:layout_constraintBottom_toTopOf="@+id/tvDangKi"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.454" />
+
         <TextView
             android:id="@+id/tvDangKi"
             android:layout_width="wrap_content"
@@ -52,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="44dp"
             android:hint="@string/strMKCu"
-            app:endIconMode="clear_text"
+            app:endIconMode="password_toggle"
             app:errorEnabled="true"
             app:helperTextEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +62,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvDangKi"
             app:layout_constraintWidth_percent="0.8">
+
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edOldPass"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:drawableStart="@drawable/icon_pass"
@@ -77,7 +81,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/strMKMoi"
-            app:endIconMode="clear_text"
+            app:endIconMode="password_toggle"
             app:errorEnabled="true"
             app:helperTextEnabled="true"
 
@@ -89,6 +93,7 @@
             app:layout_constraintWidth_percent="0.8">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edNewPass"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:drawableStart="@drawable/icon_pass"
@@ -105,7 +110,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/strNhapLai"
-            app:endIconMode="clear_text"
+            app:endIconMode="password_toggle"
             app:errorEnabled="true"
             app:helperTextEnabled="true"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -117,6 +122,7 @@
             app:layout_constraintWidth_percent="0.8">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edReNewPass"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:drawableStart="@drawable/icon_pass"
@@ -133,6 +139,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginHorizontal="40dp"
         android:background="@drawable/background_btn_dang_xuat"
         android:elevation="3dp"
         android:text="@string/strThayDoi"
@@ -142,7 +149,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        android:layout_marginHorizontal="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
         app:layout_constraintVertical_bias="0.233" />

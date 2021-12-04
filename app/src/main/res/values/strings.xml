@@ -41,4 +41,10 @@
     <string name="strSearch">search</string>
     <string name="strDiaChiNhanHang">Địa chỉ nhận hàng:</string>
     <string name="strThanhToan">Thanh Toán</string>
+    <string name="strHoSo">Hồ sơ của tôi</string>
+    <string name="strUpdateThongTinKH">Đổi thông tin người dùng</string>
+    <string name="strUpdatePass">Đổi mật khẩu người dùng</string>
+    <string name="todo">TODO</string>
+    <string name="strSoLuongSpDaMua">Sản phẩm đã mua</string>
+    <string name="strSoLuongSpGH">Sản phẩm trong giỏ hàng</string>
 </resources>

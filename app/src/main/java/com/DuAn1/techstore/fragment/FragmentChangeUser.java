@@ -17,38 +17,24 @@ import com.DuAn1.techstore.R;
 public class FragmentChangeUser extends Fragment {
     ImageView img_back_tai_khoan;
     Button btn_doi_thong_tin, btn_doi_mat_khau;
-    public FragmentChangeUser () {
+
+    public FragmentChangeUser() {
 
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_change_user,null,false);
+        return inflater.inflate(R.layout.fragment_change_user, null, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         AnhXa(view);
-        img_back_tai_khoan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((ManChinhActivity) getActivity()).popBackFragments();
-            }
-        });
-        btn_doi_thong_tin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((ManChinhActivity) getActivity()).replaceFragments(FragmentDoiThongTin.class);
-            }
-        });
-        btn_doi_mat_khau.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((ManChinhActivity) getActivity()).replaceFragments(FragmentDoiMatKhau.class);
-            }
-        });
+        img_back_tai_khoan.setOnClickListener(v -> ((ManChinhActivity) getActivity()).popBackFragments());
+        btn_doi_thong_tin.setOnClickListener(v -> ((ManChinhActivity) getActivity()).replaceFragments(FragmentDoiThongTin.class));
+        btn_doi_mat_khau.setOnClickListener(v -> ((ManChinhActivity) getActivity()).replaceFragments(FragmentDoiMatKhau.class));
     }
 
     public void AnhXa(View view) {
