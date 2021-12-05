@@ -32,6 +32,7 @@ public class ManChinhActivity extends AppCompatActivity {
     private ActionBar actionBar;
     private FragmentManager fragmentManager;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,13 +93,6 @@ public class ManChinhActivity extends AppCompatActivity {
         bottomNavigation.show(1, true);
 
         bottomNavigation.setOnClickMenuListener(item -> {
-//            // xu li su kien click item bottom
-//            switch (item.getId()) {
-//                case 1: {
-//                    Toast.makeText(this, "asdas", Toast.LENGTH_SHORT).show();
-//                    break;
-//                }
-//            }
         });
         bottomNavigation.setOnReselectListener(item -> {
             //
@@ -192,7 +186,6 @@ public class ManChinhActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_manhinhchinh, menu);
-
         return super.onCreateOptionsMenu(menu);
     }
 

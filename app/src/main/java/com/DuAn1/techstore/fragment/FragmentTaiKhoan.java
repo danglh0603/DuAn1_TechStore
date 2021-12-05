@@ -124,7 +124,7 @@ public class FragmentTaiKhoan extends Fragment {
                         khachHang.setDiaChi(jsonObject.getString("diaChi"));
                         //
                         tvHoTen.setText(khachHang.getTenKhachHang());
-                        tvTenDangNhap.setText(khachHang.getUsername());
+                        tvTenDangNhap.setText("@"+khachHang.getUsername());
                         getSanPhamDaMua();
 
 
@@ -144,37 +144,37 @@ public class FragmentTaiKhoan extends Fragment {
         requestQueue.add(stringRequest);
     }
 
-    private void demSoLuongTrongGH() {
-        StringRequest request = new StringRequest(Request.Method.POST, Server.getGioHang,
-                response -> {
-
-                    if (response.equals("failure")) {
-                        //tvSoLuongGH.setText("0");
-                    } else {
-                        try {
-                            JSONArray jsonArray = new JSONArray(response);
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                soLuong++;
-                            }
-                            //tvSoLuongGH.setText(String.valueOf(soLuong));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-
-                }, error -> Toast.makeText(context, "Loi dem GH", Toast.LENGTH_SHORT).show()) {
-            @NonNull
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("maKH", String.valueOf(khachHang.getMaKhachHang()));
-                return params;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        requestQueue.add(request);
-    }
+//    private void demSoLuongTrongGH() {
+//        StringRequest request = new StringRequest(Request.Method.POST, Server.getGioHang,
+//                response -> {
+//
+//                    if (response.equals("failure")) {
+//                        //tvSoLuongGH.setText("0");
+//                    } else {
+//                        try {
+//                            JSONArray jsonArray = new JSONArray(response);
+//                            for (int i = 0; i < jsonArray.length(); i++) {
+//                                soLuong++;
+//                            }
+//                            //tvSoLuongGH.setText(String.valueOf(soLuong));
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//
+//                    }
+//
+//                }, error -> Toast.makeText(context, "Loi dem GH", Toast.LENGTH_SHORT).show()) {
+//            @NonNull
+//            @Override
+//            protected Map<String, String> getParams() {
+//                Map<String, String> params = new HashMap<>();
+//                params.put("maKH", String.valueOf(khachHang.getMaKhachHang()));
+//                return params;
+//            }
+//        };
+//        RequestQueue requestQueue = Volley.newRequestQueue(context);
+//        requestQueue.add(request);
+//    }
 
 
     private void getSanPhamDaMua() {

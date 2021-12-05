@@ -25,6 +25,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
 
 import com.DuAn1.techstore.DAO.Server;
+import com.DuAn1.techstore.Model.Loading;
 import com.DuAn1.techstore.Model.SanPham;
 import com.DuAn1.techstore.R;
 import com.android.volley.AuthFailureError;
@@ -32,6 +33,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -56,6 +58,7 @@ public class Activity_ChiTietSp extends AppCompatActivity {
     private int sl;
     private int tongTien;
     //
+    Loading loading;
 
 
     @Override
@@ -77,6 +80,7 @@ public class Activity_ChiTietSp extends AppCompatActivity {
         tvThongTin = findViewById(R.id.tvThongTin);
         btnMuaNgay = findViewById(R.id.btnMuaNgay);
         btnThemGioHang = findViewById(R.id.btnThemGioHang);
+        loading = new Loading(this);
     }
 
 
@@ -109,7 +113,7 @@ public class Activity_ChiTietSp extends AppCompatActivity {
             tvGiaCu.setText(format.format(sanPham.getGiaCu()) + "đ");
             tvGiaCu.setPaintFlags(tvGiaCu.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             tvThongTin.setText(sanPham.getThongTinSanPham());
-            btnMuaNgay.setOnClickListener(view -> MuaNgay("Đặt hàng"));
+            btnMuaNgay.setOnClickListener(view -> MuaNgay());
             getThongTinKH();
             btnThemGioHang.setOnClickListener(view -> ThemGioHang("Thêm vào giỏ hàng", maKH));
         } else {
@@ -171,10 +175,12 @@ public class Activity_ChiTietSp extends AppCompatActivity {
     }
 
 
-    private void MuaNgay(String textBtn) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    private void MuaNgay() {
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_mua_, null);
-        builder.setView(view);
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        bottomSheetDialog.setContentView(view);
+        bottomSheetDialog.show();
+
         ImageView imgDialogSp;
         TextView tvGia;
         TextView tvDialogSoLuong;
@@ -190,9 +196,6 @@ public class Activity_ChiTietSp extends AppCompatActivity {
         tvDialogSoLuongMua = view.findViewById(R.id.tv_dialog_SoLuongMua);
         btnDialogTang = view.findViewById(R.id.btn_dialog_Tang);
         btnDialogMua = view.findViewById(R.id.btn_dialog_Mua);
-
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
 
         Picasso.get().load(sanPham.getHinhAnh())
                 .placeholder(R.drawable.dongho)
@@ -224,9 +227,9 @@ public class Activity_ChiTietSp extends AppCompatActivity {
         DecimalFormat format = new DecimalFormat("###,###,###");
         tvGia.setText(format.format(sanPham.getGiaTien()) + " đ");
 
-        btnDialogMua.setText(textBtn);
+        btnDialogMua.setText("Đặt hàng");
         btnDialogMua.setOnClickListener(view13 -> {
-            alertDialog.dismiss();
+            bottomSheetDialog.dismiss();
             Intent intent = new Intent(Activity_ChiTietSp.this, Activity_ThanhToan.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("sanPham", sanPham);
@@ -243,9 +246,11 @@ public class Activity_ChiTietSp extends AppCompatActivity {
     }
 
     private void ThemGioHang(String textBtn, int maKH) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_mua_, null);
-        builder.setView(view);
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        bottomSheetDialog.setContentView(view);
+        bottomSheetDialog.show();
+
         ImageView imgDialogSp;
         TextView tvGia;
         TextView tvDialogSoLuong;
@@ -262,8 +267,6 @@ public class Activity_ChiTietSp extends AppCompatActivity {
         btnDialogTang = view.findViewById(R.id.btn_dialog_Tang);
         btnDialogMua = view.findViewById(R.id.btn_dialog_Mua);
 
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
 
         Picasso.get().load(sanPham.getHinhAnh())
                 .placeholder(R.drawable.dongho)
@@ -297,9 +300,11 @@ public class Activity_ChiTietSp extends AppCompatActivity {
 
         btnDialogMua.setText(textBtn);
         btnDialogMua.setOnClickListener(view13 -> {
+
+            loading.LoadingDialog();
             int sl = Integer.parseInt(tvDialogSoLuongMua.getText().toString());
             int maSp = sanPham.getMaSanPham();
-            alertDialog.dismiss();
+            bottomSheetDialog.dismiss();
             AddGioHang(maSp, maKH, sl);
         });
     }
@@ -309,11 +314,14 @@ public class Activity_ChiTietSp extends AppCompatActivity {
                 response -> {
                     switch (response) {
                         case "success": {
+                            loading.DimissDialog();
                             Toast.makeText(Activity_ChiTietSp.this, "Đã thêm vào giỏ hàng!", Toast.LENGTH_SHORT).show();
                             break;
                         }
                         case "failure": {
+                            loading.DimissDialog();
                             Toast.makeText(Activity_ChiTietSp.this, "Không thể thêm vào giỏ hàng!", Toast.LENGTH_SHORT).show();
+                            break;
                         }
                     }
                 }, error -> Toast.makeText(Activity_ChiTietSp.this, "Lỗi", Toast.LENGTH_SHORT).show()) {

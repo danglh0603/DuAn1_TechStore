@@ -62,13 +62,14 @@ public class FragmentManChinh extends Fragment {
             R.drawable.maytinhbagn,
             R.drawable.headphones,
     };
-    String url1 = "https://images.fpt.shop/unsafe/fit-in/800x300/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2021/10/21/637704543103517650_F_H1_800x300.png";
-    String url2 = "https://images.fpt.shop/unsafe/fit-in/800x300/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2021/11/18/637728494005682482_F-H1_800x300.png";
-    String url3 = "https://images.fpt.shop/unsafe/fit-in/800x300/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2021/11/9/637720541178079234_F-H1_800x300.png";
-    String url4 = "https://images.fpt.shop/unsafe/fit-in/800x300/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2021/11/14/637724784941860214_F_H1_800x300.png";
-    String url5 = "https://images.fpt.shop/unsafe/fit-in/800x300/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2021/11/19/637729280202093567_F-H1_800x300.png";
-    String url6 = "https://images.fpt.shop/unsafe/fit-in/800x300/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2021/11/2/637714572252786896_F-H1_800x300.png";
-    String url7 = "https://images.fpt.shop/unsafe/fit-in/800x300/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2021/8/31/637660487336798016_F_H1_800x300.png";
+    // link anh
+    String url1 = Server.url1;
+    String url2 = Server.url2;
+    String url3 = Server.url3;
+    String url4 = Server.url4;
+    String url5 = Server.url5;
+    String url6 = Server.url6;
+    String url7 = Server.url7;
 
     //
     public static final int DIENTHOAI = 0;
@@ -115,7 +116,7 @@ public class FragmentManChinh extends Fragment {
 
         //
         loading = new Loading(getActivity());
-        loading.LoadingDialog();
+
         lstSp = new ArrayList<>();
         //
         adapterSP_moi = new AdapterSP_Moi(getContext(), lstSp);
@@ -123,6 +124,7 @@ public class FragmentManChinh extends Fragment {
         recyclerView.setLayoutManager(manager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapterSP_moi);
+        loading.LoadingDialog();
     }
 
 
@@ -159,6 +161,7 @@ public class FragmentManChinh extends Fragment {
 
 
     private void getDlSp() {
+
         RequestQueue requestQueue = Volley.newRequestQueue(context);//khai bao context
         //JsonArrayRequest(duongdan,neuThanhCong,neuThatBai);
         //tao request

@@ -1,5 +1,6 @@
 package com.DuAn1.techstore.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
@@ -167,6 +168,7 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("Accout_file", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         if (!status) {
+            clearLuuDangNhap();
             editor.clear();
         } else {
             editor.putString("USER", user);
@@ -175,7 +177,13 @@ public class LoginActivity extends AppCompatActivity {
         }
         editor.apply();
     }
-
+    private void clearLuuDangNhap() {
+        SharedPreferences sharedPreferences2 = getApplicationContext().getSharedPreferences("Luu_dangNhap", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences2.edit();
+        editor.putBoolean("luuDangNhap",false);
+        editor.putString("USER","");
+        editor.apply();
+    }
     private void Dialog(String mess) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_thongbao_resigter, null);

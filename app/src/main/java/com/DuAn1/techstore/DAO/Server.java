@@ -19,5 +19,15 @@ public class Server {
     public static String updateMatKhau = localhost + "/api/updateMatKhau.php";
     public static String updateKhachHang = localhost + "/api/updateKhachHang.php";
     public static String getSPDaMua = localhost + "/api/getSanPhamDaMua.php";
+    //
+    //link ảnh slide
+    public static String url1 = "https://images.fpt.shop/unsafe/fit-in/800x300/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2021/10/21/637704543103517650_F_H1_800x300.png";
+    public static String url2 = "https://images.fpt.shop/unsafe/fit-in/800x300/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2021/11/18/637728494005682482_F-H1_800x300.png";
+    public static String url3 = "https://images.fpt.shop/unsafe/fit-in/800x300/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2021/11/9/637720541178079234_F-H1_800x300.png";
+    public static String url4 = "https://images.fpt.shop/unsafe/fit-in/800x300/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2021/11/14/637724784941860214_F_H1_800x300.png";
+    public static String url5 = "https://images.fpt.shop/unsafe/fit-in/800x300/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2021/11/19/637729280202093567_F-H1_800x300.png";
+    public static String url6 = "https://images.fpt.shop/unsafe/fit-in/800x300/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2021/11/2/637714572252786896_F-H1_800x300.png";
+    public static String url7 = "https://images.fpt.shop/unsafe/fit-in/800x300/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2021/8/31/637660487336798016_F_H1_800x300.png";
+
 
 }
