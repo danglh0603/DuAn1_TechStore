@@ -24,8 +24,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:background="@drawable/background_dn_dk">
+                android:layout_height="100dp"
+                android:background="@drawable/bg_user">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout3"
@@ -36,14 +36,14 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.25">
+                    app:layout_constraintVertical_bias="0.51">
 
                     <ImageView
                         android:id="@+id/imageView2"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
                         android:layout_marginStart="16dp"
-                        android:src="@drawable/img_user_tai_khoan"
+                        android:src="@drawable/avatar"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -64,7 +64,6 @@
                             android:id="@+id/tvHoTen"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
                             android:textColor="@color/white"
                             android:textSize="22dp"
                             android:textStyle="bold" />

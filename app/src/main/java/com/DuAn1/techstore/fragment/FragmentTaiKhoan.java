@@ -112,6 +112,7 @@ public class FragmentTaiKhoan extends Fragment {
         String userName = preferences.getString("USER", "");
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.getKhachHang,
                 response -> {
+
                     try {
                         JSONArray jsonArray = new JSONArray(response);
                         JSONObject jsonObject = jsonArray.getJSONObject(0);
@@ -124,12 +125,13 @@ public class FragmentTaiKhoan extends Fragment {
                         khachHang.setDiaChi(jsonObject.getString("diaChi"));
                         //
                         tvHoTen.setText(khachHang.getTenKhachHang());
-                        tvTenDangNhap.setText("@"+khachHang.getUsername());
+                        tvTenDangNhap.setText("@" + khachHang.getUsername());
                         getSanPhamDaMua();
 
 
                     } catch (Exception e) {
                         e.printStackTrace();
+
                     }
                 },
                 error -> Toast.makeText(context, "Lỗi", Toast.LENGTH_SHORT).show()) {
@@ -144,63 +146,36 @@ public class FragmentTaiKhoan extends Fragment {
         requestQueue.add(stringRequest);
     }
 
-//    private void demSoLuongTrongGH() {
-//        StringRequest request = new StringRequest(Request.Method.POST, Server.getGioHang,
-//                response -> {
-//
-//                    if (response.equals("failure")) {
-//                        //tvSoLuongGH.setText("0");
-//                    } else {
-//                        try {
-//                            JSONArray jsonArray = new JSONArray(response);
-//                            for (int i = 0; i < jsonArray.length(); i++) {
-//                                soLuong++;
-//                            }
-//                            //tvSoLuongGH.setText(String.valueOf(soLuong));
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//
-//                    }
-//
-//                }, error -> Toast.makeText(context, "Loi dem GH", Toast.LENGTH_SHORT).show()) {
-//            @NonNull
-//            @Override
-//            protected Map<String, String> getParams() {
-//                Map<String, String> params = new HashMap<>();
-//                params.put("maKH", String.valueOf(khachHang.getMaKhachHang()));
-//                return params;
-//            }
-//        };
-//        RequestQueue requestQueue = Volley.newRequestQueue(context);
-//        requestQueue.add(request);
-//    }
-
 
     private void getSanPhamDaMua() {
         StringRequest request = new StringRequest(Request.Method.POST, Server.getSPDaMua,
                 response -> {
-                    try {
-                        JSONArray jsonArray = new JSONArray(response);
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            sanPham = new SanPham();
-                            sanPham.setMaSanPham(jsonObject.getInt("maLoai"));
-                            sanPham.setMaSanPham(jsonObject.getInt("maSP"));
-                            sanPham.setTenSanPham(jsonObject.getString("tenSP"));
-                            sanPham.setSoLuongNhap(jsonObject.getInt("soLuongNhap"));
-                            sanPham.setHinhAnh(jsonObject.getString("hinhAnh"));
-                            sanPham.setGiaTien(jsonObject.getInt("giaTien"));
-                            sanPham.setGiaCu(jsonObject.getInt("giaCu"));
-                            sanPham.setNgayNhap(jsonObject.getString("ngayNhap"));
-                            sanPham.setThongTinSanPham(jsonObject.getString("thongTinSP"));
-                            lstSP.add(sanPham);
-                            tvSpDaMua.setText("Sản phẩm đã mua: (" + lstSP.size() + " sản phẩm)");
-                            adapter_sp.notifyDataSetChanged();
-                            loading.DimissDialog();
+                    if (response.equals("failure")) {
+                        Toast.makeText(getActivity(), "Chua mua sp nao", Toast.LENGTH_SHORT).show();
+                        loading.DimissDialog();
+                    } else {
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                sanPham = new SanPham();
+                                sanPham.setMaSanPham(jsonObject.getInt("maLoai"));
+                                sanPham.setMaSanPham(jsonObject.getInt("maSP"));
+                                sanPham.setTenSanPham(jsonObject.getString("tenSP"));
+                                sanPham.setSoLuongNhap(jsonObject.getInt("soLuongNhap"));
+                                sanPham.setHinhAnh(jsonObject.getString("hinhAnh"));
+                                sanPham.setGiaTien(jsonObject.getInt("giaTien"));
+                                sanPham.setGiaCu(jsonObject.getInt("giaCu"));
+                                sanPham.setNgayNhap(jsonObject.getString("ngayNhap"));
+                                sanPham.setThongTinSanPham(jsonObject.getString("thongTinSP"));
+                                lstSP.add(sanPham);
+                                tvSpDaMua.setText("Sản phẩm đã mua: (" + lstSP.size() + " sản phẩm)");
+                                adapter_sp.notifyDataSetChanged();
+                                loading.DimissDialog();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
                 }, error -> {
 
@@ -239,8 +214,8 @@ public class FragmentTaiKhoan extends Fragment {
     private void clearLuuDangNhap() {
         SharedPreferences sharedPreferences2 = getActivity().getSharedPreferences("Luu_dangNhap", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences2.edit();
-        editor.putBoolean("luuDangNhap",false);
-        editor.putString("USER","");
+        editor.putBoolean("luuDangNhap", false);
+        editor.putString("USER", "");
         editor.apply();
     }
 

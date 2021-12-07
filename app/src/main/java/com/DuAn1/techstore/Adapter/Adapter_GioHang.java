@@ -66,8 +66,8 @@ public class Adapter_GioHang extends RecyclerView.Adapter<Adapter_GioHang.ViewHo
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        GioHang gioHang = lstGH.get(position);
-        SanPham sanPham = lstSP.get(position);
+        final GioHang gioHang = lstGH.get(position);
+        final SanPham sanPham = lstSP.get(position);
         if (gioHang != null && sanPham != null) {
             Picasso.get()
                     .load(sanPham.getHinhAnh())

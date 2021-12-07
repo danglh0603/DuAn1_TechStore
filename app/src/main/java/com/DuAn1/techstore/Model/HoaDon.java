@@ -1,6 +1,8 @@
 package com.DuAn1.techstore.Model;
 
-public class HoaDon {
+import java.io.Serializable;
+
+public class HoaDon implements Serializable {
 
     private int maHoaDon;
     private int maKhachHang;

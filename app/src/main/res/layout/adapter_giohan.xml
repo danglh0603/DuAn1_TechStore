@@ -47,6 +47,7 @@
             app:layout_constraintWidth_percent="0.25" />
 
         <TextView
+            android:layout_marginStart="5dp"
             android:id="@+id/tvTenSp"
             android:layout_width="270dp"
             android:layout_height="wrap_content"
@@ -64,10 +65,10 @@
             app:layout_constraintVertical_bias="0.05" />
 
         <TextView
+            android:layout_marginStart="5dp"
             android:id="@+id/tvGia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
             android:textColor="@color/red"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -79,10 +80,10 @@
             app:layout_constraintVertical_bias="0" />
 
         <TextView
+            android:layout_marginStart="5dp"
             android:id="@+id/tvSoLuongMua"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"

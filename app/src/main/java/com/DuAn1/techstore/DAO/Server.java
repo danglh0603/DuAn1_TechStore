@@ -4,7 +4,9 @@ public class Server {
     public static String localhost = "https://duan1techstore.000webhostapp.com";
     public static String dangNhap = localhost + "/api/login.php";
     public static String dangKy = localhost + "/api/register.php";
+    //
     public static String spMoiNhat = localhost + "/api/SPMoiNhat.php";
+    public static String spTheoMaSP = localhost + "/api/getSPTheoMaSP.php";
     public static String getAllSp = localhost + "/api/getAllSanPham.php";
     public static String sanPhamTheoTL = localhost + "/api/getSpTheoTL.php";
     public static String getKhachHang = localhost + "/api/getKhachHang.php";
@@ -19,6 +21,10 @@ public class Server {
     public static String updateMatKhau = localhost + "/api/updateMatKhau.php";
     public static String updateKhachHang = localhost + "/api/updateKhachHang.php";
     public static String getSPDaMua = localhost + "/api/getSanPhamDaMua.php";
+    //
+    public static String getHoaDon = localhost + "/api/getHoaDon.php";
+    public static String getCTHoaDon = localhost + "/api/getChiTietHoaDon.php";
+
     //
     //link ảnh slide
     public static String url1 = "https://images.fpt.shop/unsafe/fit-in/800x300/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2021/10/21/637704543103517650_F_H1_800x300.png";

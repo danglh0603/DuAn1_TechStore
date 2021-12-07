@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,6 +21,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.DuAn1.techstore.Adapter.Adapter_SP;
+import com.DuAn1.techstore.Adapter.Apdater_Spinner;
 import com.DuAn1.techstore.DAO.Server;
 import com.DuAn1.techstore.Model.Loading;
 import com.DuAn1.techstore.Model.SanPham;
@@ -33,6 +37,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,33 +47,51 @@ public class Activity_DienThoai extends AppCompatActivity {
     private static final int MATL = 1; // maLoai điện thoại :1
     private Toolbar toolbar;
     private RecyclerView recyclerView;
+
     private ArrayList<SanPham> lstSP;
+
     private Adapter_SP adapter_SP;
     private SanPham sanPham;
     private Loading loading;
+    //
+    private Spinner spnLoc;
+    private Apdater_Spinner apdater_spinner;
+    private final String[] lstCn = {"Tất cả", "Giá cao đến thấp", "Giá thấp đến cao", "Sắp xếp theo tên"};
+    private final int[] listIcon = {
+            R.drawable.ic_baseline_phone_android_24,
+            R.drawable.ic_baseline_trending_down_24,
+            R.drawable.ic_baseline_trending_up_24,
+            R.drawable.ic_baseline_text_rotation_down_24,
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dien_thoai);
-
         AnhXa();
         ActionBar();
         getDL_DT();
+        SapXepSpinner();
     }
+
 
     private void AnhXa() {
         loading = new Loading(this);
         toolbar = findViewById(R.id.toolbar);
         recyclerView = findViewById(R.id.rcv);
+        spnLoc = findViewById(R.id.spnLoc);
+        apdater_spinner = new Apdater_Spinner(getApplicationContext(), lstCn, listIcon);
+        spnLoc.setAdapter(apdater_spinner);
+        //
         lstSP = new ArrayList<>();
-        adapter_SP = new Adapter_SP(Activity_DienThoai.this, lstSP);
         loading.LoadingDialog();
+        adapter_SP = new Adapter_SP(Activity_DienThoai.this, lstSP);
         //
         GridLayoutManager manager = new GridLayoutManager(getApplicationContext(), 2);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter_SP);
     }
+
 
     private void getDL_DT() {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.sanPhamTheoTL,
@@ -97,8 +121,6 @@ public class Activity_DienThoai extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-
                 },
                 error -> Toast.makeText(getApplicationContext(), "Lỗi", Toast.LENGTH_SHORT).show()) {
             @Override
@@ -113,6 +135,7 @@ public class Activity_DienThoai extends AppCompatActivity {
 
     }
 
+
     @SuppressLint("RestrictedApi")
     private void ActionBar() {
         setSupportActionBar(toolbar);
@@ -123,6 +146,80 @@ public class Activity_DienThoai extends AppCompatActivity {
             actionBar.setDefaultDisplayHomeAsUpEnabled(true);
         }
 
+    }
+
+    private void SapXepSpinner() {
+        spnLoc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i) {
+                    case 0: {
+//
+                        break;
+                    }
+                    case 1: {
+                        sapXepGiamDanTheoGia(lstSP);
+                        adapter_SP.notifyDataSetChanged();
+                        break;
+                    }
+                    case 2: {
+                        sapXepTangDanTheoGia(lstSP);
+                        adapter_SP.notifyDataSetChanged();
+                        break;
+                    }
+                    case 3: {
+                        sapXepTheoChuCai(lstSP);
+                        adapter_SP.notifyDataSetChanged();
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+    public ArrayList<SanPham> MacDinh(ArrayList<SanPham> list) {
+        return list;
+    }
+
+    public ArrayList<SanPham> sapXepGiamDanTheoGia(ArrayList<SanPham> list) {
+        Collections.sort(list, (sanPham, t1) -> {
+            if (sanPham.getGiaTien() < t1.getGiaTien()) {
+                return 1;
+            } else {
+                if (sanPham.getGiaTien() == t1.getGiaTien()) {
+                    return 0;
+                } else return -1;
+            }
+        });
+        return list;
+    }
+
+    public ArrayList<SanPham> sapXepTangDanTheoGia(ArrayList<SanPham> list) {
+        Collections.sort(list, (sanPham, t1) -> {
+            if (sanPham.getGiaTien() < t1.getGiaTien()) {
+                return -1;
+            } else {
+                if (sanPham.getGiaTien() == t1.getGiaTien()) {
+                    return 0;
+                } else return 1;
+            }
+        });
+        return list;
+    }
+
+    public ArrayList<SanPham> sapXepTheoChuCai(ArrayList<SanPham> list) {
+        Collections.sort(lstSP, new Comparator<SanPham>() {
+            @Override
+            public int compare(SanPham sanPham, SanPham t1) {
+                return (sanPham.getTenSanPham().compareTo(t1.getTenSanPham()));
+            }
+        });
+        return list;
     }
 
     @Override

@@ -132,7 +132,6 @@ public class Activity_GioHang extends AppCompatActivity {
                     if (response.equals("failure")) {
                         xuLiKhiGHRong();
                         loading.DimissDialog();
-                        //Toast.makeText(getApplicationContext(), "Gio hang trong!", Toast.LENGTH_SHORT).show();
                     } else {
                         try {
                             loading.DimissDialog();

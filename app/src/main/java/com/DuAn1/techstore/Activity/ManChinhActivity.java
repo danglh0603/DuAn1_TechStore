@@ -3,7 +3,6 @@ package com.DuAn1.techstore.Activity;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,9 +18,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.DuAn1.techstore.R;
+import com.DuAn1.techstore.fragment.FragmentHoaDon;
 import com.DuAn1.techstore.fragment.FragmentManChinh;
 import com.DuAn1.techstore.fragment.FragmentTaiKhoan;
-import com.DuAn1.techstore.fragment.FragmentThongBao;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 
 
@@ -62,7 +61,7 @@ public class ManChinhActivity extends AppCompatActivity {
     private void BottomNav() {
         // add icon fragment
         bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.ic_baseline_home_24));
-        bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.ic_baseline_shopping_cart_24));
+        bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.ic_baseline_article_24));
         bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.ic_baseline_person_24));
 
         bottomNavigation.setOnShowListener(item -> {
@@ -75,8 +74,8 @@ public class ManChinhActivity extends AppCompatActivity {
                     break;
                 }
                 case 2: {
-                    fragment = new FragmentThongBao();
-                    actionBar.setTitle("Giỏ Hàng");
+                    fragment = new FragmentHoaDon();
+                    actionBar.setTitle("Hóa đơn");
                     break;
                 }
                 case 3: {
@@ -89,28 +88,17 @@ public class ManChinhActivity extends AppCompatActivity {
         });
 
         // setCountNotification
-        bottomNavigation.setCount(2, String.valueOf(getCountNotification()));
+        //bottomNavigation.setCount(2, String.valueOf(getCountNotification()));
         bottomNavigation.show(1, true);
 
         bottomNavigation.setOnClickMenuListener(item -> {
+            // khi click tab
         });
         bottomNavigation.setOnReselectListener(item -> {
-            //
+            // khi chọn lại tab
             //Toast.makeText(getApplicationContext(), "Reselect", Toast.LENGTH_SHORT).show();
         });
 
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            String title = bundle.getString("tai_khoan");
-            try {
-                if (title.equals("3")) {
-                    new android.os.Handler(Looper.getMainLooper()).postDelayed(
-                            () -> bottomNavigation.show(3, true),
-                            100);
-                }
-            } catch (Exception ignored) {
-            }
-        }
     }
 
     private int getCountNotification() {

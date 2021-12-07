@@ -33,7 +33,6 @@ public class Activity_Change_User extends AppCompatActivity {
     private KhachHang khachHang;
     private Loading loading;
     private TextView tvHoTen;
-    private TextView tvTenDangNhap;
     private TextView tvNamSinh;
     private TextView tvSoDienThoai;
     private TextView tvDiaChi;
@@ -46,20 +45,7 @@ public class Activity_Change_User extends AppCompatActivity {
 
         AnhXa();
         img_back_tai_khoan.setOnClickListener(v -> {
-//                Intent intent = new Intent(this,SecondActivity.class);
-//                Bundle bundle = new Bundle();
-//                đóng gói kiểu dữ liệu String, Boolean
-//                bundle.putString("key_1", "MainActivity greeted you with a HI");
-//                bundle.putBoolean("key_2", true);
-//                đóng gói bundle vào intent
-//                intent.putExtras(bundle);
-//                start SecondActivity
-//                startActivity(intent);
-            intent = new Intent(Activity_Change_User.this, ManChinhActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putString("tai_khoan", "3");
-            intent.putExtras(bundle);
-            startActivity(intent);
+            super.onBackPressed();
         });
         btn_doi_thong_tin.setOnClickListener(v -> {
             intent = new Intent(Activity_Change_User.this, Activity_Doi_Thong_Tin.class);
@@ -78,7 +64,6 @@ public class Activity_Change_User extends AppCompatActivity {
         btn_doi_thong_tin = findViewById(R.id.btn_doi_thong_tin);
         btn_doi_mat_khau = findViewById(R.id.btn_doi_mat_khau);
         tvHoTen = findViewById(R.id.tvHoTen);
-        tvTenDangNhap = findViewById(R.id.tvTenDangNhap);
         tvNamSinh = findViewById(R.id.tvNamSinh);
         tvSoDienThoai = findViewById(R.id.tvSoDienThoai);
         tvDiaChi = findViewById(R.id.tvDiaChi);
@@ -106,8 +91,7 @@ public class Activity_Change_User extends AppCompatActivity {
                         khachHang.setSoDienThoai(jsonObject.getString("soDienThoai"));
                         khachHang.setDiaChi(jsonObject.getString("diaChi"));
                         //
-                        tvHoTen.setText("Họ tên: " + khachHang.getTenKhachHang());
-                        tvTenDangNhap.setText("Tên đăng nhập: " + khachHang.getUsername());
+                        tvHoTen.setText(khachHang.getTenKhachHang());
                         tvNamSinh.setText("Năm sinh: " + khachHang.getNamSinh());
                         tvSoDienThoai.setText("Số điện thoại:  " + khachHang.getSoDienThoai());
                         tvDiaChi.setText("Địa chỉ: " + khachHang.getDiaChi());

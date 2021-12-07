@@ -137,6 +137,14 @@ public class ResigterActivity extends AppCompatActivity {
         } else {
             textInputLayout1.setError(null);
         }
+        if (Objects.requireNonNull(edTenDangNhap.getText()).toString().length() < 4) {
+            textInputLayout1.setError("Tên đăng nhập tối thiểu 4 kí tự!");
+            edTenDangNhap.requestFocus();
+            check = -1;
+            return check;
+        } else {
+            textInputLayout1.setError(null);
+        }
         //
         if (Objects.requireNonNull(edHoTen.getText()).toString().length() == 0) {
             textInputLayout2.setError("Không để trống họ tên!");
@@ -146,6 +154,19 @@ public class ResigterActivity extends AppCompatActivity {
         } else {
             textInputLayout2.setError(null);
         }
+
+        String hoTen = edHoTen.getText().toString();
+        String firstSt = String.valueOf(hoTen.charAt(0));
+        if (!firstSt.matches("^[A-Z]")) {
+            textInputLayout2.setError("Chữ cái đầu phải viết hoa!");
+            edHoTen.requestFocus();
+            check = -1;
+            return check;
+        } else {
+            textInputLayout3.setError(null);
+        }
+
+        //
         if (Objects.requireNonNull(edNamSinh.getText()).toString().length() == 0) {
             textInputLayout3.setError("Không để trống năm sinh!");
             edNamSinh.requestFocus();
@@ -154,6 +175,16 @@ public class ResigterActivity extends AppCompatActivity {
         } else {
             textInputLayout3.setError(null);
         }
+        if (Objects.requireNonNull(edNamSinh.getText()).toString().length() < 4) {
+            textInputLayout3.setError("Năm sinh không hợp lệ!");
+            edNamSinh.requestFocus();
+            check = -1;
+            return check;
+        } else {
+            textInputLayout3.setError(null);
+        }
+
+        //
         if (Objects.requireNonNull(edSoDienThoai.getText()).toString().length() == 0) {
             textInputLayout4.setError("Không để trống số điện thoại!");
             edSoDienThoai.requestFocus();
@@ -162,6 +193,16 @@ public class ResigterActivity extends AppCompatActivity {
         } else {
             textInputLayout4.setError(null);
         }
+        if (Objects.requireNonNull(edSoDienThoai.getText()).toString().length() < 10) {
+            textInputLayout4.setError("Số điện thoại không hợp lệ!");
+            edSoDienThoai.requestFocus();
+            check = -1;
+            return check;
+        } else {
+            textInputLayout4.setError(null);
+        }
+
+        //
         if (Objects.requireNonNull(edDiaChi.getText()).toString().length() == 0) {
             textInputLayout5.setError("Không để trống địa chỉ!");
             edDiaChi.requestFocus();
@@ -173,6 +214,14 @@ public class ResigterActivity extends AppCompatActivity {
 
         if (Objects.requireNonNull(edMatKhau.getText()).toString().length() == 0) {
             textInputLayout6.setError("Không để trống mật khẩu!");
+            edMatKhau.requestFocus();
+            check = -1;
+            return check;
+        } else {
+            textInputLayout6.setError(null);
+        }
+        if (Objects.requireNonNull(edMatKhau.getText()).toString().length() <4) {
+            textInputLayout6.setError("Mật khẩu tối thiểu 4 kí tự!");
             edMatKhau.requestFocus();
             check = -1;
             return check;
