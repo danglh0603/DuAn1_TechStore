@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -94,36 +93,42 @@ public class Activity_Doi_Thong_Tin extends AppCompatActivity {
     }
 
     private void updateThongTinKhachHang() {
-        StringRequest request = new StringRequest(Request.Method.POST, Server.updateKhachHang,
-                response -> {
-                    switch (response) {
-                        case "sucess": {
-                            loading.DimissDialog();
-                            Dialog("Đổi thông tin thành công!");
-                            btnLogChangePass.setEnabled(false);
-                            break;
+        String hoTen = edHoTen.getText().toString().trim();
+        String namSinh = edNamSinh.getText().toString().trim();
+        String soDienThoai = edNamSinh.getText().toString().trim();
+        String diaChi = edDiaChi.getText().toString().trim();
+        if (!(hoTen.length() == 0) && !(namSinh.length() == 0) && !(soDienThoai.length() == 0) && !(diaChi.length() == 0)) {
+            StringRequest request = new StringRequest(Request.Method.POST, Server.updateKhachHang,
+                    response -> {
+                        switch (response) {
+                            case "sucess": {
+                                loading.DimissDialog();
+                                Dialog("Đổi thông tin thành công!");
+                                btnLogChangePass.setEnabled(false);
+                                break;
+                            }
+                            case "failure": {
+                                loading.DimissDialog();
+                                Dialog("Đổi thông tin thất bại!");
+                                break;
+                            }
                         }
-                        case "failure": {
-                            loading.DimissDialog();
-                            Dialog("Đổi thông tin thất bại!");
-                            break;
-                        }
-                    }
-                }, error -> Dialog("Lỗi kết nối!")) {
-            @NonNull
-            @Override
-            protected Map<String, String> getParams()  {
-                Map<String, String> params = new HashMap<>();
-                params.put("maKH", String.valueOf(khachHang.getMaKhachHang()));
-                params.put("tenKH", khachHang.getTenKhachHang());
-                params.put("namSinh", khachHang.getNamSinh());
-                params.put("soDienThoai", khachHang.getSoDienThoai());
-                params.put("diaChi", khachHang.getDiaChi());
-                return params;
-            }
-        };
-        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        queue.add(request);
+                    }, error -> Dialog("Lỗi kết nối!")) {
+                @NonNull
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("maKH", String.valueOf(khachHang.getMaKhachHang()));
+                    params.put("tenKH", hoTen);
+                    params.put("namSinh", namSinh);
+                    params.put("soDienThoai", soDienThoai);
+                    params.put("diaChi", diaChi);
+                    return params;
+                }
+            };
+            RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+            queue.add(request);
+        }
     }
 
     private void getThongTinKH() {

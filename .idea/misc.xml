@@ -22,6 +22,7 @@
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/background_spinner.xml" value="0.12777777777777777" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/background_title.xml" value="0.1" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/badget.xml" value="0.11203703703703703" />
+        <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/bg_editext.xml" value="0.26614583333333336" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/bg_user.xml" value="0.26205128205128203" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/circle_badge.xml" value="0.2101851851851852" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/custom_checkbox.xml" value="0.2625" />
@@ -107,6 +108,7 @@
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/layout/fragment_all_dienthoai.xml" value="0.24635416666666668" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/layout/fragment_change_user.xml" value="0.24947916666666667" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/layout/fragment_chi_tiet_hoa_don.xml" value="0.25" />
+        <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/layout/fragment_doi_mat_khau.xml" value="0.24947916666666667" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/layout/fragment_doi_t_t.xml" value="0.25" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/layout/fragment_doi_thong_tin.xml" value="0.25" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/layout/fragment_giohang.xml" value="0.25" />

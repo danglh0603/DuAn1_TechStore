@@ -106,8 +106,6 @@ public class Activity_ChiTietHoaDon extends AppCompatActivity {
         tvNgayMua.setText(hoaDon.getNgayBan());
 
         tvTongTien.setText("Tổng tiền: " + format.format(hoaDon.getTongTien()) + "đ");
-
-
     }
 
     private void getChiTietHoaDon() {
@@ -150,6 +148,7 @@ public class Activity_ChiTietHoaDon extends AppCompatActivity {
                 }, error -> {
             Toast.makeText(getApplicationContext(), "Lỗi kết nối!", Toast.LENGTH_SHORT).show();
         }) {
+            // gửi dl
             @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
