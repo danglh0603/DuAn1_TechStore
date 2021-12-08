@@ -44,22 +44,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FragmentTaiKhoan extends Fragment {
-    ImageView img_chang_user;
-    TextView tvHoTen;
-    TextView tvTenDangNhap;
+    private ImageView img_chang_user;
+    private TextView tvHoTen;
+    private TextView tvTenDangNhap;
     private TextView tvSpDaMua;
-    Button btnLogOut;
+    private TextView tvChuaMuaSP;
+    private Button btnLogOut;
 
 
-    RecyclerView recyclerView;
-    Context context;
-    Intent intent;
-    Loading loading;
-    KhachHang khachHang;
-    int soLuong;
-    SanPham sanPham;
-    ArrayList<SanPham> lstSP;
-    Adapter_SP adapter_sp;
+    private RecyclerView recyclerView;
+    private Context context;
+    private Intent intent;
+    private Loading loading;
+    private KhachHang khachHang;
+    private SanPham sanPham;
+    private ArrayList<SanPham> lstSP;
+    private Adapter_SP adapter_sp;
 
     public FragmentTaiKhoan(Context context) {
         this.context = context;
@@ -88,6 +88,8 @@ public class FragmentTaiKhoan extends Fragment {
         img_chang_user = view.findViewById(R.id.img_change_user);
         tvHoTen = view.findViewById(R.id.tvHoTen);
         tvSpDaMua = view.findViewById(R.id.tvSpDaMua);
+        tvChuaMuaSP = view.findViewById(R.id.tvChuaMuaSP);
+        tvChuaMuaSP.setVisibility(View.GONE);
         recyclerView = view.findViewById(R.id.rcv);
         tvTenDangNhap = view.findViewById(R.id.tvTenDangNhap);
         btnLogOut = view.findViewById(R.id.btn_log_out);
@@ -151,10 +153,12 @@ public class FragmentTaiKhoan extends Fragment {
         StringRequest request = new StringRequest(Request.Method.POST, Server.getSPDaMua,
                 response -> {
                     if (response.equals("failure")) {
-                        Toast.makeText(getActivity(), "Chua mua sp nao", Toast.LENGTH_SHORT).show();
+                        tvSpDaMua.setText("Sản phẩm đã mua: (0)");
+                        tvChuaMuaSP.setVisibility(View.VISIBLE);
                         loading.DimissDialog();
                     } else {
                         try {
+                            tvChuaMuaSP.setVisibility(View.GONE);
                             JSONArray jsonArray = new JSONArray(response);
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);

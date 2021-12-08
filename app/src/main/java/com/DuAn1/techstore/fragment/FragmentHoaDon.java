@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,10 @@ import java.util.Map;
 public class FragmentHoaDon extends Fragment {
     private TextView tvSoLuongHD;
     private RecyclerView rcv;
+    private ImageView imgBillNull;
+
+
+
     private KhachHang khachHang;
     private HoaDon hoaDon;
     private ArrayList<HoaDon> lstHD;
@@ -62,6 +67,8 @@ public class FragmentHoaDon extends Fragment {
     private void AnhXa(View view) {
         tvSoLuongHD = view.findViewById(R.id.tvSoLuongHD);
         rcv = view.findViewById(R.id.rcv);
+        imgBillNull = view.findViewById(R.id.imgBillNull);
+        imgBillNull.setVisibility(View.GONE);
         //
         loading = new Loading(getActivity());
         loading.LoadingDialog();
@@ -80,10 +87,11 @@ public class FragmentHoaDon extends Fragment {
         StringRequest request = new StringRequest(Request.Method.POST, Server.getHoaDon,
                 response -> {
                     if (response.equals("failure")) {
-                        Toast.makeText(getActivity(), "K co hd", Toast.LENGTH_SHORT).show();
+                        imgBillNull.setVisibility(View.VISIBLE);
                         loading.DimissDialog();
                     } else {
                         try {
+                            imgBillNull.setVisibility(View.GONE);
                             JSONArray jsonArray = new JSONArray(response);
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
