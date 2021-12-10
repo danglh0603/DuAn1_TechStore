@@ -140,7 +140,7 @@ public class Activity_Doi_Mat_Khau extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 },
-                error -> Toast.makeText(getApplicationContext(), "Lỗi", Toast.LENGTH_SHORT).show()) {
+                error -> Toast.makeText(getApplicationContext(), "Lỗi kết nối!", Toast.LENGTH_SHORT).show()) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();

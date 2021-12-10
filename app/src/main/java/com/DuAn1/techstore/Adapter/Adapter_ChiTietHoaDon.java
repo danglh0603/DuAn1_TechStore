@@ -57,9 +57,8 @@ public class Adapter_ChiTietHoaDon extends RecyclerView.Adapter<Adapter_ChiTietH
 
             holder.imgSP.setOnClickListener(view -> {
                 Intent intent = new Intent(context, Activity_ChiTietSp.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("sanPham", sanPham);
+                bundle.putInt("maSP",sanPham.getMaSanPham());
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             });

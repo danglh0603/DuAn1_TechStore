@@ -7,10 +7,12 @@
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26614583333333336" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/bacgroung_btn_left.xml" value="0.16" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/bacgroung_btn_right.xml" value="0.12222222222222222" />
+        <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/backgound_btn_xacnhan.xml" value="0.26614583333333336" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/backgroud_dialof.xml" value="0.25092592592592594" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/backgroud_dialog.xml" value="0.175" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/backgroud_dn_dk.xml" value="0.26614583333333336" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/background_boder_item_grid.xml" value="0.26614583333333336" />
+        <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/background_bottomsheet.xml" value="0.26614583333333336" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/background_btn_dangki.xml" value="0.26614583333333336" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/background_btn_dangnhap.xml" value="0.26205128205128203" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/drawable/background_button.xml" value="0.26614583333333336" />
@@ -97,6 +99,7 @@
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/layout/custom_grid_sp.xml" value="0.25" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/layout/dangki.xml" value="0.25" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/layout/dangnhap.xml" value="0.25" />
+        <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/layout/dialog_checkpass.xml" value="0.25" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/layout/dialog_dangxuat.xml" value="0.24947916666666667" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/layout/dialog_hethang.xml" value="0.25" />
         <entry key="..\:/FPT POLYTECHNIC/FALL2021/DuAn1/DuAn1_TechStore/app/src/main/res/layout/dialog_mua_.xml" value="0.24947916666666667" />

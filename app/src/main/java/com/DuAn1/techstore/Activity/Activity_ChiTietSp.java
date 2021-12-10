@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -58,7 +59,7 @@ public class Activity_ChiTietSp extends AppCompatActivity {
     private int sl;
     private int tongTien;
     //
-    Loading loading;
+    private Loading loading;
 
 
     @Override
@@ -74,6 +75,7 @@ public class Activity_ChiTietSp extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         imageView = findViewById(R.id.img);
         imgHetHang = findViewById(R.id.imgHetHang);
+        imgHetHang.setVisibility(View.GONE);
         tvTen = findViewById(R.id.tvTen);
         tvGia = findViewById(R.id.tvGia);
         tvGiaCu = findViewById(R.id.tvGiaCu);
@@ -81,6 +83,8 @@ public class Activity_ChiTietSp extends AppCompatActivity {
         btnMuaNgay = findViewById(R.id.btnMuaNgay);
         btnThemGioHang = findViewById(R.id.btnThemGioHang);
         loading = new Loading(this);
+        sanPham = new SanPham();
+        loading.LoadingDialog();
     }
 
 
@@ -97,12 +101,53 @@ public class Activity_ChiTietSp extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void xuLiDl() {
         Bundle bundle = getIntent().getExtras();
-        if (bundle == null) {
-            return;
-        }
-        sanPham = (SanPham) bundle.get("sanPham");
+        int _maSP = bundle.getInt("maSP");
+        Log.e("zzzzzzz", "xuLiDl: "+_maSP );
+        getDlSp(_maSP);
+
+    }
+
+    private void getDlSp(int _maSP) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.spTheoMaSP,
+                response -> {
+                    if (response.equals("failure")) {
+                        Toast.makeText(getApplicationContext(), "Lỗi k thể get thông tin sản phẩm!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            JSONObject jsonObject = jsonArray.getJSONObject(0);
+                            sanPham = new SanPham();
+                            sanPham.setMaSanPham(jsonObject.getInt("maSP"));
+                            sanPham.setMaLoai(jsonObject.getInt("maLoai"));
+                            sanPham.setTenSanPham(jsonObject.getString("tenSP"));
+                            sanPham.setSoLuongNhap(jsonObject.getInt("soLuongNhap"));
+                            sanPham.setHinhAnh(jsonObject.getString("hinhAnh"));
+                            sanPham.setGiaTien(jsonObject.getInt("giaTien"));
+                            sanPham.setGiaCu(jsonObject.getInt("giaCu"));
+                            sanPham.setNgayNhap(jsonObject.getString("ngayNhap"));
+                            sanPham.setThongTinSanPham(jsonObject.getString("thongTinSP"));
+                            setData(sanPham);
+                            loading.DimissDialog();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                error -> Toast.makeText(getApplicationContext(), "Lỗi kết nối!", Toast.LENGTH_SHORT).show()) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("maSP", String.valueOf(_maSP));
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
+    }
+
+    private void setData(SanPham sanPham) {
         if (sanPham.getSoLuongNhap() > 1) {
-            imgHetHang.setVisibility(View.INVISIBLE);
+            imgHetHang.setVisibility(View.GONE);
             Picasso.get().load(sanPham.getHinhAnh())
                     .placeholder(R.drawable.dongho)
                     .error(R.drawable.atvphone)
@@ -177,9 +222,10 @@ public class Activity_ChiTietSp extends AppCompatActivity {
 
     private void MuaNgay() {
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_mua_, null);
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this,R.style.BottomSheetDialog);
         bottomSheetDialog.setContentView(view);
         bottomSheetDialog.show();
+
 
         ImageView imgDialogSp;
         TextView tvGia;
@@ -247,9 +293,10 @@ public class Activity_ChiTietSp extends AppCompatActivity {
 
     private void ThemGioHang(String textBtn, int maKH) {
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_mua_, null);
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this,R.style.BottomSheetDialog);
         bottomSheetDialog.setContentView(view);
         bottomSheetDialog.show();
+
 
         ImageView imgDialogSp;
         TextView tvGia;

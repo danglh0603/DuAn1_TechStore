@@ -38,7 +38,6 @@ public class ManChinhActivity extends AppCompatActivity {
         setContentView(R.layout.activity_manchinh);
         fragmentManager = getSupportFragmentManager();
         AnhXa();
-
         // xu li actionBar
         ActionBar();
         // xu li bottom
@@ -123,9 +122,9 @@ public class ManChinhActivity extends AppCompatActivity {
         alertDialog.show();
 
         Button btnHuy = view.findViewById(R.id.btn_dialog_Huy);
-        Button btnThoat = view.findViewById(R.id.btn_dialog_Thoat);
+        Button btnOut = view.findViewById(R.id.btn_dialog_Thoat);
 
-        btnThoat.setOnClickListener(v -> {
+        btnOut.setOnClickListener(v -> {
             alertDialog.dismiss();
             System.exit(0);
 
@@ -169,7 +168,6 @@ public class ManChinhActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

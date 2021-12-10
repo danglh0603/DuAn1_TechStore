@@ -163,7 +163,7 @@ public class ResigterActivity extends AppCompatActivity {
             check = -1;
             return check;
         } else {
-            textInputLayout3.setError(null);
+            textInputLayout2.setError(null);
         }
 
         //

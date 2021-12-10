@@ -3,12 +3,14 @@ package com.DuAn1.techstore.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,16 +61,45 @@ public class Activity_Doi_Thong_Tin extends AppCompatActivity {
         AnhXa();
         loading.LoadingDialog();
         img_change_info_back_change_user.setOnClickListener(v -> {
-            Intent intent = new Intent(Activity_Doi_Thong_Tin.this, Activity_Change_User.class);
+            Intent intent = new Intent(Activity_Doi_Thong_Tin.this,Activity_Change_User.class);
             startActivity(intent);
             finish();
         });
         btnLogChangePass.setOnClickListener(view -> {
             if (validate() > 0) {
-                loading.LoadingDialog();
-                updateThongTinKhachHang();
+                CheckPass(khachHang);
             }
         });
+    }
+
+    private void CheckPass(KhachHang khachHang) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Activity_Doi_Thong_Tin.this);
+        View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_checkpass, null);
+
+        builder.setView(view);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        EditText edPass;
+        TextView tvCheckPass;
+        AppCompatButton btnOK;
+
+        edPass = view.findViewById(R.id.edPass);
+        tvCheckPass = view.findViewById(R.id.tvCheck);
+        btnOK = view.findViewById(R.id.btnOK);
+        Log.e("pass", "CheckPass: "+khachHang.getPassword() );
+        btnOK.setOnClickListener(view1 -> {
+            if (edPass.getText().toString().trim().equals(khachHang.getPassword())) {
+                loading.LoadingDialog();
+                updateThongTinKhachHang();
+                alertDialog.dismiss();
+            } else {
+                tvCheckPass.setText("Mật khẩu không chính xác!");
+                tvCheckPass.setTextColor(Color.RED);
+                edPass.requestFocus();
+            }
+        });
+
     }
 
 
@@ -95,7 +126,7 @@ public class Activity_Doi_Thong_Tin extends AppCompatActivity {
     private void updateThongTinKhachHang() {
         String hoTen = edHoTen.getText().toString().trim();
         String namSinh = edNamSinh.getText().toString().trim();
-        String soDienThoai = edNamSinh.getText().toString().trim();
+        String soDienThoai = edSoDienThoai.getText().toString().trim();
         String diaChi = edDiaChi.getText().toString().trim();
         if (!(hoTen.length() == 0) && !(namSinh.length() == 0) && !(soDienThoai.length() == 0) && !(diaChi.length() == 0)) {
             StringRequest request = new StringRequest(Request.Method.POST, Server.updateKhachHang,
@@ -204,6 +235,16 @@ public class Activity_Doi_Thong_Tin extends AppCompatActivity {
         } else {
             textInputLayout1.setError(null);
         }
+        String firstSt = String.valueOf(hoTen.charAt(0));
+        if (!firstSt.matches("^[A-Z]")) {
+            textInputLayout1.setError("Chữ cái đầu phải viết hoa!");
+            edHoTen.requestFocus();
+            check = -1;
+            return check;
+        } else {
+            textInputLayout1.setError(null);
+        }
+        //
         if (namSinh.length() == 0) {
             textInputLayout2.setError("Không để trống năm sinh!");
             edNamSinh.requestFocus();

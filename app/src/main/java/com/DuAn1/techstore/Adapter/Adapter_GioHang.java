@@ -3,7 +3,9 @@ package com.DuAn1.techstore.Adapter;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.DuAn1.techstore.Activity.Activity_ChiTietSp;
 import com.DuAn1.techstore.Activity.Activity_GioHang;
 import com.DuAn1.techstore.DAO.Server;
 import com.DuAn1.techstore.Model.GioHang;
@@ -88,6 +91,16 @@ public class Adapter_GioHang extends RecyclerView.Adapter<Adapter_GioHang.ViewHo
                 notifyDataSetChanged();
                 if (lstGH.size()==0 && lstSP.size()==0) {
                     activity_gioHang.xuLiKhiGHRong();
+                }
+            });
+            holder.imgSP.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, Activity_ChiTietSp.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("maSP",sanPham.getMaSanPham());
+                    intent.putExtras(bundle);
+                    context.startActivity(intent);
                 }
             });
         }

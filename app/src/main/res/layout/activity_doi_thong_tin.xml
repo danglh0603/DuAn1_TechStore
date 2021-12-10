@@ -99,7 +99,7 @@
                 android:layout_height="50dp"
                 android:drawableStart="@drawable/icon_calenra"
                 android:drawablePadding="8dp"
-                android:inputType="text"
+                android:inputType="number"
                 android:maxLength="4"
                 android:maxLines="1"
                 android:textColor="@color/white"
@@ -131,7 +131,7 @@
                 android:layout_height="50dp"
                 android:drawableStart="@drawable/icon_phone"
                 android:drawablePadding="8dp"
-                android:inputType="text"
+                android:inputType="number"
                 android:maxLength="10"
                 android:textColor="@color/white"
                 android:textSize="14sp" />

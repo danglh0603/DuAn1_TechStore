@@ -2,6 +2,7 @@ package com.DuAn1.techstore.Activity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -115,7 +116,6 @@ public class Activity_ThanhToan extends AppCompatActivity {
         sanPham = (SanPham) bundle.get("sanPham");
         sl = bundle.getInt("sl");
         tongTien = bundle.getInt("tongTien");
-        //tvTongTien.setText(String.valueOf(tongTien));
 
         lstSP = (ArrayList<SanPham>) bundle.get("lstSP");
         lstGH = (ArrayList<GioHang>) bundle.get("lstGH");
@@ -194,12 +194,11 @@ public class Activity_ThanhToan extends AppCompatActivity {
                         response -> {
                             switch (response) {
                                 case "\nsuccess": {
-                                    //Toast.makeText(getApplicationContext(), "Insert chi tiet hoa don thanh cong", Toast.LENGTH_SHORT).show();
                                     UpdateSanPham(lstSP.get(indexSp).getMaSanPham(), updateSoLuongSp);
                                     break;
                                 }
                                 case "failure": {
-                                    Toast.makeText(getApplicationContext(), "loi insert chi tiet hoa don thanh cong", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "loi insert chi tiet hoa don", Toast.LENGTH_SHORT).show();
                                     break;
                                 }
                             }
@@ -225,12 +224,12 @@ public class Activity_ThanhToan extends AppCompatActivity {
                     response -> {
                         switch (response) {
                             case "\nsuccess": {
-                                Toast.makeText(getApplicationContext(), "Insert chi tiet hoa don thanh cong", Toast.LENGTH_SHORT).show();
+
                                 UpdateSanPham(sanPham.getMaSanPham(), updateSoLuongSp);
                                 break;
                             }
                             case "failure": {
-                                Toast.makeText(getApplicationContext(), "loi insert chi tiet hoa don thanh cong", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "loi insert chi tiet hoa don", Toast.LENGTH_SHORT).show();
                                 break;
                             }
                         }
@@ -299,7 +298,9 @@ public class Activity_ThanhToan extends AppCompatActivity {
             if (lstGH != null) {
                 deleteGioHang();
             }
-            Activity_ThanhToan.super.onBackPressed();
+            Intent intent = new Intent(Activity_ThanhToan.this,ManChinhActivity.class);
+            startActivity(intent);
+            finish();
         });
 
         alertDialog.show();

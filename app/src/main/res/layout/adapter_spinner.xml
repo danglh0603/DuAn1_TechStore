@@ -17,7 +17,7 @@
         android:layout_height="48dp"
         android:gravity="center_vertical"
         android:paddingStart="8dp"
-        android:paddingEnd="8dp"
+        android:paddingEnd="20dp"
         android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_circle_24"
         android:text="Loại sách 1"
         android:textColor="@color/xam"

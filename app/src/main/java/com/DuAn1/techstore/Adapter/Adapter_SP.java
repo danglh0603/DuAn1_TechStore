@@ -68,9 +68,8 @@ public class Adapter_SP extends RecyclerView.Adapter<Adapter_SP.ViewHolder> {
             });
             holder.cardView.setOnClickListener(view -> {
                 Intent intent = new Intent(context, Activity_ChiTietSp.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("sanPham", sanPham);
+                bundle.putInt("maSP", sanPham.getMaSanPham());
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             });
@@ -136,9 +135,6 @@ public class Adapter_SP extends RecyclerView.Adapter<Adapter_SP.ViewHolder> {
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                 lstSP = (ArrayList<SanPham>) filterResults.values;
-                if (lstSP.size()==0){
-                    Toast.makeText(context, "Không tìm thấy sản phẩm!", Toast.LENGTH_SHORT).show();
-                }
                 notifyDataSetChanged();
             }
         };
