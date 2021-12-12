@@ -102,7 +102,6 @@ public class Activity_ChiTietSp extends AppCompatActivity {
     private void xuLiDl() {
         Bundle bundle = getIntent().getExtras();
         int _maSP = bundle.getInt("maSP");
-        Log.e("zzzzzzz", "xuLiDl: "+_maSP );
         getDlSp(_maSP);
 
     }
@@ -281,7 +280,6 @@ public class Activity_ChiTietSp extends AppCompatActivity {
             bundle.putSerializable("sanPham", sanPham);
             sl = Integer.parseInt(tvDialogSoLuongMua.getText().toString());
             bundle.putInt("slMua", sl);
-            //Log.e("sllllll", "MuaNgay: "+sl );
             tongTien = sanPham.getGiaTien() * sl;
             bundle.putInt("sl", sl);
             bundle.putInt("tongTien", tongTien);

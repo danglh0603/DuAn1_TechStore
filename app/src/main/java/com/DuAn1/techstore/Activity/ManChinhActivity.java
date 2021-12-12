@@ -68,7 +68,7 @@ public class ManChinhActivity extends AppCompatActivity {
             Fragment fragment = null;
             switch (item.getId()) {
                 case 1: {
-                    fragment = new FragmentManChinh(getApplicationContext());
+                    fragment = new FragmentManChinh();
                     actionBar.setTitle("Trang chủ");
                     break;
                 }

@@ -74,7 +74,7 @@ public class Activity_Doi_Thong_Tin extends AppCompatActivity {
 
     private void CheckPass(KhachHang khachHang) {
         AlertDialog.Builder builder = new AlertDialog.Builder(Activity_Doi_Thong_Tin.this);
-        View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_checkpass, null);
+        View view = LayoutInflater.from(Activity_Doi_Thong_Tin.this).inflate(R.layout.dialog_checkpass, null);
 
         builder.setView(view);
         AlertDialog alertDialog = builder.create();
@@ -87,7 +87,6 @@ public class Activity_Doi_Thong_Tin extends AppCompatActivity {
         edPass = view.findViewById(R.id.edPass);
         tvCheckPass = view.findViewById(R.id.tvCheck);
         btnOK = view.findViewById(R.id.btnOK);
-        Log.e("pass", "CheckPass: "+khachHang.getPassword() );
         btnOK.setOnClickListener(view1 -> {
             if (edPass.getText().toString().trim().equals(khachHang.getPassword())) {
                 loading.LoadingDialog();
@@ -179,7 +178,6 @@ public class Activity_Doi_Thong_Tin extends AppCompatActivity {
                         khachHang.setSoDienThoai(jsonObject.getString("soDienThoai"));
                         khachHang.setDiaChi(jsonObject.getString("diaChi"));
                         //
-                        Log.e("khachHang", "getThongTinKH: " + khachHang);
                         edHoTen.setText(khachHang.getTenKhachHang());
                         edDiaChi.setText(khachHang.getDiaChi());
                         edSoDienThoai.setText(khachHang.getSoDienThoai());

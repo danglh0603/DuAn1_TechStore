@@ -59,6 +59,7 @@ public class Adapter_ChiTietHoaDon extends RecyclerView.Adapter<Adapter_ChiTietH
                 Intent intent = new Intent(context, Activity_ChiTietSp.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("maSP",sanPham.getMaSanPham());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             });

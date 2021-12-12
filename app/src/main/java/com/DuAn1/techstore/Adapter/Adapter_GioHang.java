@@ -112,11 +112,11 @@ public class Adapter_GioHang extends RecyclerView.Adapter<Adapter_GioHang.ViewHo
                     switch (response) {
                         case "success": {
                             loading.DimissDialog();
-                            Toast.makeText(context, "Đã xóa!", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(context, "Đã xóa!", Toast.LENGTH_SHORT).show();
                             break;
                         }
                         case "failure": {
-                            Toast.makeText(context, "Lỗi xóa", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(context, "Lỗi xóa", Toast.LENGTH_SHORT).show();
                             break;
                         }
                     }

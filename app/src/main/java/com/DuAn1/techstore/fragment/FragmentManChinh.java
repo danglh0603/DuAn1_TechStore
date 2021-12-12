@@ -1,7 +1,6 @@
 package com.DuAn1.techstore.fragment;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -42,7 +41,6 @@ import me.relex.circleindicator.CircleIndicator3;
 
 
 public class FragmentManChinh extends Fragment {
-    private final Context context;
     private GridView gridView;
     private SanPham sanPham;
     private ArrayList<SanPham> lstSp;
@@ -90,8 +88,7 @@ public class FragmentManChinh extends Fragment {
         }
     };
 
-    public FragmentManChinh(Context context) {
-        this.context = context;
+    public FragmentManChinh() {
     }
 
     @Override
@@ -119,7 +116,7 @@ public class FragmentManChinh extends Fragment {
 
         lstSp = new ArrayList<>();
         //
-        adapterSP_moi = new AdapterSP_Moi(getContext(), lstSp);
+        adapterSP_moi = new AdapterSP_Moi(getActivity(), lstSp);
         GridLayoutManager manager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(manager);
         recyclerView.setHasFixedSize(true);
@@ -162,7 +159,7 @@ public class FragmentManChinh extends Fragment {
 
     private void getDlSp() {
 
-        RequestQueue requestQueue = Volley.newRequestQueue(context);//khai bao context
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());//khai bao context
         //JsonArrayRequest(duongdan,neuThanhCong,neuThatBai);
         //tao request
         //xu ly khi thanh cong
@@ -192,7 +189,7 @@ public class FragmentManChinh extends Fragment {
 
                 }
             }
-        }, error -> Toast.makeText(context, "Lỗi mạng!", Toast.LENGTH_SHORT).show());
+        }, error -> Toast.makeText(getActivity(), "Lỗi mạng!", Toast.LENGTH_SHORT).show());
         requestQueue.add(jsonArrayRequest);//add request vao xu ly
     }
 
