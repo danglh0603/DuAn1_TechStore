@@ -68,7 +68,19 @@ public class Activity_GioHang extends AppCompatActivity {
         Anhxa();
         ActionBar();
         getThongTinKH();
+
         btnThanhToan.setOnClickListener(view -> ThanhToanGioHang());
+    }
+
+    public void setTongTien() {
+        tongTien = 0;
+        if (lstSP != null && lstGH != null) {
+            for (int i = 0; i < lstSP.size(); i++) {
+                tongTien += lstSP.get(i).getGiaTien() * lstGH.get(i).getSoLuongMua();
+            }
+            DecimalFormat format = new DecimalFormat("###,###,###");
+            tvTongTien.setText(String.valueOf(format.format(tongTien) + " đ"));
+        }
     }
 
     private void ThanhToanGioHang() {
@@ -158,16 +170,13 @@ public class Activity_GioHang extends AppCompatActivity {
                                     gioHang.setSoLuongMua(jsonObject.getInt("soLuong"));
                                     lstSP.add(sanPham);
                                     lstGH.add(gioHang);
-                                    tongTien += sanPham.getGiaTien() * gioHang.getSoLuongMua();
                                     tvSoLuongSPTrongGio.setText(lstGH.size() + " đơn hàng!");
                                     adapter_gioHang.notifyDataSetChanged();
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
                             }
-                            DecimalFormat format = new DecimalFormat("###,###,###");
-                            tvTongTien.setText("Tổng tiền: " + format.format(tongTien) + "đ");
-
+                            setTongTien();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -230,4 +239,9 @@ public class Activity_GioHang extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        adapter_gioHang.fixMemoryLeak();
+    }
 }

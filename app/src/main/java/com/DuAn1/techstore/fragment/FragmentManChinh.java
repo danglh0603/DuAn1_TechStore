@@ -189,7 +189,7 @@ public class FragmentManChinh extends Fragment {
 
                 }
             }
-        }, error -> Toast.makeText(getActivity(), "Lỗi mạng!", Toast.LENGTH_SHORT).show());
+        }, error -> Toast.makeText(getActivity().getApplicationContext(), "Lỗi mạng!", Toast.LENGTH_SHORT).show());
         requestQueue.add(jsonArrayRequest);//add request vao xu ly
     }
 

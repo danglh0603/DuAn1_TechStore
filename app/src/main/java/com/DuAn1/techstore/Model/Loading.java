@@ -13,8 +13,8 @@ import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
 
 public class Loading {
-    private Activity activity;
-    private AlertDialog alertDialog;
+    private final Activity activity;
+    private final AlertDialog alertDialog;
 
     public Loading(Activity activity) {
         this.activity = activity;

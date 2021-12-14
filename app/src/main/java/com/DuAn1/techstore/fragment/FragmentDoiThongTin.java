@@ -29,12 +29,7 @@ public class FragmentDoiThongTin extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         AnhXa(view);
-        img_change_info_back_change_user.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((ManChinhActivity) getActivity()).popBackFragments();
-            }
-        });
+        img_change_info_back_change_user.setOnClickListener(v -> ((ManChinhActivity) getActivity()).popBackFragments());
     }
     public void AnhXa(View view) {
         img_change_info_back_change_user = view.findViewById(R.id.img_change_info_back_change_user);

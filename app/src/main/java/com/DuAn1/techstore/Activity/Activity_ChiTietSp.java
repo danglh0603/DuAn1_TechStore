@@ -190,7 +190,11 @@ public class Activity_ChiTietSp extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 },
-                error -> Toast.makeText(getApplicationContext(), "Lỗi", Toast.LENGTH_SHORT).show()) {
+                error -> {
+                    Toast.makeText(getApplicationContext(), "Lỗi", Toast.LENGTH_SHORT).show();
+                    Log.e("lỗi", "getThongTinKH: " + error.getMessage());
+                }) {
+
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
@@ -221,7 +225,7 @@ public class Activity_ChiTietSp extends AppCompatActivity {
 
     private void MuaNgay() {
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_mua_, null);
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this,R.style.BottomSheetDialog);
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this, R.style.BottomSheetDialog);
         bottomSheetDialog.setContentView(view);
         bottomSheetDialog.show();
 
@@ -291,7 +295,7 @@ public class Activity_ChiTietSp extends AppCompatActivity {
 
     private void ThemGioHang(String textBtn, int maKH) {
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_mua_, null);
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this,R.style.BottomSheetDialog);
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this, R.style.BottomSheetDialog);
         bottomSheetDialog.setContentView(view);
         bottomSheetDialog.show();
 

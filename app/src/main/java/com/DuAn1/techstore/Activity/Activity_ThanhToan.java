@@ -298,7 +298,7 @@ public class Activity_ThanhToan extends AppCompatActivity {
             if (lstGH != null) {
                 deleteGioHang();
             }
-            Intent intent = new Intent(Activity_ThanhToan.this,ManChinhActivity.class);
+            Intent intent = new Intent(Activity_ThanhToan.this, ManChinhActivity.class);
             startActivity(intent);
             finish();
         });
@@ -356,7 +356,10 @@ public class Activity_ThanhToan extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 },
-                error -> Toast.makeText(getApplicationContext(), "Lỗi", Toast.LENGTH_SHORT).show()) {
+                error -> {
+                    Toast.makeText(getApplicationContext(), "Lỗi", Toast.LENGTH_SHORT).show();
+                    Log.e("lỗi", "getThongTinKH: " + error.getMessage());
+                }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();

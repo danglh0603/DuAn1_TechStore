@@ -42,7 +42,7 @@ import java.util.Map;
 
 public class Adapter_GioHang extends RecyclerView.Adapter<Adapter_GioHang.ViewHolder> {
 
-    private final Context context;
+    private Context context;
     private final Activity_GioHang activity_gioHang;
     private final ArrayList<GioHang> lstGH;
     private final ArrayList<SanPham> lstSP;
@@ -89,6 +89,7 @@ public class Adapter_GioHang extends RecyclerView.Adapter<Adapter_GioHang.ViewHo
                 lstGH.remove(holder.getAdapterPosition());
                 xoaSanPhamKhoiGioHang(sanPham.getMaSanPham(), maKH);
                 notifyDataSetChanged();
+                activity_gioHang.setTongTien();
                 if (lstGH.size()==0 && lstSP.size()==0) {
                     activity_gioHang.xuLiKhiGHRong();
                 }
@@ -134,6 +135,9 @@ public class Adapter_GioHang extends RecyclerView.Adapter<Adapter_GioHang.ViewHo
         requestQueue.add(request);
 
     }
+    public void fixMemoryLeak() {
+        context = null;
+    }
 
 
     private void getThongTinKH() {
@@ -169,6 +173,7 @@ public class Adapter_GioHang extends RecyclerView.Adapter<Adapter_GioHang.ViewHo
         }
         return 0;
     }
+
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView imgSP;
