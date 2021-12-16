@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -110,42 +109,17 @@ public class FragmentTaiKhoan extends Fragment {
     }
 
     private void getThongTinKH() {
-        SharedPreferences preferences = context.getSharedPreferences("Luu_dangNhap", Context.MODE_PRIVATE);
-        String userName = preferences.getString("USER", "");
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.getKhachHang,
-                response -> {
-
-                    try {
-                        JSONArray jsonArray = new JSONArray(response);
-                        JSONObject jsonObject = jsonArray.getJSONObject(0);
-                        khachHang.setMaKhachHang(jsonObject.getInt("maKH"));
-                        khachHang.setUsername(jsonObject.getString("tenDangNhap"));
-                        khachHang.setPassword(jsonObject.getString("matKhau"));
-                        khachHang.setTenKhachHang(jsonObject.getString("tenKH"));
-                        khachHang.setNamSinh(jsonObject.getString("namSinh"));
-                        khachHang.setSoDienThoai(jsonObject.getString("soDienThoai"));
-                        khachHang.setDiaChi(jsonObject.getString("diaChi"));
-                        //
-                        tvHoTen.setText(khachHang.getTenKhachHang());
-                        tvTenDangNhap.setText("@" + khachHang.getUsername());
-                        getSanPhamDaMua();
-
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-
-                    }
-                },
-                error -> Toast.makeText(context, "Lỗi", Toast.LENGTH_SHORT).show()) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("tenDangNhap", userName);
-                return params;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        requestQueue.add(stringRequest);
+        SharedPreferences preferences = getActivity().getApplicationContext().getSharedPreferences("Luu_dangNhap", Context.MODE_PRIVATE);
+        khachHang.setMaKhachHang(preferences.getInt("maKH", 0));
+        khachHang.setUsername(preferences.getString("tenDangNhap", ""));
+        khachHang.setTenKhachHang(preferences.getString("tenKH", ""));
+        khachHang.setNamSinh(preferences.getString("namSinh", ""));
+        khachHang.setDiaChi(preferences.getString("diaChi", ""));
+        khachHang.setSoDienThoai(preferences.getString("soDienThoai", ""));
+        // set thong tin
+        tvHoTen.setText(khachHang.getTenKhachHang());
+        tvTenDangNhap.setText("@" + khachHang.getUsername());
+        getSanPhamDaMua();
     }
 
 
@@ -219,7 +193,12 @@ public class FragmentTaiKhoan extends Fragment {
         SharedPreferences sharedPreferences2 = getActivity().getSharedPreferences("Luu_dangNhap", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences2.edit();
         editor.putBoolean("luuDangNhap", false);
-        editor.putString("USER", "");
+        editor.putString("tenDangNhap", "");
+        editor.putInt("maKH", 0);
+        editor.putString("tenKH", "");
+        editor.putString("namSinh", "");
+        editor.putString("soDienThoai","");
+        editor.putString("diaChi", "");
         editor.apply();
     }
 

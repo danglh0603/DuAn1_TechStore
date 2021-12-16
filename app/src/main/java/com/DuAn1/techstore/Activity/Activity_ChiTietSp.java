@@ -158,7 +158,7 @@ public class Activity_ChiTietSp extends AppCompatActivity {
             tvGiaCu.setPaintFlags(tvGiaCu.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             tvThongTin.setText(sanPham.getThongTinSanPham());
             btnMuaNgay.setOnClickListener(view -> MuaNgay());
-            getThongTinKH();
+            maKH = getThongTinKH();
             btnThemGioHang.setOnClickListener(view -> ThemGioHang("Thêm vào giỏ hàng", maKH));
         } else {
             imgHetHang.setVisibility(View.VISIBLE);
@@ -177,33 +177,10 @@ public class Activity_ChiTietSp extends AppCompatActivity {
         }
     }
 
-    private void getThongTinKH() {
+    private int getThongTinKH() {
         SharedPreferences preferences = getApplicationContext().getSharedPreferences("Luu_dangNhap", Context.MODE_PRIVATE);
-        String userName = preferences.getString("USER", "");
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.getKhachHang,
-                response -> {
-                    try {
-                        JSONArray jsonArray = new JSONArray(response);
-                        JSONObject jsonObject = jsonArray.getJSONObject(0);
-                        maKH = jsonObject.getInt("maKH");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                },
-                error -> {
-                    Toast.makeText(getApplicationContext(), "Lỗi", Toast.LENGTH_SHORT).show();
-                    Log.e("lỗi", "getThongTinKH: " + error.getMessage());
-                }) {
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("tenDangNhap", userName);
-                return params;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(stringRequest);
+        maKH = preferences.getInt("maKH",0);
+        return maKH;
     }
 
     private void DialogHetHang() {

@@ -163,7 +163,7 @@ public class Activity_Doi_Thong_Tin extends AppCompatActivity {
 
     private void getThongTinKH() {
         SharedPreferences preferences = getApplicationContext().getSharedPreferences("Luu_dangNhap", Context.MODE_PRIVATE);
-        String userName = preferences.getString("USER", "");
+        String userName = preferences.getString("tenDangNhap", "");
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.getKhachHang,
                 response -> {
                     try {

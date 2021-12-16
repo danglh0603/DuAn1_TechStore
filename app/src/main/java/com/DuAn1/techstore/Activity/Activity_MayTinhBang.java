@@ -66,7 +66,6 @@ public class Activity_MayTinhBang extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_may_tinh_bang);
-
         AnhXa();
         ActionBar();
         getDL_DT();

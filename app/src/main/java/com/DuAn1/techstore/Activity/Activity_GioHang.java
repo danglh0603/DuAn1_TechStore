@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -72,28 +71,6 @@ public class Activity_GioHang extends AppCompatActivity {
         btnThanhToan.setOnClickListener(view -> ThanhToanGioHang());
     }
 
-    public void setTongTien() {
-        tongTien = 0;
-        if (lstSP != null && lstGH != null) {
-            for (int i = 0; i < lstSP.size(); i++) {
-                tongTien += lstSP.get(i).getGiaTien() * lstGH.get(i).getSoLuongMua();
-            }
-            DecimalFormat format = new DecimalFormat("###,###,###");
-            tvTongTien.setText(String.valueOf(format.format(tongTien) + " đ"));
-        }
-    }
-
-    private void ThanhToanGioHang() {
-        Intent intent = new Intent(Activity_GioHang.this, Activity_ThanhToan.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("lstSP", lstSP);
-        bundle.putSerializable("lstGH", lstGH);
-        bundle.putInt("tongTien", tongTien);
-        intent.putExtras(bundle);
-        startActivity(intent);
-        finish();
-    }
-
     private void Anhxa() {
         toolbar = findViewById(R.id.toolbar);
         imgGHTrong = findViewById(R.id.imgGHTrong);
@@ -128,6 +105,17 @@ public class Activity_GioHang extends AppCompatActivity {
             actionBar.setDefaultDisplayHomeAsUpEnabled(true);
         }
 
+    }
+
+    private void ThanhToanGioHang() {
+        Intent intent = new Intent(Activity_GioHang.this, Activity_ThanhToan.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("lstSP", lstSP);
+        bundle.putSerializable("lstGH", lstGH);
+        bundle.putInt("tongTien", tongTien);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
     }
 
     public void xuLiKhiGHRong() {
@@ -200,31 +188,22 @@ public class Activity_GioHang extends AppCompatActivity {
 
     private void getThongTinKH() {
         SharedPreferences preferences = getApplicationContext().getSharedPreferences("Luu_dangNhap", Context.MODE_PRIVATE);
-        String userName = preferences.getString("USER", "");
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.getKhachHang,
-                response -> {
-                    loading.DimissDialog();
-                    try {
-                        JSONArray jsonArray = new JSONArray(response);
-                        JSONObject jsonObject = jsonArray.getJSONObject(0);
-                        maKH = jsonObject.getInt("maKH");
-                        getDLGioHang(maKH);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                },
-                error -> Toast.makeText(getApplicationContext(), "Lỗi", Toast.LENGTH_SHORT).show()) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("tenDangNhap", userName);
-                return params;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(stringRequest);
+        maKH = preferences.getInt("maKH",0);
+        getDLGioHang(maKH);
     }
 
+    @SuppressLint("SetTextI18n")
+    public void setTongTien() {
+        tongTien = 0;
+        if (lstSP != null && lstGH != null) {
+            for (int i = 0; i < lstSP.size(); i++) {
+                tongTien += lstSP.get(i).getGiaTien() * lstGH.get(i).getSoLuongMua();
+            }
+            DecimalFormat format = new DecimalFormat("###,###,###");
+            tvTongTien.setText(String.valueOf(format.format(tongTien) + " đ"));
+            tvSoLuongSPTrongGio.setText(String.valueOf(lstGH.size()) + " đơn hàng trong giỏ!");
+        }
+    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

@@ -123,7 +123,7 @@ public class Activity_Doi_Mat_Khau extends AppCompatActivity {
 
     private void getThongTinKH() {
         SharedPreferences preferences = getApplicationContext().getSharedPreferences("Luu_dangNhap", Context.MODE_PRIVATE);
-        String userName = preferences.getString("USER", "");
+        String userName = preferences.getString("tenDangNhap", "");
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.getKhachHang,
                 response -> {
                     try {

@@ -1,10 +1,12 @@
 package com.DuAn1.techstore.Activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +28,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -75,24 +80,65 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    //}
+    private void AnhXa() {
+        imageView = findViewById(R.id.imgLogo);
+        tvDangNhap = findViewById(R.id.tvDangNhap);
+        textInputLayout1 = findViewById(R.id.textInputLayout1);
+        edUsername = findViewById(R.id.edUsername);
+        textInputLayout2 = findViewById(R.id.textInputLayout2);
+        edPassword = findViewById(R.id.edPassword);
+        chkRemember = findViewById(R.id.chkRemember);
+        btnLogin = findViewById(R.id.btnLogin);
+        textView4 = findViewById(R.id.textView4);
+        tvResigter = findViewById(R.id.tvResigter);
+        loading = new Loading(this);
 
+    }
+
+    // animation logo
+    private void animationLogo() {
+        //set vị trí ban đầu
+        imageView.setTranslationY(550);
+        imageView.setScaleX(1.5f);
+        imageView.setScaleY(1.5f);
+        textView4.setTranslationY(1000);
+        tvResigter.setTranslationY(1000);
+        //constraintLayout.setTranslationY(-900);
+        //ẩn
+        tvDangNhap.setAlpha(0);
+        textInputLayout1.setAlpha(0);
+        textInputLayout2.setAlpha(0);
+        chkRemember.setAlpha(0);
+        btnLogin.setAlpha(0);
+        // animation
+        imageView.animate().translationY(0).setDuration(1200).setStartDelay(300).start();
+        imageView.animate().scaleX(1).setDuration(1000).setStartDelay(300).start();
+        imageView.animate().scaleY(1).setDuration(1000).setStartDelay(300).start();
+        tvDangNhap.animate().alpha(1).setDuration(1200).setStartDelay(900).start();
+        textInputLayout1.animate().alpha(1).setDuration(1200).setStartDelay(1100).start();
+        textInputLayout2.animate().alpha(1).setDuration(1200).setStartDelay(1300).start();
+        chkRemember.animate().alpha(1).setDuration(1200).setStartDelay(1500).start();
+        btnLogin.animate().alpha(1).setDuration(1200).setStartDelay(1700).start();
+        textView4.animate().translationY(0).setDuration(1200).setStartDelay(1900).start();
+        tvResigter.animate().translationY(0).setDuration(1200).setStartDelay(2100).start();
+    }
 
     public void Login(String username, String password) {
         if (!username.equals("") && !password.equals("")) {
             StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.dangNhap, response -> {
                 if (response.equals("success")) {
-                    loading.DimissDialog();
                     Intent intent = new Intent(LoginActivity.this, ManChinhActivity.class);
                     intent.putExtra("tenDangNhap", username);
                     startActivity(intent);
                     rememberAccount(username, password, chkRemember.isChecked());
-                    LuuDangNhap(username);
-                    //Toast.makeText(getApplicationContext(), "Xin chào " + username, Toast.LENGTH_SHORT).show();
+                    luuThongTinKH(username);
+                    loading.DimissDialog();
                     finish();
+
                 } else if (response.equals("failure")) {
                     loading.DimissDialog();
                     Toast.makeText(LoginActivity.this, "Tên đăng nhập hoặc mật khẩu không chính xác!", Toast.LENGTH_SHORT).show();
+                    rememberAccount("","",false);
                 }
             }, error -> {
                 //Toast.makeText(LoginActivity.this, error.toString().trim(), Toast.LENGTH_SHORT).show();
@@ -113,13 +159,40 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void LuuDangNhap(String username) {
-        SharedPreferences sharedPreferences2 = getSharedPreferences("Luu_dangNhap", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences2.edit();
-        editor.putBoolean("luuDangNhap", true);
-        editor.putString("USER", username);
-        editor.apply();
+    private void luuThongTinKH(String username) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.getKhachHang,
+                response -> {
+                    try {
+                        JSONArray jsonArray = new JSONArray(response);
+                        JSONObject jsonObject = jsonArray.getJSONObject(0);
+                        SharedPreferences sharedPreferences2 = LoginActivity.this.getSharedPreferences("Luu_dangNhap", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences2.edit();
+                        editor.putBoolean("luuDangNhap", true);
+                        editor.putString("tenDangNhap", username);
+                        editor.putInt("maKH", jsonObject.getInt("maKH"));
+                        editor.putString("tenKH", jsonObject.getString("tenKH"));
+                        editor.putString("namSinh", jsonObject.getString("namSinh"));
+                        editor.putString("soDienThoai", jsonObject.getString("soDienThoai"));
+                        editor.putString("diaChi", jsonObject.getString("diaChi"));
+                        editor.apply();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                },
+                error -> {
+                    Toast.makeText(getApplicationContext(), "Lỗi", Toast.LENGTH_SHORT).show();
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("tenDangNhap", username);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
     }
+
 
     private int validate() {
         int check = 1;
@@ -132,7 +205,7 @@ public class LoginActivity extends AppCompatActivity {
             textInputLayout1.setError(null);
         }
         if (Objects.requireNonNull(edPassword.getText()).toString().length() == 0) {
-            textInputLayout2.setError("Không để trông mật khẩu!");
+            textInputLayout2.setError("Không để trống mật khẩu!");
             edPassword.requestFocus();
             check = -1;
             return check;
@@ -141,21 +214,6 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         return check;
-    }
-
-    private void AnhXa() {
-        imageView = findViewById(R.id.imgLogo);
-        tvDangNhap = findViewById(R.id.tvDangNhap);
-        textInputLayout1 = findViewById(R.id.textInputLayout1);
-        edUsername = findViewById(R.id.edUsername);
-        textInputLayout2 = findViewById(R.id.textInputLayout2);
-        edPassword = findViewById(R.id.edPassword);
-        chkRemember = findViewById(R.id.chkRemember);
-        btnLogin = findViewById(R.id.btnLogin);
-        textView4 = findViewById(R.id.textView4);
-        tvResigter = findViewById(R.id.tvResigter);
-        loading = new Loading(this);
-
     }
 
     private void Resigter() {
@@ -177,13 +235,15 @@ public class LoginActivity extends AppCompatActivity {
         }
         editor.apply();
     }
+
     private void clearLuuDangNhap() {
         SharedPreferences sharedPreferences2 = getApplicationContext().getSharedPreferences("Luu_dangNhap", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences2.edit();
-        editor.putBoolean("luuDangNhap",false);
-        editor.putString("USER","");
+        editor.putBoolean("luuDangNhap", false);
+        editor.putString("USER", "");
         editor.apply();
     }
+
     private void Dialog(String mess) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_thongbao_resigter, null);
@@ -221,33 +281,6 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         btnHuy.setOnClickListener(v -> alertDialog.dismiss());
-    }
-
-    private void animationLogo() {
-        //set vị trí ban đầu
-        imageView.setTranslationY(550);
-        imageView.setScaleX(1.5f);
-        imageView.setScaleY(1.5f);
-        textView4.setTranslationY(1000);
-        tvResigter.setTranslationY(1000);
-        //constraintLayout.setTranslationY(-900);
-        //ẩn
-        tvDangNhap.setAlpha(0);
-        textInputLayout1.setAlpha(0);
-        textInputLayout2.setAlpha(0);
-        chkRemember.setAlpha(0);
-        btnLogin.setAlpha(0);
-        // animation
-        imageView.animate().translationY(0).setDuration(1200).setStartDelay(300).start();
-        imageView.animate().scaleX(1).setDuration(1000).setStartDelay(300).start();
-        imageView.animate().scaleY(1).setDuration(1000).setStartDelay(300).start();
-        tvDangNhap.animate().alpha(1).setDuration(1200).setStartDelay(900).start();
-        textInputLayout1.animate().alpha(1).setDuration(1200).setStartDelay(1100).start();
-        textInputLayout2.animate().alpha(1).setDuration(1200).setStartDelay(1300).start();
-        chkRemember.animate().alpha(1).setDuration(1200).setStartDelay(1500).start();
-        btnLogin.animate().alpha(1).setDuration(1200).setStartDelay(1700).start();
-        textView4.animate().translationY(0).setDuration(1200).setStartDelay(1900).start();
-        tvResigter.animate().translationY(0).setDuration(1200).setStartDelay(2100).start();
     }
 
     @Override

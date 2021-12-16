@@ -3,6 +3,7 @@ package com.DuAn1.techstore.fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -113,7 +114,7 @@ public class FragmentHoaDon extends Fragment {
 
                 },
                 error -> Toast.makeText(getActivity(), "Lỗi kết nối!", Toast.LENGTH_SHORT).show()) {
-            @Nullable
+            @NonNull
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
@@ -142,35 +143,14 @@ public class FragmentHoaDon extends Fragment {
     }
 
     private void getThongTinKH() {
-        SharedPreferences preferences = getActivity().getSharedPreferences("Luu_dangNhap", Context.MODE_PRIVATE);
-        String userName = preferences.getString("USER", "");
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.getKhachHang,
-                response -> {
-                    try {
-                        JSONArray jsonArray = new JSONArray(response);
-                        JSONObject jsonObject = jsonArray.getJSONObject(0);
-                        khachHang.setMaKhachHang(jsonObject.getInt("maKH"));
-                        khachHang.setUsername(jsonObject.getString("tenDangNhap"));
-                        khachHang.setPassword(jsonObject.getString("matKhau"));
-                        khachHang.setTenKhachHang(jsonObject.getString("tenKH"));
-                        khachHang.setNamSinh(jsonObject.getString("namSinh"));
-                        khachHang.setSoDienThoai(jsonObject.getString("soDienThoai"));
-                        khachHang.setDiaChi(jsonObject.getString("diaChi"));
-                        getThongTinHoaDon();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                },
-                error -> Toast.makeText(getActivity(), "Lỗi kết nối", Toast.LENGTH_SHORT).show()) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("tenDangNhap", userName);
-                return params;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        requestQueue.add(stringRequest);
+        SharedPreferences preferences = getActivity().getApplicationContext().getSharedPreferences("Luu_dangNhap", Context.MODE_PRIVATE);
+        khachHang.setMaKhachHang(preferences.getInt("maKH",0));
+        khachHang.setUsername(preferences.getString("tenDangNhap",""));
+        khachHang.setTenKhachHang(preferences.getString("tenKH",""));
+        khachHang.setNamSinh(preferences.getString("namSinh",""));
+        khachHang.setDiaChi(preferences.getString("diaChi",""));
+        khachHang.setSoDienThoai(preferences.getString("soDienThoai",""));
+        getThongTinHoaDon();
     }
 
     @Override

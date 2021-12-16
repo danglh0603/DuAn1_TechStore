@@ -39,7 +39,6 @@ import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -85,7 +84,6 @@ public class Activity_ThanhToan extends AppCompatActivity {
         btnThanhToan.setOnClickListener(view -> {
             loading.LoadingDialog();
             insertHoaDon();
-
         });
 
 
@@ -224,17 +222,17 @@ public class Activity_ThanhToan extends AppCompatActivity {
                     response -> {
                         switch (response) {
                             case "\nsuccess": {
-
+                                Toast.makeText(Activity_ThanhToan.this, "Thành công!", Toast.LENGTH_SHORT).show();
                                 UpdateSanPham(sanPham.getMaSanPham(), updateSoLuongSp);
                                 break;
                             }
                             case "failure": {
-                                Toast.makeText(getApplicationContext(), "loi insert chi tiet hoa don", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Activity_ThanhToan.this, "Đã có lỗi xảy ra, vui lòng thử lại!", Toast.LENGTH_SHORT).show();
                                 break;
                             }
                         }
                     },
-                    error -> Toast.makeText(getApplicationContext(), "Looix ket noi", Toast.LENGTH_SHORT).show()) {
+                    error -> Toast.makeText(Activity_ThanhToan.this, "Đã có lỗi xảy ra, vui lòng thử lại!", Toast.LENGTH_SHORT).show()) {
                 @NonNull
                 @Override
                 protected Map<String, String> getParams() {
@@ -310,17 +308,16 @@ public class Activity_ThanhToan extends AppCompatActivity {
         StringRequest request = new StringRequest(Request.Method.POST, Server.deleteGioHang, response -> {
             switch (response) {
                 case "failure": {
-                    Toast.makeText(getApplicationContext(), "xoa loi xoa", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Đã có lỗi xảy ra, vui lòng thử lại!", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 case "success": {
-                    Toast.makeText(getApplicationContext(), "Xoa thang cong", Toast.LENGTH_SHORT).show();
-                    Log.d("updateSP", "UpdateSanPham: thanh cong");
+                    Toast.makeText(getApplicationContext(), "Thành công!", Toast.LENGTH_SHORT).show();
                     break;
                 }
             }
 
-        }, error -> Toast.makeText(getApplicationContext(), "Loix ket noi!", Toast.LENGTH_SHORT).show()) {
+        }, error -> Toast.makeText(getApplicationContext(), "Đã có lỗi xảy ra, vui lòng thử lại !", Toast.LENGTH_SHORT).show()) {
             @NonNull
             @Override
             protected Map<String, String> getParams() {
@@ -337,38 +334,14 @@ public class Activity_ThanhToan extends AppCompatActivity {
 
     private void getThongTinKH() {
         SharedPreferences preferences = getApplicationContext().getSharedPreferences("Luu_dangNhap", Context.MODE_PRIVATE);
-        userName = preferences.getString("USER", "");
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.getKhachHang,
-                response -> {
-                    loading.DimissDialog();
-                    try {
-                        JSONArray jsonArray = new JSONArray(response);
-                        JSONObject jsonObject = jsonArray.getJSONObject(0);
-                        khachHang.setMaKhachHang(jsonObject.getInt("maKH"));
-                        khachHang.setUsername(jsonObject.getString("tenDangNhap"));
-                        khachHang.setPassword(jsonObject.getString("matKhau"));
-                        khachHang.setTenKhachHang(jsonObject.getString("tenKH"));
-                        khachHang.setNamSinh(jsonObject.getString("namSinh"));
-                        khachHang.setSoDienThoai(jsonObject.getString("soDienThoai"));
-                        khachHang.setDiaChi(jsonObject.getString("diaChi"));
-                        setThongtin();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                },
-                error -> {
-                    Toast.makeText(getApplicationContext(), "Lỗi", Toast.LENGTH_SHORT).show();
-                    Log.e("lỗi", "getThongTinKH: " + error.getMessage());
-                }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("tenDangNhap", userName);
-                return params;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(stringRequest);
+        khachHang.setMaKhachHang(preferences.getInt("maKH", 0));
+        khachHang.setUsername(preferences.getString("tenDangNhap", ""));
+        khachHang.setTenKhachHang(preferences.getString("tenKH", ""));
+        khachHang.setNamSinh(preferences.getString("namSinh", ""));
+        khachHang.setDiaChi(preferences.getString("diaChi", ""));
+        khachHang.setSoDienThoai(preferences.getString("soDienThoai", ""));
+        loading.DimissDialog();
+        setThongtin();
     }
 
 

@@ -12,7 +12,6 @@ import com.DuAn1.techstore.R;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashScreenActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +23,6 @@ public class SplashScreenActivity extends AppCompatActivity {
                 finish();
             }, 2000);
         } else {
-
             new Handler().postDelayed(() -> {
                 Intent intent = new Intent(SplashScreenActivity.this, LoginActivity.class);
                 startActivity(intent);

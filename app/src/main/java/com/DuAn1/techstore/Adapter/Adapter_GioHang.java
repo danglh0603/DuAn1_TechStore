@@ -50,7 +50,6 @@ public class Adapter_GioHang extends RecyclerView.Adapter<Adapter_GioHang.ViewHo
     private int maKH;
     private final ViewBinderHelper binderHelper = new ViewBinderHelper();
     private final Loading loading;
-
     public Adapter_GioHang(Context context, Activity_GioHang activity_gioHang, ArrayList<GioHang> lstGH, ArrayList<SanPham> lstSP) {
         this.context = context;
         this.activity_gioHang = activity_gioHang;
@@ -58,15 +57,13 @@ public class Adapter_GioHang extends RecyclerView.Adapter<Adapter_GioHang.ViewHo
         this.lstSP = lstSP;
         loading = new Loading((Activity) context);
     }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.adapter_giohan, null, false);
         return new ViewHolder(view);
     }
-
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "NotifyDataSetChanged"})
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         final GioHang gioHang = lstGH.get(position);
@@ -106,18 +103,17 @@ public class Adapter_GioHang extends RecyclerView.Adapter<Adapter_GioHang.ViewHo
             });
         }
     }
-
     public void xoaSanPhamKhoiGioHang(int maSanPham, int maKH) {
         StringRequest request = new StringRequest(Request.Method.POST, Server.deleteSanPhamGH,
                 response -> {
                     switch (response) {
                         case "success": {
                             loading.DimissDialog();
-                            //Toast.makeText(context, "Đã xóa!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Đã xóa sản phẩm khỏi giỏ hàng!", Toast.LENGTH_SHORT).show();
                             break;
                         }
                         case "failure": {
-                            //Toast.makeText(context, "Lỗi xóa", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Đã có lỗi xảy ra, vui lòng thử lại!", Toast.LENGTH_SHORT).show();
                             break;
                         }
                     }
@@ -135,37 +131,13 @@ public class Adapter_GioHang extends RecyclerView.Adapter<Adapter_GioHang.ViewHo
         requestQueue.add(request);
 
     }
+    private void getThongTinKH() {
+        SharedPreferences preferences = context.getSharedPreferences("Luu_dangNhap", Context.MODE_PRIVATE);
+        maKH = preferences.getInt("maKH",0);
+    }
     public void fixMemoryLeak() {
         context = null;
     }
-
-
-    private void getThongTinKH() {
-        SharedPreferences preferences = context.getSharedPreferences("Luu_dangNhap", Context.MODE_PRIVATE);
-        String userName = preferences.getString("USER", "");
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.getKhachHang,
-                response -> {
-                    try {
-                        JSONArray jsonArray = new JSONArray(response);
-                        JSONObject jsonObject = jsonArray.getJSONObject(0);
-                        maKH = jsonObject.getInt("maKH");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                },
-                error -> Toast.makeText(context, "Lỗi", Toast.LENGTH_SHORT).show()) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("tenDangNhap", userName);
-                return params;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        requestQueue.add(stringRequest);
-    }
-
-
     @Override
     public int getItemCount() {
         if (lstGH != null && lstSP != null) {
@@ -173,8 +145,6 @@ public class Adapter_GioHang extends RecyclerView.Adapter<Adapter_GioHang.ViewHo
         }
         return 0;
     }
-
-
     static class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView imgSP;
         private final TextView tvTenSp;
